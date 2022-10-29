@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signupEmail } from 'firebase/auth';
 
 function Login() {
     const [inputId, setInputId] = useState("");
@@ -15,7 +15,13 @@ function Login() {
 
     // 로그인 버튼 이벤트
     const onClickLogin = () => {
-        console.log('로그인 버튼 눌림')
+        console.log('Login button pressed')
+        signInWithEmailAndPassword(inputId, inputPw)
+    }
+
+    // 회원가입 버튼 이벤트
+    const onClickJoin = () => {
+        console.log('Join button pressed')
     }
 
     // 페이지 렌더링 후 가장 처음 호출되는 함수
@@ -30,7 +36,8 @@ function Login() {
                 <p><input type="password" id="userpw" name="userpw" placeholder="USER PW" value={inputPw} onChange={handleInputPw}/></p>
             </div>
             <div>
-                <button type="button">로그인</button>
+                <button type="button" onClick={onClickLogin}>Login</button>
+                <button type="button" onClick={onClickJoin}>Join</button>
             </div>
         </div>
     )
