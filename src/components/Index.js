@@ -1,6 +1,6 @@
 import React from "react";
 import Flip from 'react-reveal/Flip';
-import './Index.css';
+import '../styles/Index.css';
 
 class Introduce1 extends React.Component {
     render() {
@@ -8,7 +8,7 @@ class Introduce1 extends React.Component {
             <div className="intro">
                 <div className="intro1">
                     <Flip left>
-                        <p>우리 (사이트 이름)으로 제작한 다양한 포트폴리오를 확인해보세요.</p>
+                        <p>우리 (사이트이름)으로 제작한 다양한 포트폴리오를 확인해보세요.</p>
                         <p>관심분야의 포트폴리오를 쉽게 조회할 수 있습니다.</p>
                         <p>지금 바로 (사이트 이름)을 시작해보세요.</p>
                     </Flip>

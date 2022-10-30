@@ -12,7 +12,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-dotenv.config();
+//dotenv.config();
 const firebaseConfig = {
 	apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
 	authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -22,7 +22,7 @@ const firebaseConfig = {
 	appId: process.env.REACT_APP_FIREBASE_APPID,
 	measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
 };
-export default firebaseConfig;
+//export default firebaseConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -31,7 +31,7 @@ const app = initializeApp(firebaseConfig);
 //const auth = getAuth();
 
 //Email 회원가입
-export const signupEmail = (email, password) => {
+/*export const signupEmail = (email, password) => {
 	return createUserWithEmailAndPassword(auth, email, password);
   };
   
@@ -39,8 +39,8 @@ export const signupEmail = (email, password) => {
  //Email 로그인
  export const loginEmail = (email, password) => {
 	return signInWithEmailAndPassword(auth, email, password);
-  };
+  };*/
 
-export const auth = getAuth(app);
+export default app;
 
  

@@ -3,6 +3,7 @@ import './App.css';
 import Login from './components/Login';
 import Index from './components/Index';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import app from './components/firebase_config';
 
 function App() {
   return (
