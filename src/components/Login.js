@@ -1,45 +1,71 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import "../styles/Login.css";
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+} from 'firebase/auth';
+import '../styles/Login.css';
 
 function Login() {
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPw, setLoginPw] = useState("");
-    const [isSignUp, setIsSignUp] = useState(true);
-    const auth = getAuth();
+	const [loginEmail, setLoginEmail] = useState('');
+	const [loginPw, setLoginPw] = useState('');
+	const [isSignUp, setIsSignUp] = useState(true);
+	const auth = getAuth();
 
-    // input dataÀÇ º¯È­°¡ ÀÖÀ» ¶§¸¶´Ù value °ªÀ» º¯°æÇØ¼­ useState ÇØÁØ´Ù.
-    const handleLoginEmail = (e) => {
-        setLoginEmail(e.target.value)
-    }
-    const handleLoginPw = (e) => {
-        setLoginPw(e.target.value)
-    }
+	// input dataì˜ ë³€í™”ê°€ ìžˆì„ ë•Œë§ˆë‹¤ value ê°’ì„ ë³€ê²½í•´ì„œ useState í•´ì¤€ë‹¤.
+	const handleLoginEmail = e => {
+		setLoginEmail(e.target.value);
+	};
+	const handleLoginPw = e => {
+		setLoginPw(e.target.value);
+	};
 
-    // È¸¿ø°¡ÀÔ ¹öÆ° ÀÌº¥Æ®
-    const onClickJoin = () => {
-        console.log('Join button pressed')
-    }
+	// íšŒì›ê°€ìž… ë²„íŠ¼ ì´ë²¤íŠ¸
+	const onClickJoin = () => {
+		console.log('Join button pressed');
+	};
 
-    // ·Î±×ÀÎ ¹öÆ° ÀÌº¥Æ®
-    const onClickLogin = async() => {
-        console.log('Login button pressed');
-        const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
-        console.log(result);
-    }
+	// ë¡œê·¸ì¸ ë²„íŠ¼ ì´ë²¤íŠ¸
+	const onClickLogin = async () => {
+		console.log('Login button pressed');
+		const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
+		console.log(result);
+	};
 
-    return (
-        <div className='login_join_form'>
-            <div>
-                <p><input type="text" id="userid" name="userid" placeholder="user@gmail.com" value={loginEmail} onChange={handleLoginEmail}/></p>
-                <p><input type="password" id="userpw" name="userpw" placeholder="Password" value={loginPw} onChange={handleLoginPw}/></p>
-            </div>
-            <div>
-                <button id='login' type="button" onClick={onClickLogin}>Login</button>
-                <button id='join' type='button' onClick={onClickJoin}>Join</button>
-            </div>
-        </div>
-    )
+	return (
+		<div className="login_join_form">
+			<div>
+				<p>
+					<input
+						type="text"
+						id="userid"
+						name="userid"
+						placeholder="user@gmail.com"
+						value={loginEmail}
+						onChange={handleLoginEmail}
+					/>
+				</p>
+				<p>
+					<input
+						type="password"
+						id="userpw"
+						name="userpw"
+						placeholder="Password"
+						value={loginPw}
+						onChange={handleLoginPw}
+					/>
+				</p>
+			</div>
+			<div>
+				<button id="login" type="button" onClick={onClickLogin}>
+					Login
+				</button>
+				<button id="join" type="button" onClick={onClickJoin}>
+					Join
+				</button>
+			</div>
+		</div>
+	);
 }
 
 export default Login;
