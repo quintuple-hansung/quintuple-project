@@ -1,0 +1,28 @@
+input {
+    width:50%;
+    height:50px;
+    padding:0px;
+    border-width:2px;
+    padding-left: 5px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+.join_form {
+    text-align: center;
+    height:260px;
+    margin-top: 30%;
+    margin-inline: 10%;
+}
+
+button {
+    border: 1px solid rgb(64, 113, 203);
+    height: 55px;
+    width: 240px; 
+    margin-top: 20px;
+    margin-inline: 40px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    background-color: rgb(64, 113, 203);
+    color: white;
+}

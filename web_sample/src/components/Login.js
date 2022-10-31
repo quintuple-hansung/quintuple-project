@@ -33,7 +33,8 @@ function Login() {
         console.log('Login button pressed');
         const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
         console.log(result);
-        
+        // 팀회의 후 완성할 것
+        navigate('/main'); // 메인페이지로 넘어가기 (이식해야할 듯)
     }
 
     return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import '../styles/Join.css';
 
 function Join() {
     const [loginEmail, setLoginEmail] = useState("");
@@ -14,21 +15,11 @@ function Join() {
     }
     
     return (
-        <div>
-        <input
-            placeholder="Email"
-            onChange={(e) => {
-                setLoginEmail(e.target.value);
-            }}
-        />
-        <input
-            placeholder="EmailPassword"
-            onChange={(e) => {
-                setLoginPw(e.target.value);
-            }}
-        />
-        <button onClick={signup}>CreateUser</button>
-    </div>
+        <div className='join_form'>
+            <p><input placeholder="Email" onChange={(e) => { setLoginEmail(e.target.value); }}/></p>
+            <p><input placeholder="EmailPassword" onChange={(e) => { setLoginPw(e.target.value); }}/></p>
+            <button onClick={signup}>CreateUser</button>
+        </div>
     )
 
 }
