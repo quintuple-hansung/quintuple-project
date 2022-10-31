@@ -8,15 +8,18 @@ import Join from './components/Join';
 
 function App() {
   return (
-    <div className='container'>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Index/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path='/join' element={<Join/>}/>
-        </Routes>
-      </Router>
+    <body>
+        <div className='container'>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Index/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path='/join' element={<Join/>}/>
+          </Routes>
+        </Router>
     </div>
+    </body>
+    
   );
 }
 
