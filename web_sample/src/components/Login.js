@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import "../styles/Login.css";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [loginEmail, setLoginEmail] = useState("");
@@ -16,9 +17,15 @@ function Login() {
         setLoginPw(e.target.value)
     }
 
+    // 화면 전환
+    const navigate = useNavigate();
+
     // 회원가입 버튼 이벤트
-    const onClickJoin = () => {
+    const onClickJoin = async () => {
         console.log('Join button pressed')
+        //const result = await createUserWithEmailAndPassword(auth, loginEmail, loginPw)
+        //console.log(result)
+        navigate('/join');
     }
 
     // 로그인 버튼 이벤트
@@ -26,6 +33,7 @@ function Login() {
         console.log('Login button pressed');
         const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
         console.log(result);
+        
     }
 
     return (
