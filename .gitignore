@@ -29,7 +29,6 @@ yarn-error.log*
 ### Firebase Patch ###
 .runtimeconfig.json
 .firebase/
-
 ### react ###
 .DS_*
 *.log
@@ -83,3 +82,4 @@ sketch
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/yarn,react,firebase,dotenv,visualstudiocode
+src/components/firebase_config.js
