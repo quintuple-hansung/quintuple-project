@@ -15,6 +15,7 @@ function App() {
             <Route path="/" element={<Index/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path='/join' element={<Join/>}/>
+            {/* Route path="/main", element={Main/>}/>*/}
           </Routes>
         </Router>
     </div>
