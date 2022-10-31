@@ -1,0 +1,36 @@
+body {
+    background-image: url(../image/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.intro0 {
+    margin-bottom: 50px;
+
+}
+
+button {
+    position: absolute;
+    border: 1px solid rgb(64, 113, 203);
+    height: 55px;
+    width: 240px; 
+    margin-top: 20px;
+    margin-inline: 40px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    background-color: rgb(64, 113, 203);
+    color: white;
+}
+
+.l1 {
+    text-indent: 30px;
+    font-weight: bold ;
+    font-size: 4em;
+}
+
+p {
+    text-indent: 30px;
+    font-size: 1.5em;
+
+}
