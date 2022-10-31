@@ -1,21 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import Login from './components/Login';
-import Index from './components/Index';
+import Index from './pages/Index';
+import Login from './pages/Login';
+import Home from './pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import app from './components/firebase_config';
+import Introduce1 from './pages/Index';
 
 function App() {
-  return (
-    <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Index/>}/>
-          <Route path="/login" element={<Login/>}/>
-        </Routes>
-      </Router>
-    </div>
-  );
+	return (
+		<div>
+			<Router>
+				<Routes>
+					<Route path="/" element={<Introduce1 />} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/home" element={<Home />} />
+				</Routes>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
