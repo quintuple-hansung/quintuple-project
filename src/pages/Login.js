@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {
-	getAuth,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
+import { auth } from '../components/firebase_config';
 import '../styles/Login.css';
 
 function Login() {
 	const [loginEmail, setLoginEmail] = useState('');
 	const [loginPw, setLoginPw] = useState('');
 	const [isSignUp, setIsSignUp] = useState(true);
-	const auth = getAuth();
+	// const auth = getAuth();
 
 	// input data의 변화가 있을 때마다 value 값을 변경해서 useState 해준다.
 	const handleLoginEmail = e => {
