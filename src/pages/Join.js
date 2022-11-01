@@ -19,8 +19,8 @@ function Join() {
     
     return (
         <div className='join_form'>
-            <p><input placeholder="Email" onChange={(e) => { setLoginEmail(e.target.value); }}/></p>
-            <p><input placeholder="EmailPassword" onChange={(e) => { setLoginPw(e.target.value); }}/></p>
+            <p><input type="text" placeholder="Email" onChange={(e) => { setLoginEmail(e.target.value); }}/></p>
+            <p><input type="password"placeholder="EmailPassword" onChange={(e) => { setLoginPw(e.target.value); }}/></p>
             <button onClick={signup}>CreateUser</button>
         </div>
     )
