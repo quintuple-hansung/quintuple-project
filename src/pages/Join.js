@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 import '../styles/Join.css';
 
 function Join() {
@@ -7,11 +8,13 @@ function Join() {
     const [loginPw, setLoginPw] = useState("");
 
     const auth = getAuth();
+    const navigate = useNavigate();
     
     const signup = async() => {
-        console.log('Join button pressed')
+        console.log('Join button pressed');
         const result = await createUserWithEmailAndPassword(auth, loginEmail, loginPw);
-        console.log(result) 
+        console.log(result);
+        navigate('/login');
     }
     
     return (

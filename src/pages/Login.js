@@ -5,6 +5,8 @@ import {
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from './firebase_config';
+import { async } from '@firebase/util';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 
 function Login() {
@@ -21,9 +23,13 @@ function Login() {
 		setLoginPw(e.target.value);
 	};
 
+	// 화면전환
+	const navigate = useNavigate();
+	
 	// 회원가입 버튼 이벤트
 	const onClickJoin = () => {
 		console.log('Join button pressed');
+		navigate('/join');
 	};
 
 	// 로그인 버튼 이벤트
@@ -31,6 +37,8 @@ function Login() {
 		console.log('Login button pressed');
 		const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
 		console.log(result);
+		// 팀 회의 후 완성할 것
+		navigate('/main');
 	};
 
 	return (
@@ -56,10 +64,8 @@ function Login() {
 						onChange={handleLoginPw}
 					/>
 				</p>
-			</div>
-			<div className='login_join_btn'>
-				<button id="login" onClick={onClickLogin}>Login</button>
-				<button id="join" onClick={onClickJoin}>Join</button>
+				<input id="login" type="button" value="로그인" onClick={onClickLogin}/>
+				<input id="join" type="button" value="회원가입" onClick={onClickJoin}/>
 			</div>
 		</div>
 	);
