@@ -2,53 +2,34 @@ import React from 'react';
 import Bounce from 'react-reveal/Bounce';
 import Tada from 'react-reveal/Tada';
 import Swing from 'react-reveal/Swing';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useNavigation } from 'react-router-dom';
 import "../styles/Intro.css";
 
-
-class IntroPage extends React.Component {
+class Intro extends React.Component {
+    
 
     render() {
     return (
+        <body>
         <div className='intro0'>
             <Bounce left cascade>
                 
                 <div>
-                <p className='l1'>Create your own portfolio in SITE!</p>
+                <p className='l1'>ì—¬ëŸ¬ë¶„ë§Œì˜ í¬íŠ¸í´ë¦¬ì˜¤ë¥¼ (ì‚¬ì´íŠ¸)ì—ì„œ ë§Œë“¤ì–´ë³´ì„¸ìš”!</p>
                 </div>
                 
             </Bounce>
-            <p> Make it easy using various templates! </p> 
-            <p> If you fill in the form provided, you can create your own portfolio for free even if you don't know the coding. </p>
+            <p> ë‹¤ì–‘í•œ í…œí”Œë¦¿ì„ ì´ìš©í•˜ì—¬ ê°„í¸í•˜ê²Œ ë§Œë“¤ì–´ë³´ì„¸ìš” </p> 
+            <p> ì£¼ì–´ì§„ ì–‘ì‹ëŒ€ë¡œ ì…ë ¥í•˜ë©´ ì½”ë”©ì„ ëª°ë¼ë„ ë‚˜ë§Œì˜ í¬íŠ¸í´ë¦¬ì˜¤ë¥¼ ë¬´ë£Œë¡œ ì œì‘í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p>
             <Swing>
-            <button>START</button>
-            {/*<button onClick={()=>this.props.navHook('/login)')}>½ÃÀÛÇÏ±â</button> */} 
+            <button>ì‹œì‘í•˜ê¸°</button>
+            <button onClick={()=>window.location.href='/login'}>ì‹œì‘í•˜ê¸°</button> 
             </Swing>
         </div>
+        </body>
         )
     }
 }
 
 
-
-/*
-//½ÃÀÛÇÏ±â ¹öÆ° Å¬¸¯½Ã ·Î±×ÀÎ È­¸éÀ¸·Î 
-function Start(Component) {
-    return props => <Component {...props} navigate={useNavigate()} />;
-}
-*/
-
-/*
-const Start = async () => {
- // È­¸é ÀüÈ¯
- const navigate = useNavigate();
-
- // ½ÃÀÛÇÏ±â ¹öÆ° Å¬¸¯½Ã ·Î±×ÀÎ È­¸éÀ¸·Î
- const onClickStart = async () => {
- console.log('Start button pressed')
- navigate('/login');
- }
-}
-*/
-export default IntroPage;
-//export default Start;
+export default Intro;
