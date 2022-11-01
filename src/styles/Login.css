@@ -18,7 +18,8 @@ input {
 .login_join_btn {
     display: inline-block;
 }
-/*button {
+
+button {
     border: 1px solid rgb(64, 113, 203);
     height: 50px;
     width: 240px; 
@@ -28,4 +29,4 @@ input {
     font-size: 1.2rem;
     background-color: rgb(64, 113, 203);
     color: white;
-}*/
+}

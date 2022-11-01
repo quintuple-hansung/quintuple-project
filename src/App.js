@@ -1,6 +1,5 @@
 import './App.css';
 import Login from './pages/Login';
-import Index from './pages/Index';
 import Intro from './pages/Intro';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import app from './pages/firebase_config';

@@ -1,17 +1,25 @@
-body {
-    background-image: url(../image/background.jpg);
+.intro0 {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(../image/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-}
-
-.intro0 {
-    margin-bottom: 100px;
     height: 700px;
 }
 
+.title {
+    /*text-indent: 30px;*/
+    text-align: center;
+    font-weight: bold ;
+    font-size: 50px;
+    height: 200px;
+    background-color: grb(208, 244, 249);
+   /* margin-top: 50px;*/
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .intro0_text {
-    font-size: 1.8rem;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     height: 120px;
@@ -22,32 +30,54 @@ body {
     color: rgb(3, 62, 3);
 }
 
-button {
+.intro0_start_btn button {
     position: absolute;
-    border: 1px solid rgb(64, 113, 203);
-    height: 55px;
-    width: 240px; 
-    margin-top: 0;
-    margin-inline: 40px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    background-color: rgb(64, 113, 203);
-    color: white;
+    background-color: white;
+    border: white;
+    color:black;
+    display: inline-block;
+   
 }
 
-.title {
-    /*text-indent: 30px;*/
-    text-align: center;
-    font-weight: bold ;
-    font-size: 50px;
-    height: 200px;
-    background-color: rgb(208, 244, 249);
-    margin-top: 50px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.intro1 {
+    height: 700px; 
+    margin-top: 0;
+    /*
+    margin-bottom: 50px;
+    margin-inline: 30px;
+    */
+    background-color: rgba(247, 213, 232, 0.3);
 }
 
 .intro1_text {
-    height: 100px;
-    margin-top: 30px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-align: left;
+    margin-inline: 30px;
+
+}
+
+.intro1_start_btn button {
+    position: absolute;
+    background-color: rgba(202, 68, 214, 0.5);
+    border: rgba(202, 68, 214, 0.5);
+    color:black;
+    display: inline-block;
+   
+}
+
+.intro2 {
+    height: 700px;
+    margin-inline: 30px;
+    padding-top: 100px;
+}
+
+.intro2_text {
+    background-color: rgba(164, 219, 167, 0.37);
+    border-radius: 20px;
+    padding-top: 150px;
+    padding-bottom: 10px;
+    text-align: center;
+    height: 400px;
 }
