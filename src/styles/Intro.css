@@ -39,7 +39,22 @@
    
 }
 
-.intro1 {
+.intro0_learn_more {
+    border: 1px solid white;
+    background-color: white;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    margin-inline: 30%;
+}
+
+#learn_more {
+    text-decoration: none;
+}
+
+#intro1 {
     height: 700px; 
     margin-top: 0;
     /*

@@ -31,13 +31,13 @@ class Intro extends React.Component {
 					</div>
 					<div className="intro0_start_btn">
 						<Swing>
-							<button onClick={() => (window.location.href = '/login')}>
-								시작하기
-							</button>
+							<div className='intro0_learn_more'>
+								<a id="learn_more" href="#intro1">더 알아보기</a>
+							</div>
 						</Swing>
 					</div>
 				</div>
-				<div className="intro1">
+				<div id="intro1">
 					<Flip left>
 						<div className="intro1_text">
 							<p>
