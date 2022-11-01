@@ -77,16 +77,6 @@ function Main() {
 								</a>
 							</li>
 							<li className="nav-item">
-								<a className="nav-link" href="#" data-filter=".travel">
-									Travel & Booking
-								</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="#" data-filter=".multipurpose">
-									Multipurpose
-								</a>
-							</li>
-							<li className="nav-item">
 								<a className="nav-link" href="#" data-filter=".personal">
 									Personal
 								</a>
@@ -99,21 +89,6 @@ function Main() {
 							<li className="nav-item">
 								<a href="#" className="nav-link" data-filter=".event">
 									Events & Wedding
-								</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="#" data-filter=".photography">
-									Photography
-								</a>
-							</li>
-							<li className="nav-item">
-								<a href="#" className="nav-link" data-filter=".coming">
-									Coming Soon
-								</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="#" data-filter=".other">
-									Other
 								</a>
 							</li>
 							<li className="nav-item dropdown">
