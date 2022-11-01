@@ -1,21 +1,28 @@
-import Index from './pages/Index';
+import './App.css';
 import Login from './pages/Login';
-import Home from './pages/Home';
+import Index from './pages/Index';
+import Intro from './pages/Intro';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Introduce1 from './pages/Index';
+import app from './pages/firebase_config';
+import Join from './pages/Join';
+
 
 function App() {
-	return (
-		<div>
-			<Router>
-				<Routes>
-					<Route path="/" element={<Introduce1 />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/home" element={<Home />} />
-				</Routes>
-			</Router>
-		</div>
-	);
+  return (
+    <body>
+        <div className='container'>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Intro/>}/>
+            {/*<Route path="/" element={<Index/>}/>*/}
+            <Route path="/login" element={<Login/>}/>
+            <Route path='/join' element={<Join/>}/>
+            {/* Route path="/main", element={Main/>}/>*/}
+          </Routes>
+        </Router>
+    </div>
+    </body>
+  );
 }
 
 export default App;
