@@ -4,7 +4,7 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { auth } from './firebase_config';
+import { auth } from '../components/firebase_config';
 import { async } from '@firebase/util';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
@@ -25,7 +25,7 @@ function Login() {
 
 	// 화면전환
 	const navigate = useNavigate();
-	
+
 	// 회원가입 버튼 이벤트
 	const onClickJoin = () => {
 		console.log('Join button pressed');
@@ -36,15 +36,18 @@ function Login() {
 	const onClickLogin = async () => {
 		try {
 			console.log('Login button pressed');
-			const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
+			const result = await signInWithEmailAndPassword(
+				auth,
+				loginEmail,
+				loginPw
+			);
 			console.log(result);
 			navigate('/main');
-		} catch(error) {
+		} catch (error) {
 			alert('회원가입이 필요한 이메일입니다. 회원가입 페이지로 이동합니다.');
 			//document.getElementById('userid').focus();
 			navigate('/join'); // 회원가입 페이지로 바로 이동
 		}
-		
 	};
 
 	return (
@@ -70,8 +73,8 @@ function Login() {
 						onChange={handleLoginPw}
 					/>
 				</p>
-				<input id="login" type="button" value="로그인" onClick={onClickLogin}/>
-				<input id="join" type="button" value="회원가입" onClick={onClickJoin}/>
+				<input id="login" type="button" value="로그인" onClick={onClickLogin} />
+				<input id="join" type="button" value="회원가입" onClick={onClickJoin} />
 			</div>
 		</div>
 	);

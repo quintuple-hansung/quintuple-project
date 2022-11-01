@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import app from './pages/firebase_config';
+import app from './components/firebase_config';
 import Join from './pages/Join';
 
 function App() {
