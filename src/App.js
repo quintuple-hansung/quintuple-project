@@ -8,7 +8,7 @@ import Join from './pages/Join';
 
 function App() {
 	return (
-		<div className="container">
+		<div className="app_container">
 			<Router>
 				<Routes>
 					<Route path="/" element={<Intro />} />

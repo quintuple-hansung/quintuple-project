@@ -1,3 +1,7 @@
 body {
   background-color: white;
 }
+
+.app_container {
+  display: contents;
+}
