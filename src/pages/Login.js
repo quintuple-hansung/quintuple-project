@@ -34,11 +34,17 @@ function Login() {
 
 	// 로그인 버튼 이벤트
 	const onClickLogin = async () => {
-		console.log('Login button pressed');
-		const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
-		console.log(result);
-		// 팀 회의 후 완성할 것
-		navigate('/main');
+		try {
+			console.log('Login button pressed');
+			const result = await signInWithEmailAndPassword(auth, loginEmail, loginPw);
+			console.log(result);
+			navigate('/main');
+		} catch(error) {
+			alert('회원가입이 필요한 이메일입니다. 회원가입 페이지로 이동합니다.');
+			//document.getElementById('userid').focus();
+			navigate('/join'); // 회원가입 페이지로 바로 이동
+		}
+		
 	};
 
 	return (
