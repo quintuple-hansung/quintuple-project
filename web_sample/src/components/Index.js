@@ -8,17 +8,21 @@ class Introduce1 extends React.Component {
             <div className="intro">
                 <div className="intro1">
                     <Flip left>
-                        <p>¿ì¸® (»çÀÌÆ®ÀÌ¸§)À¸·Î Á¦ÀÛÇÑ ´Ù¾çÇÑ Æ÷Æ®Æú¸®¿À¸¦ È®ÀÎÇØº¸¼¼¿ä.</p>
-                        <p>°ü½ÉºÐ¾ßÀÇ Æ÷Æ®Æú¸®¿À¸¦ ½±°Ô Á¶È¸ÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
-                        <p>Áö±Ý ¹Ù·Î (»çÀÌÆ® ÀÌ¸§)À» ½ÃÀÛÇØº¸¼¼¿ä.</p>
+                        <div className="intro1_component">
+                            <p>ìš°ë¦¬ (ì‚¬ì´íŠ¸ì´ë¦„)ìœ¼ë¡œ ì œìž‘í•œ ë‹¤ì–‘í•œ í¬íŠ¸í´ë¦¬ì˜¤ë¥¼ í™•ì¸í•´ë³´ì„¸ìš”.</p>
+                            <p>ê´€ì‹¬ë¶„ì•¼ì˜ í¬íŠ¸í´ë¦¬ì˜¤ë¥¼ ì‰½ê²Œ ì¡°íšŒí•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
+                            <p>ì§€ê¸ˆ ë°”ë¡œ (ì‚¬ì´íŠ¸ ì´ë¦„)ì„ ì‹œìž‘í•´ë³´ì„¸ìš”.</p>
+                        </div>
                     </Flip>
                 </div>
                 <div className="intro2">
                     <Flip right>
-                        <p>´Ù¸¥ »ç¶÷ÀÇ Æ÷Æ®Æú¸®¿À¿¡ ÀÇ°ßÀ» ³²±â°í ¼­·Î °øÀ¯ÇÏ¸ç ¼ÒÅëÇØº¸¼¼¿ä.</p>
-                        <p>¸¶ÀÌÆäÀÌÁö¿¡¼­ ³ª¸¸ÀÇ Æ÷Æ®Æú¸®¿À¸¦ »ý¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.</p>
-                        <p>ÁÖ¾îÁø ¾ç½Ä´ë·Î ÀÔ·Â¸¸ ÇÏ¸é µË´Ï´Ù.</p>
-                        <p>Á¦ÀÛÇÑ Æ÷Æ®Æú¸®¿À´Â pdf ÆÄÀÏ·Î ÀúÀåµµ °¡´ÉÇÕ´Ï´Ù.</p>
+                        <div className="intro2_component">
+                            <p>ë‹¤ë¥¸ ì‚¬ëžŒì˜ í¬íŠ¸í´ë¦¬ì˜¤ì— ì˜ê²¬ì„ ë‚¨ê¸°ê³  ì„œë¡œ ê³µìœ í•˜ë©° ì†Œí†µí•´ë³´ì„¸ìš”.</p>
+                            <p>ë§ˆì´íŽ˜ì´ì§€ì—ì„œ ë‚˜ë§Œì˜ í¬íŠ¸í´ë¦¬ì˜¤ë¥¼ ìƒì„±í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</p>
+                            <p>ì£¼ì–´ì§„ ì–‘ì‹ëŒ€ë¡œ ìž…ë ¥ë§Œ í•˜ë©´ ë©ë‹ˆë‹¤.</p>
+                            <p>ì œìž‘í•œ í¬íŠ¸í´ë¦¬ì˜¤ëŠ” pdf íŒŒì¼ë¡œ ì €ìž¥ë„ ê°€ëŠ¥í•©ë‹ˆë‹¤.</p>
+                        </div>
                     </Flip>
                 </div>
             </div>          
