@@ -1,7 +1,9 @@
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Card from '@mui/material/Card';
-
 import { styled } from '@mui/material/styles';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import DownloadImage from '../DownloadImage';
 
 const Div = styled('div')(({ theme }) => ({
 	...theme.typography.button,
@@ -12,7 +14,7 @@ const Div = styled('div')(({ theme }) => ({
 }));
 
 const card = (
-	<Card sx={{ width: '300px', height: '300px' }} variant="outlined">
+	<Card sx={{ width: '300px', height: '100px' }} variant="outlined">
 		hello
 	</Card>
 );
@@ -23,9 +25,18 @@ function Cards() {
 			<Div>{'Title'}</Div>
 			<hr />
 			<Grid2 container justifyContent={'space-around'} flexDirection={'row'}>
-				<Card>{card}</Card>
-				<Card>{card}</Card>
-				<Card>{card}</Card>
+				<Card sx={{ maxWidth: 300, maxHeight: 300 }}>
+					<CardContent>hello</CardContent>
+					<DownloadImage />
+				</Card>
+				<Card sx={{ maxWidth: 300, maxHeight: 300 }}>
+					<CardContent>hello</CardContent>
+					<DownloadImage />
+				</Card>
+				<Card sx={{ maxWidth: 300, maxHeight: 300 }}>
+					<CardContent>hello</CardContent>
+					<DownloadImage />
+				</Card>
 				<Card>{card}</Card>
 			</Grid2>
 		</div>
