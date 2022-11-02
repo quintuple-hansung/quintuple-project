@@ -5,6 +5,8 @@ import Main from './pages/Main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import app from './components/firebase_config';
 import Join from './pages/Join';
+import MyPage from './pages/MyPage';
+import PortFolio from './pages/PortFolio';
 
 function App() {
 	return (
@@ -16,7 +18,8 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/join" element={<Join />} />
 					<Route path="/main" element={<Main />} />
-					{/*<Route path='/mypage'element={<MyPage />}/>*/}
+					<Route path='/mypage' element={<MyPage />}/>
+					<Route path='/portfolio' element={<PortFolio />}/>
 				</Routes>
 			</Router>
 		</div>
