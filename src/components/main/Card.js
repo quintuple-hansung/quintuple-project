@@ -14,7 +14,10 @@ const Div = styled('div')(({ theme }) => ({
 }));
 
 const card = (
-	<Card sx={{ width: '300px', height: '100px' }} variant="outlined">
+	<Card
+		sx={{ width: '300px', height: '300px' }}
+		variant="outlined"
+		className="Card">
 		hello
 	</Card>
 );
@@ -25,18 +28,9 @@ function Cards() {
 			<Div>{'Title'}</Div>
 			<hr />
 			<Grid2 container justifyContent={'space-around'} flexDirection={'row'}>
-				<Card sx={{ maxWidth: 300, maxHeight: 300 }}>
-					<CardContent>hello</CardContent>
-					<DownloadImage />
-				</Card>
-				<Card sx={{ maxWidth: 300, maxHeight: 300 }}>
-					<CardContent>hello</CardContent>
-					<DownloadImage />
-				</Card>
-				<Card sx={{ maxWidth: 300, maxHeight: 300 }}>
-					<CardContent>hello</CardContent>
-					<DownloadImage />
-				</Card>
+				<Card>{card}</Card>
+				<Card>{card}</Card>
+				<Card>{card}</Card>
 				<Card>{card}</Card>
 			</Grid2>
 		</div>
