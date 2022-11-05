@@ -62,7 +62,6 @@ function Login() {
 				} else { // 비밀번호가 틀리면 로그인 실패
 					console.log('비밀번호 틀림');
 					alert('비밀번호가 틀립니다. 다시 입력해주세요.');
-					setLoginEmail('')
 					setLoginPw('')
 				}
 			} else {
