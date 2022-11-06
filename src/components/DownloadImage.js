@@ -5,6 +5,7 @@
 // getStream()
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import React, { useState, useEffect } from 'react';
+import CardMedia from '@mui/material/CardMedia';
 
 export default function DownloadImage() {
 	const [url, setUrl] = useState();
@@ -26,5 +27,5 @@ export default function DownloadImage() {
 		}
 	}, []);
 
-	return <img src={url} />;
+	return <CardMedia component="img" image={url} src="true" alt="image" />;
 }

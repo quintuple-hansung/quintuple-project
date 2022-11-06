@@ -1,7 +1,10 @@
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Card from '@mui/material/Card';
-
 import { styled } from '@mui/material/styles';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import DownloadImage from '../DownloadImage';
+import CardHeader from './CardHeader';
 
 const Div = styled('div')(({ theme }) => ({
 	...theme.typography.button,
@@ -12,9 +15,13 @@ const Div = styled('div')(({ theme }) => ({
 }));
 
 const card = (
-	<Card sx={{ width: '300px', height: '300px' }} variant="outlined">
-		hello
-	</Card>
+	<CardHeader />
+	// <Card
+	// 	sx={{ width: '300px', height: '300px' }}
+	// 	variant="outlined"
+	// 	className="Card">
+	// 	hello
+	// </Card>
 );
 
 function Cards() {
