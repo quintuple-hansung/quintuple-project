@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import DownloadImage from '../DownloadImage';
+import CardHeader from './CardHeader';
 
 const Div = styled('div')(({ theme }) => ({
 	...theme.typography.button,
@@ -14,12 +15,13 @@ const Div = styled('div')(({ theme }) => ({
 }));
 
 const card = (
-	<Card
-		sx={{ width: '300px', height: '300px' }}
-		variant="outlined"
-		className="Card">
-		hello
-	</Card>
+	<CardHeader />
+	// <Card
+	// 	sx={{ width: '300px', height: '300px' }}
+	// 	variant="outlined"
+	// 	className="Card">
+	// 	hello
+	// </Card>
 );
 
 function Cards() {
