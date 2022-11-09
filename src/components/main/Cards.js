@@ -8,6 +8,7 @@ import { getDocs } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useId } from 'react';
 import { useEffect } from 'react';
+import DownloadImage from '../DownloadImage';
 
 const Div = styled('div')(({ theme }) => ({
 	...theme.typography.button,
@@ -21,7 +22,6 @@ function Cards() {
 	const [users, setUsers] = useState([]);
 	// db의 users 컬렉션을 가져옴
 	const usersCollectionRef = collection(firestore, 'user');
-
 	// 시작될때 한번만 실행
 	useEffect(() => {
 		// 비동기로 데이터 받을준비
@@ -37,10 +37,10 @@ function Cards() {
 
 	const cardUsers = users.map((value, index) => (
 		<Card key={index} sx={{ width: '300px', height: '300px' }}>
-			<CardText name={value.name} />
+			<CardText name={value.name} email={value.email} />
+			{/* // <CardThumbnail /> */}
+			<DownloadImage email={value.email} />
 		</Card>
-
-		// <CardThumbnail />
 	));
 
 	return (
@@ -54,15 +54,5 @@ function Cards() {
 			</div>
 		</>
 	);
-
-	// return (
-	// 	<div>
-	// 		<Div>{'Title'}</Div>
-	// 		<hr />
-	// 		<Grid2 container justifyContent={'space-around'} flexDirection={'row'}>
-	// 			{card('test1@test1.com')}
-	// 		</Grid2>
-	// 	</div>
-	// );
 }
 export default Cards;
