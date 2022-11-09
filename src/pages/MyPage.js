@@ -2,16 +2,21 @@
 import Swing from 'react-reveal/Swing'; // Swing component 사용
 import { useNavigate } from 'react-router-dom'; //navigate 사용
 import '../styles/MyPage.css'; // css 파일 사용
+import React, { useState, useEffect } from 'react'; // useState,userEffect 사용
+import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md"; // 비밀번호 이미지 ReactIcon 사용 (yarn add react-icons) 
 
 function MyPage() {
   /* #databse 연동부분
   const handleLoginEmail = e => {
-		setLoginEmail(e.target.value);
-	};
+    setLoginEmail(e.target.value);
+  };
   */
 
   // 화면전환
   const navigate = useNavigate();
+
+  //
+  const [visible, setVisible] = React.useState(false);
 
   //포트폴리오 작성 버튼 이벤트
   const onClickPortFolio = () => {
@@ -32,20 +37,34 @@ function MyPage() {
     //navigate('/MyBookmark');
   };
 
-  //북마크 버튼 이벤트
+  //댓글 버튼 이벤트
   const onClickCommentPost = () => {
     console.log('CommentPost button pressed');
     //navigate('/MycommentPost');
   };
 
   //비밀번호 수정 버튼 이벤트 #비밀번호 수정 전 현재 비밀번호로 사용자 재인증
-  const onClickPassWordEdit = () => {
+  const onClickPassWordEdit = ({ visible = false }) => {
     console.log('PassWordEdit button pressed');
     //비밀번호 내용 수정가능하게 변경
   };
 
 
-
+  const Visibility = ({ visible = false}) => { // 비밀번호 수정 이미지 
+    return (
+      <div style={{ height: 60 }}>
+        {!visible && <MdOutlineVisibilityOff color="grey" size={50} />}
+        {visible && <MdOutlineVisibility color="grey" size={50} />}
+      </div>
+    )
+  };
+const switchfunction = e =>{
+    console.log("button clicked")
+    const {visible} = !(e.target.value)
+    setVisible(visible)
+}
+  
+  
 
   return (
     <div className="mypage_form">
@@ -68,23 +87,26 @@ function MyPage() {
       <div className='mypage_form_myprofileform'>
         <div> {/*#아래 많은 div에 div className 필요? */}
           <label htmlFor="id">id: </label>
-          <input id="id" type="text" defaultValue={"사용자id"}/*# 사용자id datbase에서 가져오기 onChange={handleLoginEmail} #데이터베이스 연동부분*//><br />
+          <input id="id" type="text" defaultValue={"사용자id"}/*# 사용자id datbase에서 가져오기 onChange={handleLoginEmail} #데이터베이스 연동부분*/ /><br />
         </div>
         <div>
           <label htmlFor="pw">pw: </label>
           <input id="pw" type="password" value="사용자pw" disabled="disabled" />
-          <input id="pwedit" type="button" value="수정" onClick={onClickPassWordEdit} /*#수정 버튼 클릭시 password diabled 해제*/  /><br />
+          
+          <Visibility visible = {false} onClick = {switchfunction} /> {/*// 버튼 누를 시 이미지 변경*/}
+          
+          {/*input id="pwedit" type="button" value="수정" onClick={onClickPassWordEdit} #수정 버튼 클릭시 password diabled 해제 /><br /> */}
         </div>
         <div>
           <label htmlFor="name">name: </label>
-          <input id="name" type="text" defaultValue={"사용자name"} /*onChange={handleLoginEmail}*//><br />
+          <input id="name" type="text" defaultValue={"사용자name"} /*onChange={handleLoginEmail}*/ /><br />
         </div>
         <div>
           <label htmlFor="email">email: </label>
-          <input id="email" type="text" defaultValue={"사용자email"} /*onChange={handleLoginEmail}*//><br />
+          <input id="email" type="text" defaultValue={"사용자email"} /*onChange={handleLoginEmail}*/ /><br />
         </div>
         <div>
-          <input type="submit" value="확인" /*#일단 무지성 버튼 만들기, 과연 submit,button이 맞나?*//> 
+          <input type="submit" value="확인" /*#일단 무지성 버튼 만들기, 과연 submit,button이 맞나?*/ />
           <input type="button" value="취소" />
         </div>
       </div>
