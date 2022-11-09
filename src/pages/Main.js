@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Card from '../components/main/Card';
+import Cards from '../components/main/Cards';
 import '../styles/Main.css';
 function Main() {
-	return <Card />;
+	return <Cards />;
 }
 
 export default Main;
