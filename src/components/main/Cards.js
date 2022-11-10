@@ -10,14 +10,6 @@ import { useId } from 'react';
 import { useEffect } from 'react';
 import DownloadImage from '../DownloadImage';
 
-const Div = styled('div')(({ theme }) => ({
-	...theme.typography.button,
-	backgroundColor: theme.palette.background.paper,
-	color: 'black',
-	textAlign: 'center',
-	padding: theme.spacing(1),
-}));
-
 function Cards() {
 	const [users, setUsers] = useState([]);
 	// db의 users 컬렉션을 가져옴
@@ -45,8 +37,6 @@ function Cards() {
 
 	return (
 		<>
-			<Div>{'Title'}</Div>
-
 			<div className="Cards" key={1}>
 				<Grid2 container justifyContent={'space-around'} flexDirection={'row'}>
 					{cardUsers}
