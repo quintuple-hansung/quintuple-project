@@ -50,21 +50,22 @@ function MyPage() {
   };
 
 
-  const Visibility = ({ visible = false}) => { // 비밀번호 수정 이미지 
+  const Visibility = () => { // 비밀번호 수정 이미지 
     return (
-      <div style={{ height: 60 }}>
+      <div style={{ width: 50, height: 50 }} >
         {!visible && <MdOutlineVisibilityOff color="grey" size={50} />}
         {visible && <MdOutlineVisibility color="grey" size={50} />}
       </div>
     )
   };
-const switchfunction = e =>{
-    console.log("button clicked")
-    const {visible} = !(e.target.value)
-    setVisible(visible)
-}
-  
-  
+  const onClickVisible = () =>{
+    setVisible(!visible)
+    
+  }
+
+
+
+
 
   return (
     <div className="mypage_form">
@@ -91,15 +92,13 @@ const switchfunction = e =>{
         </div>
         <div>
           <label htmlFor="pw">pw: </label>
-          <input id="pw" type="password" value="사용자pw" disabled="disabled" />
+          <input id="pw" type="password" defaultValue={"사용자pw"}  />
           
-          <Visibility visible = {false} onClick = {switchfunction} /> {/*// 버튼 누를 시 이미지 변경*/}
-          
-          {/*input id="pwedit" type="button" value="수정" onClick={onClickPassWordEdit} #수정 버튼 클릭시 password diabled 해제 /><br /> */}
+          <div onClick={onClickVisible}> <Visibility visible={false}/> </div>{/*// 버튼 누를 시 이미지 변경, useReducer는 컴포넌트 밖에서 상태 업데이트 */}
         </div>
         <div>
           <label htmlFor="name">name: </label>
-          <input id="name" type="text" defaultValue={"사용자name"} /*onChange={handleLoginEmail}*/ /><br />
+          <input id="name" type="text" defaultValue={"사용자name"}  /*onChange={handleLoginEmail}*/ /><br />
         </div>
         <div>
           <label htmlFor="email">email: </label>
