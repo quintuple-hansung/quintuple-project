@@ -2,8 +2,10 @@
 import Swing from 'react-reveal/Swing'; // Swing component 사용
 import { useNavigate } from 'react-router-dom'; //navigate 사용
 import '../styles/MyPage.css'; // css 파일 사용
-import React, { useState, useEffect } from 'react'; // useState,userEffect 사용
+import React, { useState, useEffect } from 'react'; // useState,userEffect 사용자
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md"; // 비밀번호 이미지 ReactIcon 사용 (yarn add react-icons) 
+
+
 
 function MyPage() {
   /* #databse 연동부분
@@ -15,8 +17,10 @@ function MyPage() {
   // 화면전환
   const navigate = useNavigate();
 
+
   //
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [isPwType, setisPWType] = useState(true);
 
   //포트폴리오 작성 버튼 이벤트
   const onClickPortFolio = () => {
@@ -44,24 +48,22 @@ function MyPage() {
   };
 
   //비밀번호 수정 버튼 이벤트 #비밀번호 수정 전 현재 비밀번호로 사용자 재인증
-  const onClickPassWordEdit = ({ visible = false }) => {
-    console.log('PassWordEdit button pressed');
-    //비밀번호 내용 수정가능하게 변경
-  };
+  const onClickVisible = () => {
+    setisPWType(!isPwType)
+    setVisible(!visible)
+  }
 
 
   const Visibility = () => { // 비밀번호 수정 이미지 
     return (
       <div style={{ width: 50, height: 50 }} >
-        {!visible && <MdOutlineVisibilityOff color="grey" size={50} />}
+        {!visible && <MdOutlineVisibilityOff color="grey" size={50} />} {/*조건부 랜더링*/}
         {visible && <MdOutlineVisibility color="grey" size={50} />}
       </div>
     )
   };
-  const onClickVisible = () =>{
-    setVisible(!visible)
-    
-  }
+
+
 
 
 
@@ -92,9 +94,11 @@ function MyPage() {
         </div>
         <div>
           <label htmlFor="pw">pw: </label>
-          <input id="pw" type="password" defaultValue={"사용자pw"}  />
-          
-          <div onClick={onClickVisible}> <Visibility visible={false}/> </div>{/*// 버튼 누를 시 이미지 변경, useReducer는 컴포넌트 밖에서 상태 업데이트 */}
+          <div>
+            {isPwType && <input id="pw" type="password" defaultValue={"사용자pw"} />} {/*조건부 랜더링*/}
+            {!isPwType && <input id="pw" type="text" defaultValue={"사용자pw"} />} 
+          </div>
+          <div onClick={() => onClickVisible()}> <Visibility visible={false} /> </div>{/*// 버튼 누를 시 이미지 변경, useReducer는 컴포넌트 밖에서 상태 업데이트 */}
         </div>
         <div>
           <label htmlFor="name">name: </label>
