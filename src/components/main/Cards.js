@@ -8,7 +8,7 @@ import { getDocs } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useId } from 'react';
 import { useEffect } from 'react';
-import DownloadImage from '../DownloadImage';
+import CardThumbnail from './CardThumbnail';
 
 function Cards() {
 	const [users, setUsers] = useState([]);
@@ -31,7 +31,7 @@ function Cards() {
 		<Card key={index} sx={{ width: '300px', height: '300px' }}>
 			<CardText name={value.name} email={value.email} />
 			{/* // <CardThumbnail /> */}
-			<DownloadImage email={value.email} />
+			<CardThumbnail email={value.email} />
 		</Card>
 	));
 
