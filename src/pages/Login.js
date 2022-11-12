@@ -47,31 +47,15 @@ function Login() {
 			console.log('Login button pressed');
 			//console.log(`firestore.collection('users') = ${firestore.collection('users')}`)
 			//const usersData = collection(firestore, 'user') // 조회할 collectioin
-			const docUser = doc(firestore, 'user', loginEmail);
+			//const docUser = doc(firestore, 'user', loginEmail); // 사용자 이메일 db에 저장
 			console.log(`loginEmail : ${loginEmail}`);
-			const docGetUser = await getDoc(docUser);
-			const docGetPw = await docGetUser.data().password;
-			console.log(`docGetPw = ${docGetPw}`);
+			console.log(`loginPw : ${loginPw}`);
+			//const docGetUser = await getDoc(docUser);
+			//const docGetPw = await docGetUser.data().password;
+			//console.log(`docGetPw = ${docGetPw}`);
 			
-			if (docGetUser.exists()) { // 이메일이 있고
-				// 비밀번호가 맞으면 로그인 성공
-				if (docGetPw === loginPw) {
-					console.log('로그인 성공');
-					console.log(`user : ${JSON.stringify(docGetUser.data())}`);
-					navigate('/main');
-				} else { // 비밀번호가 틀리면 로그인 실패
-					console.log('비밀번호 틀림');
-					alert('비밀번호가 틀립니다. 다시 입력해주세요.');
-					setLoginPw('')
-				}
-			} else {
-				console.log("로그인 정보 없음");
-				alert('회원가입이 필요한 이메일입니다. 회원가입 페이지로 이동합니다.');
-				//document.getElementById('userid').focus();
-				navigate('/join'); // 회원가입 페이지로 바로 이동
-			}
 
-			/*const querySnapshot = await getDocs(collection(firestore, "users"));
+			/*const querySnapshot = await getDoc(collection(firestore, "users"));
 			querySnapshot.forEach((doc) => {
 				console.log(`${doc.id} => ${doc.data()}`);
 			});*/
@@ -94,16 +78,15 @@ function Login() {
 					navigate('/main')
 				}
 			})*/
-			/*const result = await signInWithEmailAndPassword(
+			// 로그인 실행
+			const result = await signInWithEmailAndPassword(
 				auth,
 				loginEmail,
 				loginPw
 			);
 			console.log(result);
-			navigate('/main');*/
+			navigate('/main');
 		} catch (error) {
-			//console.log(`firestore.collection('users') = ${firestore.collection('users')}`);
-			//console.log(`user : ${JSON.stringify(docGetUser.data())}`)
 			console.error(error)
 			alert('회원가입이 필요한 이메일입니다. 회원가입 페이지로 이동합니다.');
 			//document.getElementById('userid').focus();
