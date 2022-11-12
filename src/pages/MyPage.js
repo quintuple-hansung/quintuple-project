@@ -17,7 +17,6 @@ function MyPage() {
   // 화면전환
   const navigate = useNavigate();
 
-
   //
   const [visible, setVisible] = useState(false);
   const [isPwType, setisPWType] = useState(true);
@@ -53,7 +52,6 @@ function MyPage() {
     setVisible(!visible)
   }
 
-
   const Visibility = () => { // 비밀번호 수정 이미지 
     return (
       <div style={{ width: 50, height: 50 }} >
@@ -66,39 +64,35 @@ function MyPage() {
 
 
 
-
-
-
+  {/*JSX code*/ }
   return (
     <div className="mypage_form">
-      <div className='mypage_form_portfolioform'>
+      <div className='mypage_form_createPortfolioform'>
         <p>
           <input id="portfolio" type="button" value="포트폴리오 작성" onClick={onClickPortFolio} />
         </p>
       </div>
-      <div className='mypage_form_mypostform'>
+      <p id='lbMyPost'>내 글</p>
+      <div className='mypage_form_myPostForm'>
         <p>
-          <input id="likedPost" type="button" value="좋아요한 글" onClick={onClickLikedPost} />
-        </p>
-        <p>
-          <input id="bookmark" type="button" value="북마크" onClick={onClickCommentPost} />
-        </p>
-        <p>
-          <input id="commentPost" type="button" value="댓글 단 글" onClick={onClickBookmark} />
+          <span><input id="likedPost" type="button" value="좋아요한 글" onClick={onClickLikedPost} /></span>
+          <span><input id="bookmark" type="button" value="북마크" onClick={onClickCommentPost} /></span>
+          <span><input id="commentPost" type="button" value="댓글 단 글" onClick={onClickBookmark} /></span>
         </p>
       </div>
-      <div className='mypage_form_myprofileform'>
-        <div> {/*#아래 많은 div에 div className 필요? */}
+      <p id='lbMyProfile'>회원 정보 수정</p>
+      <div className='mypage_form_myProfileForm'>
+        <div> {/*#아래 많은 div에 div className 필요? => 놉*/}
           <label htmlFor="id">id: </label>
           <input id="id" type="text" defaultValue={"사용자id"}/*# 사용자id datbase에서 가져오기 onChange={handleLoginEmail} #데이터베이스 연동부분*/ /><br />
         </div>
         <div>
           <label htmlFor="pw">pw: </label>
-          <div>
+          <span>
             {isPwType && <input id="pw" type="password" defaultValue={"사용자pw"} />} {/*조건부 랜더링*/}
             {!isPwType && <input id="pw" type="text" defaultValue={"사용자pw"} />} 
-          </div>
-          <div onClick={() => onClickVisible()}> <Visibility visible={false} /> </div>{/*// 버튼 누를 시 이미지 변경, useReducer는 컴포넌트 밖에서 상태 업데이트 */}
+          </span>
+          <span onClick={() => onClickVisible()}> <Visibility visible={false} /> </span>{/*// 버튼 누를 시 이미지 변경, useReducer는 컴포넌트 밖에서 상태 업데이트 */}
         </div>
         <div>
           <label htmlFor="name">name: </label>
@@ -109,9 +103,13 @@ function MyPage() {
           <input id="email" type="text" defaultValue={"사용자email"} /*onChange={handleLoginEmail}*/ /><br />
         </div>
         <div>
-          <input type="submit" value="확인" /*#일단 무지성 버튼 만들기, 과연 submit,button이 맞나?*/ />
-          <input type="button" value="취소" />
+          <input name="button" type="submit" value="수정" /*#일단 무지성 버튼 만들기, 과연 submit,button이 맞나?*/ />
+          <input name="button" type="button" value="취소" />
         </div>
+      </div>
+      <p id='lbExportPortFolio'>포트폴리오 내보내기</p>
+      <div className='mypage_form_myPortfolioExportForm'>
+      <input name="button" type="submit" value="PDF"/>
       </div>
     </div>
   );

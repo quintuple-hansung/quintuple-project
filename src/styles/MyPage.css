@@ -1,0 +1,65 @@
+
+.mypage_form{
+  text-align: right;
+}
+.mypage_form_createPortfolioform {
+  width: 800px; 
+  margin: 0 auto;
+  border: 1px solid rgb(64, 113, 203);
+  border-radius: 10px;
+  text-align: center;
+}
+.mypage_form_myPostForm{
+  width: 800px; 
+  height: 600px;
+  margin: 0 auto;
+  border: 1px solid rgb(64, 113, 203);
+  border-radius: 10px;
+  text-align: center; 
+}
+#lbMyPost{
+  width: 800px; /*라벨과 form의 code 중복!*/
+  margin: 0 auto; /*라벨과 form의 code 중복!*/
+  text-align:left;
+  padding-left: 1rem;
+}
+
+.mypage_form_myProfileForm{
+  width: 800px; 
+  margin: 0 auto;
+  border: 1px solid rgb(64, 113, 203);
+  border-radius: 10px;
+  text-align: center; 
+}
+#lbMyProfile{
+  width: 800px; 
+  margin: 0 auto;
+  text-align:left;
+  padding-left: 1rem; 
+}
+.mypage_form_myPortfolioExportForm{
+  width: 800px; 
+  margin: 0 auto;
+  border: 1px solid rgb(64, 113, 203);
+  border-radius: 10px;
+  text-align: center; 
+}
+
+input[name="button"] {
+  border: 1px solid rgb(64, 113, 203);
+  height: 50px;
+  width: 160px; 
+  margin-inline: 40px;
+  margin-top: 20px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  background-color: rgb(64, 113, 203);
+  color: white;
+}
+
+#lbExportPortFolio{
+  width: 800px; 
+  margin: 0 auto;
+  text-align:left;
+  padding-left: 1rem; 
+}
