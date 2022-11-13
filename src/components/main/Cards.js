@@ -1,26 +1,69 @@
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Card from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
 import CardText from './CardText';
 import { useState } from 'react';
 import { collection } from 'firebase/firestore/lite';
 import { getDocs } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
-import { useId } from 'react';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
+import React from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+
+const modalStyle = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 1000,
+	height: 800,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+};
 
 function Cards() {
 	const [users, setUsers] = useState([]);
-	// db의 users 컬렉션을 가져옴
 	const usersCollectionRef = collection(firestore, 'user');
-	// 시작될때 한번만 실행
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	function ModalHandler() {
+		return (
+			<Modal
+				aria-labelledby="transition-modal-title"
+				aria-describedby="transition-modal-description"
+				open={open}
+				onClose={handleClose}
+				closeAfterTransition
+				BackdropComponent={Backdrop}
+				BackdropProps={{
+					timeout: 500,
+				}}>
+				<Fade in={open}>
+					<Box sx={modalStyle}>
+						<Typography id="transition-modal-title" variant="h6" component="h2">
+							Text in a modal
+						</Typography>
+						<Typography id="transition-modal-description" sx={{ mt: 2 }}>
+							Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+						</Typography>
+					</Box>
+				</Fade>
+			</Modal>
+		);
+	}
+
 	useEffect(() => {
-		// 비동기로 데이터 받을준비
 		const getUsers = async () => {
-			// getDocs로 컬렉션안에 데이터 가져오기
 			const data = await getDocs(usersCollectionRef);
-			// users에 data안의 자료 추가. 객체에 id 덮어씌우는거
 			setUsers(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
 			console.log(users);
 		};
@@ -28,10 +71,12 @@ function Cards() {
 	}, []);
 
 	const cardUsers = users.map((value, index) => (
-		<Card key={index} sx={{ width: '300px', height: '300px' }}>
-			<CardText name={value.name} email={value.email} />
-			{/* // <CardThumbnail /> */}
-			<CardThumbnail email={value.email} />
+		<Card key={index} sx={{ width: '400px', height: '300px' }}>
+			<CardActionArea onClick={handleOpen}>
+				<ModalHandler />
+				<CardText name={value.name} email={value.email} />
+				<CardThumbnail email={value.email} />
+			</CardActionArea>
 		</Card>
 	));
 
@@ -45,4 +90,5 @@ function Cards() {
 		</>
 	);
 }
+
 export default Cards;
