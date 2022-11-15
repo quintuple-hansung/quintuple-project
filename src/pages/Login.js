@@ -10,10 +10,19 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import { CheckCircleOutlineSharp } from '@mui/icons-material';
 import { addDoc, collection } from 'firebase/firestore/lite'; // db 접근
-//import firestore from 'firebase/compat/app';
 import 'firebase/auth';
-//import 'firebase/firestore'; // web version 9 에서는 더 이상 안씀
-import { doc, getDoc } from 'firebase/firestore/lite';
+import TextField from '@mui/material/TextField';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 
 function Login() {
 	const [loginEmail, setLoginEmail] = useState('');
@@ -44,48 +53,22 @@ function Login() {
 	// 로그인 버튼 이벤트
 	const onClickLogin = async () => {
 		try {
-			console.log('Login button pressed');
-			//console.log(`firestore.collection('users') = ${firestore.collection('users')}`)
-			//const usersData = collection(firestore, 'user') // 조회할 collectioin
-			//const docUser = doc(firestore, 'user', loginEmail); // 사용자 이메일 db에 저장
-			console.log(`loginEmail : ${loginEmail}`);
-			console.log(`loginPw : ${loginPw}`);
-			//const docGetUser = await getDoc(docUser);
-			//const docGetPw = await docGetUser.data().password;
-			//console.log(`docGetPw = ${docGetPw}`);
-			
-
-			/*const querySnapshot = await getDoc(collection(firestore, "users"));
-			querySnapshot.forEach((doc) => {
-				console.log(`${doc.id} => ${doc.data()}`);
-			});*/
-			/*if (docGetUser.exists()) {
-				console.log(`user : ${JSON.stringify(docGetUser.data())}`)
-				navigate('/main')
-			}*/
-			/*.doc(loginEmail) // 조회할 document
-			.get()
-			.then(loginEmail => {
-				if (!loginEmail.data()) { // db에 해당 loginEmail 이 없을 경우
-					alert('회원가입이 필요한 이메일입니다. 회원가입 페이지로 이동합니다.');
-				} else { // 존재할 경우
-					const result = signInWithEmailAndPassword(
-						auth,
-						loginEmail,
-						loginPw
-					);
-					console.log(result)
-					navigate('/main')
-				}
-			})*/
-			// 로그인 실행
-			const result = await signInWithEmailAndPassword(
-				auth,
-				loginEmail,
-				loginPw
-			);
-			console.log(result);
-			navigate('/main');
+			if (loginEmail === "" || loginPw === "") { // 정보를 입력하지 않고 버튼을 누르면
+				alert("이메일, 비밀번호를 입력해주세요.");
+			} else {
+				console.log('Login button pressed');
+				console.log(`loginEmail : ${loginEmail}`);
+				console.log(`loginPw : ${loginPw}`);
+				
+				// 로그인 실행
+				const result = await signInWithEmailAndPassword(
+					auth,
+					loginEmail,
+					loginPw
+				);
+				console.log(result);
+				navigate('/main');
+			}
 		} catch (error) {
 			console.error(error)
 			alert('회원가입이 필요한 이메일입니다. 회원가입 페이지로 이동합니다.');
@@ -95,32 +78,58 @@ function Login() {
 	};
 
 	return (
-		<div className="login_join_form">
-			<div>
-				<p>
-					<input
-						type="text"
-						id="userid"
-						name="userid"
-						placeholder="user@gmail.com"
+		<Container component="main" maxWidth="xs">
+			<CssBaseline />
+				<Box
+					sx={{
+						marginTop: 8,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+					}}
+				>
+				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+					<LockOutlinedIcon />
+				</Avatar>
+				<Typography component="h1" variant="h5">
+					Sign in
+				</Typography>
+				<Box component="form" noValidate sx={{ mt: 1 }}>
+					<TextField
+						margin="normal"
+						required
+						fullWidth
+						id="email"
+						label="Email Address"
+						name="email"
+						autoComplete="email"
+						autoFocus
 						value={loginEmail}
 						onChange={handleLoginEmail}
 					/>
-				</p>
-				<p>
-					<input
+					<TextField
+						margin="normal"
+						required
+						fullWidth
+						name="password"
+						label="Password"
 						type="password"
-						id="userpw"
-						name="userpw"
-						placeholder="Password"
+						id="password"
+						autoComplete="current-password"
 						value={loginPw}
 						onChange={handleLoginPw}
 					/>
-				</p>
-				<input id="login" type="button" value="로그인" onClick={onClickLogin} />
-				<input id="join" type="button" value="회원가입" onClick={onClickJoin} />
-			</div>
-		</div>
+				</Box>
+				<Button 
+					type="submit" 
+					fullWidth
+					variant="contained" 
+					sx={{ mt: 3, mb: 2 }} 
+					onClick={onClickLogin}>
+						Sign In
+				</Button>
+			</Box>
+      	</Container>
 	);
 }
 
