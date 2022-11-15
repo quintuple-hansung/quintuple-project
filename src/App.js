@@ -1,4 +1,3 @@
-import './App.css';
 import Login from './pages/Login';
 import Intro from './pages/Intro';
 import Main from './pages/Main';
@@ -7,14 +6,15 @@ import app from './components/firebase_config';
 import Join from './pages/Join';
 import MyPage from './pages/MyPage';
 import PortFolio from './pages/PortFolio';
+import { AppAppBar } from './pages/AppAppBar';
 
 function App() {
 	return (
-		<div className="app_container">
+		<>
+			<div className="app_container">
 			<Router>
 				<Routes>
 					<Route path="/" element={<Intro />} />
-					{/*<Route path="/" element={<Index/>}/>*/}
 					<Route path="/login" element={<Login />} />
 					<Route path="/join" element={<Join />} />
 					<Route path="/main" element={<Main />} />
@@ -23,6 +23,7 @@ function App() {
 				</Routes>
 			</Router>
 		</div>
+		</>
 	);
 }
 
