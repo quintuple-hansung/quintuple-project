@@ -33,26 +33,22 @@ function Join() {
 
     const signup = async() => {
         try {
-            if (joinEmail === "" || joinPw === "" || userName === "") { // 회원정보를 입력 안했을 경우
-                alert("회원정보를 모두 입력해주세요.");
-            } else {
-                const result = await createUserWithEmailAndPassword(auth, joinEmail, joinPw);
-                console.log(result);            
-
-                // 사용자 이름과 이메일 db에 추가
-                //setDoc(usersCollectionRef, userName);
-                setDoc(doc(firestore, "user", userName), {
-                    name: userName,
-                    email: joinEmail
-                });
-                //addDoc(usersCollectionRef, {name:userName}, {email:joinEmail});
-
-                navigate('/login'); // 로그인 페이지로 이동
-            }
+            const result = await createUserWithEmailAndPassword(auth, joinEmail, joinPw);
+            console.log(result);            
+    
+            // 사용자 이름과 이메일 db에 추가
+            //setDoc(usersCollectionRef, userName);
+            setDoc(doc(firestore, "user", userName), {
+                name: userName,
+                email: joinEmail
+            });
+            //addDoc(usersCollectionRef, {name:userName}, {email:joinEmail});
+    
+            navigate('/login'); // 로그인 페이지로 이동
 
         } catch (error) {
             console.error(error);
-            alert('비밀번호는 6자 이상으로 해주세요.');
+            alert('회원정보를 모두 입력해주세요. 비밀번호는 6자 이상으로 해주세요.');
         }
         
     }
