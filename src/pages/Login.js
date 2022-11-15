@@ -4,19 +4,13 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { auth, firestore } from '../components/firebase_config';
-import { async } from '@firebase/util';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
-import { CheckCircleOutlineSharp } from '@mui/icons-material';
-import { addDoc, collection } from 'firebase/firestore/lite'; // db 접근
 import 'firebase/auth';
 import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
