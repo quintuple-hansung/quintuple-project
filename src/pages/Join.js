@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import AlertDialog from './AlertDialog';
 
 function Join() {
     const [joinEmail, setJoinEmail] = useState("");
@@ -48,6 +49,7 @@ function Join() {
 
         } catch (error) {
             console.error(error);
+            //<AlertDialog></AlertDialog>
             alert('회원정보를 모두 입력해주세요. 비밀번호는 6자 이상으로 해주세요.');
         }
         
