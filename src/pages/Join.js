@@ -115,16 +115,13 @@ function Join() {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
-                        onClick={signup()}
-                        >
+                        onClick={signup()}>
                             Sign Up
                     </Button>
-                    <Grid container justifyContent="flex-end">
-                        <Grid item>
-                            <Link href="/login" variant="body2">
-                                로그인 페이지로 이동하기
-                            </Link>
-                        </Grid>
+                    <Grid item>
+                        <Link href="/login" variant="body2" textAlign="center">
+                            로그인 페이지로 이동하기
+                        </Link>
                     </Grid>
                 </Box>
                 </Box>
