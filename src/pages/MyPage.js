@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; //navigate 사용
 import '../styles/MyPage.css'; // css 파일 사용
 import React, { useState, useEffect } from 'react'; // useState,userEffect 사용자
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md"; // 비밀번호 이미지 ReactIcon 사용 (yarn add react-icons) 
+import { PDFDownloadLink } from '@react-pdf/renderer'; // pdf 다운로드  PDFDownloadLink 사용
 
 
 
