@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom'; //navigate 사용
 import '../styles/MyPage.css'; // css 파일 사용
 import React, { useState, useEffect } from 'react'; // useState,userEffect 사용자
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md"; // 비밀번호 이미지 ReactIcon 사용 (yarn add react-icons) 
-import { PDFDownloadLink } from '@react-pdf/renderer'; // pdf 다운로드  PDFDownloadLink 사용
+import cardContent from "../components/main/Cards" // main의 카드 component를 pdf로 변환
+import html2canvas from 'html2canvas'; // javascript 페이지 스크린샷 라이브러리
+import jsPDF from 'jspdf'; // JavaScript에서 PDF를 생성하는 라이브러리입니다.
 
 
 
@@ -62,6 +64,19 @@ function MyPage() {
     )
   };
 
+  const exportPDF = () =>{ // pdf 추출 함수
+    const input = cardContent.document.getElemts
+    html2canvas(input,{logging:true , letterRendering:1, useCORS: true}).then(canvas=>{
+      const imgWidth =208;
+      const imgHeigth = canvas.height * imgWidth / canvas.height;
+      const imgData = canvas.toDataURL('img/png');
+      const pdf = new jsPDF('p','mm','a4');
+      pdf.addImage(imgData,'PNG',0,0,imgWidth,imgHeigth);
+      pdf.save("sibal.pdf");
+    }) 
+  }
+  
+
 
 
 
@@ -110,7 +125,7 @@ function MyPage() {
       </div>
       <p id='lbExportPortFolio'>포트폴리오 내보내기</p>
       <div className='mypage_form_myPortfolioExportForm'>
-      <input name="button" type="submit" value="PDF"/>
+      <button onClick={()=> exportPDF()}>PDF로 추출하기</button>
       </div>
     </div>
   );
