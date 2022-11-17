@@ -1,6 +1,7 @@
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import React, { useState, useEffect } from 'react';
 import CardMedia from '@mui/material/CardMedia';
+import { CircularProgress } from '@mui/material';
 export default function CardThumbnail(props) {
 	const [url, setUrl] = useState();
 	const [ready, setReady] = useState(true);
@@ -28,6 +29,7 @@ export default function CardThumbnail(props) {
 			setReady(true);
 		}
 	}, []);
-
-	return <CardMedia component="img" image={url} src="true" alt="image" />;
+	if (url)
+		return <CardMedia component="img" image={url} src="true" alt="image" />;
+	else return <CircularProgress />;
 }
