@@ -18,9 +18,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import AlertDialog from './AlertDialog';
 import { async } from '@firebase/util';
-import { email, required } from '../form/validation';
-import { Form, Field } from 'react-final-form';
-import RFTextField from '../form/RFTextField';
 
 function Join() {
     const [joinEmail, setJoinEmail] = useState('');
