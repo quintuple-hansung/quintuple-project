@@ -38,12 +38,6 @@ function Login() {
 	// 화면전환
 	const navigate = useNavigate();
 
-	// 회원가입 버튼 이벤트
-	const onClickJoin = () => {
-		console.log('Join button pressed');
-		navigate('/join');
-	};
-
 	// 로그인 버튼 이벤트
 	const onClickLogin = async () => {
 		try {
@@ -124,7 +118,7 @@ function Login() {
 				</Button>
 				<Grid item>
 					<Link href="/join" variant="body2">
-						회원가입 페이지로 이동하기
+						<b>(사이트 이름)과 함께하러 가기</b> (회원가입)
 					</Link>
               </Grid>
 			</Box>
