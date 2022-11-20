@@ -19,7 +19,7 @@ import Container from '@mui/material/Container';
 import AlertDialog from './AlertDialog';
 import { async } from '@firebase/util';
 
-function Join() {
+export const Join = () => {
     const [joinEmail, setJoinEmail] = useState('');
     const [joinPw, setJoinPw] = useState('');
     const [userName, setUserName] = useState('');
@@ -64,7 +64,7 @@ function Join() {
             //const userRef = doc(firestore, 'user', userName);
             //setDoc(userRef, {name: userName}, {email: joinEmail});
             
-            setDoc(doc(firestore, 'user', userName), {
+            setDoc(doc(firestore, 'user', joinEmail), {
                 email: joinEmail,
                 name: userName
             })

@@ -8,7 +8,15 @@ import cardContent from '../components/main/Cards'; // main의 카드 component�
 import html2canvas from 'html2canvas'; // javascript 페이지 스크린샷 라이브러리
 import jsPDF from 'jspdf'; // JavaScript에서 PDF를 생성하는 라이브러리.
 import TopBar from '../components/main/TopBar';
+<<<<<<< HEAD
 import { width } from '@mui/system';
+=======
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+>>>>>>> 4d791b8 (포트폴리오 template 추가 및 사용자 정보 db 추가)
 
 function MyPage() {
 	/* #databse 연동부분
@@ -164,6 +172,25 @@ function MyPage() {
 						/>
 					</span>
 				</p>
+				{/*<Card sx={{ maxWidth: 345 }}>
+					<CardActionArea>
+					<CardMedia
+						component="img"
+						height="140"
+						image="/static/images/cards/contemplative-reptile.jpg"
+						alt="green iguana"
+					/>
+					<CardContent>
+						<Typography gutterBottom variant="h5" component="div">
+						Lizard
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+						Lizards are a widespread group of squamate reptiles, with over 6,000
+						species, ranging across all continents except Antarctica
+						</Typography>
+					</CardContent>
+					</CardActionArea>
+				</Card>*/}
 			</div>
 			<p id="lbMyProfile">회원 정보 수정</p>
 			<div className="mypage_form_myProfileForm">
