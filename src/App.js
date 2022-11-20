@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import app from './components/firebase_config';
 import Join from './pages/Join';
 import MyPage from './pages/MyPage';
-import Portfolio from './pages/Portfolio';
+import Portfolio from './pages/PortFolio';
 import { AppAppBar } from './pages/AppAppBar';
 import SelectTemplate from './pages/SelectTemplate';
 import Template1 from './pages/Template1';
