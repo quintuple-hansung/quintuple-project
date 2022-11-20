@@ -9,14 +9,9 @@ export default function CardThumbnail(props) {
 	useEffect(() => {
 		const func = async () => {
 			const storage = getStorage();
-			const reference = ref(
-				storage,
-				// `portfolio_thumbnails/${props.email}.heic`
-				'portflio_thumbnails/test@test.com.heic'
-			);
 			const gsReference = ref(
 				storage,
-				`gs://quintuple-e9f49.appspot.com/portfolio_thumbnails/${props.email}.jpg`
+				`gs://quintuple-e9f49.appspot.com/portfolio_thumbnails/${props.img_url}.jpg`
 			);
 			await getDownloadURL(gsReference).then(x => {
 				setUrl(x);

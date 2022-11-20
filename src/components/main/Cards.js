@@ -8,7 +8,6 @@ import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -20,6 +19,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import InfoIcon from '@mui/icons-material/Info';
+import { ClickAwayListener } from '@mui/material';
+import Comment from './Comment';
 
 const modalStyle = {
 	position: 'absolute',
@@ -33,23 +34,14 @@ const modalStyle = {
 	boxShadow: 24,
 	p: 4,
 };
-
-const modalContentButtonStyle = {
-	color: 'inherit',
-	position: 'absolute',
-	width: 50,
-	height: 50,
-	top: '32px',
-};
-
 function Cards() {
-	const [users, setUsers] = useState([]);
-	const usersCollectionRef = collection(firestore, 'user');
+	const [posts, setPosts] = useState([]);
+	const postsCollectionRef = collection(firestore, 'post');
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	function ModalHandler() {
+	function ModalHandler(props) {
 		return (
 			<Modal
 				aria-labelledby="transition-modal-title"
@@ -61,28 +53,18 @@ function Cards() {
 				BackdropProps={{
 					timeout: 500,
 				}}>
-				<Fade in={open}>
-					<Box sx={modalStyle}>
-						<ModalInteract />
-						<ModalContent />
-						<IconButton
-							color="inherit"
-							sx={{
-								position: 'absolute',
-								width: 50,
-								height: 50,
-								top: '32px',
-								right: '32px',
-							}}
-							onClick={handleClose}>
-							<CloseIcon />
-						</IconButton>
-					</Box>
-				</Fade>
+				<ClickAwayListener onClickAway={handleClose}>
+					<Fade in={open}>
+						<Box sx={modalStyle}>
+							<ModalInteract post={props.post} name={props.name} />
+							<ModalContent post={props.post} />
+						</Box>
+					</Fade>
+				</ClickAwayListener>
 			</Modal>
 		);
 	}
-	function ModalInteract() {
+	function ModalInteract(props) {
 		return (
 			<Box
 				sx={{
@@ -91,6 +73,7 @@ function Cards() {
 					width: 450,
 					height: 1000,
 				}}>
+				{props.name}
 				<Box
 					sx={{
 						width: '100%',
@@ -115,7 +98,9 @@ function Cards() {
 						position: 'absolute',
 						width: '100%',
 						height: '800px',
-					}}></Box>
+					}}>
+					<Comment post={props.post} />
+				</Box>
 			</Box>
 		);
 	}
@@ -142,20 +127,20 @@ function Cards() {
 	}
 
 	useEffect(() => {
-		const getUsers = async () => {
-			const data = await getDocs(usersCollectionRef);
-			setUsers(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-			console.log(users);
+		const getPosts = async () => {
+			const data = await getDocs(postsCollectionRef);
+			setPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+			console.log(posts);
 		};
-		getUsers();
+		getPosts();
 	}, []);
 
-	const cardUsers = users.map((value, index) => (
+	const cardPosts = posts.map((value, index) => (
 		<Card key={index} sx={{ width: '400px', height: '300px' }}>
 			<CardActionArea onClick={handleOpen}>
-				<ModalHandler />
-				<CardText name={value.name} email={value.email} />
-				<CardThumbnail email={value.email} />
+				<ModalHandler post={value.id} name={value.user} />
+				<CardText name={value.user} id={value.id} />
+				<CardThumbnail img_url={value.img_url} />
 			</CardActionArea>
 		</Card>
 	));
@@ -164,7 +149,7 @@ function Cards() {
 		<>
 			<div className="Cards" key={1}>
 				<Grid2 container justifyContent={'space-around'} flexDirection={'row'}>
-					{cardUsers}
+					{cardPosts}
 				</Grid2>
 			</div>
 		</>
