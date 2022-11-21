@@ -43,25 +43,27 @@ function Cards() {
 
 	function ModalHandler(props) {
 		return (
-			<Modal
-				aria-labelledby="transition-modal-title"
-				aria-describedby="transition-modal-description"
-				open={open}
-				onClose={handleClose}
-				closeAfterTransition
-				BackdropComponent={Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}>
-				<ClickAwayListener onClickAway={handleClose}>
-					<Fade in={open}>
-						<Box sx={modalStyle}>
-							<ModalInteract post={props.post} name={props.name} />
-							<ModalContent post={props.post} />
-						</Box>
-					</Fade>
-				</ClickAwayListener>
-			</Modal>
+			<>
+				<Modal
+					aria-labelledby="transition-modal-title"
+					aria-describedby="transition-modal-description"
+					open={open}
+					onClose={handleClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 500,
+					}}>
+					<ClickAwayListener onClickAway={handleClose}>
+						<Fade in={open}>
+							<Box sx={modalStyle}>
+								<ModalInteract post={props.post} name={props.name} />
+								<ModalContent post={props.post} />
+							</Box>
+						</Fade>
+					</ClickAwayListener>
+				</Modal>
+			</>
 		);
 	}
 	function ModalInteract(props) {
