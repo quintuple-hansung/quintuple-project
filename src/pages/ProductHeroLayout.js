@@ -43,11 +43,11 @@ function ProductHeroLayout(props) {
         }}
       >
         {/*<img
-          src="/static/themes/onepirate/productHeroWonder.png"
+          src="intro.jpg"
           alt="wonder"
-          width="147"
-          height="80"
-    />*/}
+          width="100%"
+          height="100%"
+      />*/}
         {children}
         <Box
           sx={{

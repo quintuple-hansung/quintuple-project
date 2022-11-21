@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom';
 import { margin } from '@mui/system';
 import { useState, useEffect } from 'react';
 
-/*const backgroundImage =
-  '../image/background.jpg';*/
-
+const backgroundImage =
+'https://images.pexels.com/photos/5208871/pexels-photo-5208871.jpeg?auto=compress&cs=tinysrgb&w=600'
 const goToLearnMore = () => {
   console.log('더 알아보기 버튼 눌림');
   window.scrollTo({
@@ -22,8 +21,8 @@ export default function IntroLayout() {
   return (
     <ProductHeroLayout
       sxBackground={{
-        //backgroundImage: `url(${backgroundImage})`,
-        backgroundColor: '#FFF9c4', // Average color of the background image.
+        backgroundImage: `url(${backgroundImage})`,
+        //backgroundColor: '#FFF9c4', // Average color of the background image.
         backgroundPosition: 'center',
       }}
     >
