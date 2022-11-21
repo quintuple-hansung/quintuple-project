@@ -3,11 +3,22 @@ import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 import { Link } from 'react-router-dom';
+import { margin } from '@mui/system';
+import { useState, useEffect } from 'react';
 
-const backgroundImage =
-  '../image/background.jpg';
+/*const backgroundImage =
+  '../image/background.jpg';*/
+
+const goToLearnMore = () => {
+  console.log('더 알아보기 버튼 눌림');
+  window.scrollTo({
+      top: 800,
+      behavior: 'smooth'
+  })
+}
 
 export default function IntroLayout() {
+
   return (
     <ProductHeroLayout
       sxBackground={{
@@ -22,6 +33,7 @@ export default function IntroLayout() {
         src={backgroundImage}
         alt="increase priority"
     />*/}
+
       <Typography color="inherit" align="center" variant="h2" marked="center">
         여러분만의 포트폴리오를<br/>(사이트)에서 만들어보세요!
       </Typography>
@@ -39,8 +51,8 @@ export default function IntroLayout() {
         variant="contained"
         size="large"
         component="a"
-        //href="/introLearnMore"
         sx={{ minWidth: 200 }}
+        onClick={goToLearnMore}
       >
         더 알아보기
       </Button>

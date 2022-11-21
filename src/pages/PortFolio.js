@@ -8,7 +8,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore/lite';
 import { useNavigate } from 'react-router-dom';
 
-function PortFolio(){
+function Portfolio(){
   //const [value, setValue] = React.useState('Controlled');
   const [name, setName] = React.useState('');
   const [education, setEducation] = React.useState('');
@@ -123,4 +123,4 @@ function PortFolio(){
   )
 }
 
-export default PortFolio;
+export default Portfolio;
