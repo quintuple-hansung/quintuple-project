@@ -23,7 +23,7 @@ function App() {
 						<Route path="/join" element={<Join />} />
 						<Route path="/main" element={<Main />} />
 						<Route path='/mypage' element={<MyPage />}/>
-						<Route path='/portfolio' element={<Portfolio />}/>
+						<Route path='/Portfolio' element={<Portfolio />}/>
 						<Route path='/selectTemplate' element={<SelectTemplate/>}/>
 						<Route path='/template1' element={<Template1/>}/>
 						<Route path='/template2' element={<Template2/>}/>
