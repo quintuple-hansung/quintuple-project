@@ -9,6 +9,8 @@ import Portfolio from './pages/PortFolio';
 import { AppAppBar } from './pages/AppAppBar';
 import SelectTemplate from './pages/SelectTemplate';
 import Template1 from './pages/Template1';
+import Template2 from './pages/temp2/Template2';
+
 
 function App() {
 	return (
@@ -24,6 +26,7 @@ function App() {
 						<Route path='/portfolio' element={<Portfolio />}/>
 						<Route path='/selectTemplate' element={<SelectTemplate/>}/>
 						<Route path='/template1' element={<Template1/>}/>
+						<Route path='/template2' element={<Template2/>}/>
 					</Routes>
 				</Router>
 			</div>
