@@ -35,6 +35,7 @@ function Comment(props) {
 							variant="body2"
 							color="text.primary">
 							{value.content}
+							{console.log(value.content)}
 						</Typography>
 					</React.Fragment>
 				}
@@ -44,7 +45,7 @@ function Comment(props) {
 
 	return (
 		<>
-			<FixedSizeList height={400} width={360} itemSize={46} overscanCount={5}>
+			<FixedSizeList height={400} width={800} itemSize={46} overscanCount={5}>
 				{renderRow}
 			</FixedSizeList>
 		</>

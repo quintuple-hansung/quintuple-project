@@ -101,6 +101,7 @@ function Cards() {
 						width: '100%',
 						height: '800px',
 					}}>
+					HELLO
 					<Comment post={props.post} />
 				</Box>
 			</Box>
