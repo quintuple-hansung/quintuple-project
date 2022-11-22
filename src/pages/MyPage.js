@@ -2,15 +2,30 @@
 import '../styles/MyPage.css'; // css 파일 사용
 import { useNavigate } from 'react-router-dom'; //navigate 사용
 import React, { useState, useEffect, useRef } from 'react'; // useState,userEffect 사용자
-import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md'; // 비밀번호 이미지 ReactIcon 사용 (yarn add react-icons)
 import html2canvas from 'html2canvas'; // javascript 페이지 스크린샷 라이브러리
 import jsPDF from 'jspdf'; // JavaScript에서 PDF를 생성하는 라이브러리.
 import TopBar from '../components/main/TopBar';
-import { width } from '@mui/system';
-import {firestore} from "../components/firebase_config";
-import { getAuth, updateEmail,updateProfile} from 'firebase/auth';
-import { doc, getDoc, updateDoc } from 'firebase/firestore/lite';
-import { async } from '@firebase/util';
+import { getAuth, updateEmail, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider, } from 'firebase/auth'; // firebase에서 사용자 정보를 가져오고, 재인증 메소드, 업데이트 처리
+import { doc, getDoc, updateDoc } from 'firebase/firestore/lite'; // firebase DB에서 정보 가져오기
+import Container from '@mui/material/Container'; // Mui Container 사용
+import Box from '@mui/material/Box'; // Mui Box 사용
+import Button from '@mui/material/Button'; // Mui Button 사용
+import Tabs from '@mui/material/Tabs'; // Mui Tabs 사용
+import Tab from '@mui/material/Tab'; // Mui Tab 사용
+import FavoriteIcon from '@mui/icons-material/Favorite'; // Mui Favorite(heart) Icons 사용
+import BookmarkIcon from '@mui/icons-material/Bookmark'; // Mui Bookmark Icons 사용
+import ModeCommentIcon from '@mui/icons-material/ModeComment'; // Mui Comment Icons 사용
+import Typography from '@mui/material/Typography'; // Mui 글자용 Typography 사용
+import FilledInput from '@mui/material/FilledInput'; // Mui 색이 채워진 Input 사용
+import InputAdornment from '@mui/material/InputAdornment'; // Mui 반응적 Input 사용
+import IconButton from '@mui/material/IconButton'; // Mui 비밀번호 표시 Icon 사용
+import Visibility from '@mui/icons-material/Visibility'; // Mui 비밀번호 표시 Icon img 사용
+import VisibilityOff from '@mui/icons-material/VisibilityOff'; // Mui 비밀번호 비표시 Icon img 사용
+import InputLabel from '@mui/material/InputLabel'; // Mui Input field의 라벨 사용
+import FormControl from '@mui/material/FormControl'; // Mui Form container 사용
+import TextField from '@mui/material/TextField'; // Mui textfield 사용
+import SendIcon from '@mui/icons-material/Send'; // Mui 전송 아이콘 ( > ) 사용
+import SaveIcon from '@mui/icons-material/Save'; // Mui 저장 아이콘 사용
 
 function MyPage() {
 	/* #databse 연동부분
@@ -23,76 +38,93 @@ function MyPage() {
 	const navigate = useNavigate();
 
 	// 사용할 변수들
-	const [visible, setVisible] = useState(false);
-	const [isPwType, setisPWType] = useState(true);
-
+	const [tapValue, setTapValue] = React.useState(0); // Mui table 현재 보고 있는 탭 값
 
 	// 현재 로그인한 사용자 가져오기
 	const auth = getAuth();
-	console.log(`auth: ${auth}`);
-	
+
 	const currentUser = auth.currentUser;
 	const currentUserName = currentUser.displayName;
 	const currentEmail = currentUser.email;
-	console.log(`currentUser: ${currentEmail} currentUserName: ${auth.name} user.currentUserName: ${currentUserName}`);
+
+	// onChange 에서 다룰 변수들
+	const [values, setValues] = React.useState({
+		password: '',
+		userName: currentUserName,
+		isPwType: false,
+		isPwVisible: false
+	});
 
 
-	const userNameRef = useRef();
-	const userEmailRef = useRef();
-	
 
 	// const docRef = doc(firestore, "user", currentEmail);
 	// const docSnap = getDoc(docRef);
 
-  	//onChange()
-  	
+	//onChange()
+	// Values들이 바뀌면
+	const handleChange = (prop) => (event) => {
+		setValues({ ...values, [prop]: event.target.value });
+	};
 
-  	// onClick()
+	// Tab 목록이 바뀌면
+	const handleTabChange = (event, newValue) => {
+		setTapValue(newValue);
+	};
 
+
+	// onClick()
 	//포트폴리오 작성 버튼 이벤트
 	const onClickPortFolio = () => {
 		console.log('PortFolio button pressed');
 		navigate('/Portfolio');
 	};
 
-	//좋아요한 게시글 버튼 이벤트
-	const onClickLikedPost = () => {
-		console.log('LikedPost button pressed');
-		/* # 페이지 전환이 아닌 현재 페이지에 정보 뿌리기, 아래 북마크 , 댓글단 게시글도 동일한 포맷 사용*/
-		//navigate('/MyLikedPost');
-	};
-
-	//북마크 버튼 이벤트
-	const onClickBookmark = () => {
-		console.log('LikedPost button pressed');
-		//navigate('/MyBookmark');
-	};
-
-	//댓글 버튼 이벤트
-	const onClickCommentPost = () => {
-		console.log('CommentPost button pressed');
-		//navigate('/MycommentPost');
-	};
-
 	//수정 버튼 이벤트
-	const onClickSubmitButton = () => {
+	const onClickSubmitButton = async () => {
 		console.log('Submit button pressed');
-		console.log(`userNameRef.current.value : ${userNameRef.current.value}`);
-		console.log(`userEmailRef.current.value : ${userEmailRef.current.value}`);
+		console.log(`currentUser: ${currentUser}`)
+		console.log(`currentUserName: ${currentUserName}`)
+		console.log(`changeUserName : ${values.userName}`);
+		console.log(`UserName 비교 ${currentUserName === values.userName}`);
 
-		updateProfile(currentUser,{
-			displayName: userNameRef.current.value
-		}).then(() => {
-			console.log(`Profile updated!`)
-		  }).catch((error) => {
-			console.log(`Profile updated error!`)
-		  });
-		
-		updateEmail(currentUser,userEmailRef.current.value).then(() => {
-			console.log(`Email updated!`)
-		  }).catch((error) => {
-			console.log(`Email updated error!`)
-		  });		
+
+		const newPassword = values.password;
+		console.log(`newPW is ${values.password}`)
+
+		const oldPassword = 'dldbswo1..1' // DB에서 인증을 위한 기존 비밀번호 가져오기
+		const credential = EmailAuthProvider.credential(
+			currentEmail,
+			oldPassword
+		);
+
+		await reauthenticateWithCredential(auth.currentUser, credential); // StackOverFlow 사랑합니다 ㅠㅠ
+
+		// DB의 pw 속성도 업데이트 해주기
+		updatePassword(currentUser, newPassword).then(() => {
+			console.log(`PassWord updated!`)
+		}).catch((error) => {
+			console.log(`PassWord error!`)
+		});
+
+		if (currentUser.displayName !== values.userName) {
+			updateProfile(currentUser, {
+				displayName: values.userName
+			}).then(() => {
+				console.log(`Profile updated!`)
+			}).catch((error) => {
+				console.log(`Profile updated error!`)
+			})
+		} else console.log(`UserName is Not Changed!`)
+
+		// 우선 이메일 변경은 보류
+		// if (currentUser.email !== userEmailRef.current.value) {
+		// 	updateEmail(currentUser, userEmailRef.current.value).then(() => {
+		// 		console.log(`Email updated!`)
+		// 	}).catch((error) => {
+		// 		console.log(`Email updated error!`)
+		// 	});
+		// } else console.log(`UserEmail is Not Changed!`)
+
 	};
 
 	//취소 버튼 이벤트
@@ -100,24 +132,13 @@ function MyPage() {
 		console.log('Cancel button pressed');
 	};
 
-	//비밀번호 수정 버튼 이벤트 #비밀번호 수정 전 현재 비밀번호로 사용자 재인증
+	//비밀번호 표시 전환 버튼 이벤트
 	const onClickVisible = () => {
-		setisPWType(!isPwType);
-		setVisible(!visible);
-	};
+		console.log(`values.isPwType is ${values.isPwType}`);
+		console.log(`values.isPwVisible is ${values.isPwVisible}`);
 
-	// 비밀번호 아이콘 조건부 랜더링
-	const Visibility = () => {
-		// 비밀번호 수정 이미지
-		return (
-			<div style={{ width: 50, height: 50 }}>
-				{!visible && <MdOutlineVisibilityOff color="grey" size={50} />}{' '}
-				{/*조건부 랜더링*/}
-				{visible && <MdOutlineVisibility color="grey" size={50} />}
-			</div>
-		);
+		setValues({ ...values, isPwType: !values.isPwType, isPwVisible: !values.isPwVisible });
 	};
-
 
 	//PDF로 추출
 	const exportPDF = () => {
@@ -174,111 +195,105 @@ function MyPage() {
 	return (
 		<div className="mypage_form">
 			<TopBar />
-			<div className='mypage_form_captureTarget'>
-				<div className="mypage_form_createPortfolioform">
-					<p>
-						<input
-							id="portfolio"
-							type="button"
-							value="포트폴리오 작성"
-							onClick={onClickPortFolio}
-						/>
-					</p>
-				</div>
-				<p id="lbMyPost">내 글</p>
+			<Container className='mypage_form_captureTarget' fixed>
+				<Box className="mypage_form_createPortfolioform">
+						<Button sx={{margin:"3% auto"}} onClick={onClickPortFolio} variant="contained" endIcon={<SendIcon />}>
+							포트폴리오 작성하러 가기</Button>
+				</Box>
+				<Typography id="lbMyPost">내 글</Typography>
 				<div className="mypage_form_myPostForm">
-					<p>
-						<span>
-							<input
-								id="likedPost"
-								type="button"
-								value="좋아요한 글"
-								onClick={onClickLikedPost}
-							/>
-						</span>
-						<span>
-							<input
-								id="bookmark"
-								type="button"
-								value="북마크"
-								onClick={onClickCommentPost}
-							/>
-						</span>
-						<span>
-							<input
-								id="commentPost"
-								type="button"
-								value="댓글 단 글"
-								onClick={onClickBookmark}
-							/>
-						</span>
-					</p>
+					<Box sx={{ width: '100%' }}>
+						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+							<Tabs value={tapValue} onChange={handleTabChange} aria-label="basic tabs example">
+								<Tab icon={<FavoriteIcon />} label="좋아요한 글" />
+								<Tab icon={<BookmarkIcon />} label="북마크한 글" />
+								<Tab icon={<ModeCommentIcon />} label="댓글단 글" />
+							</Tabs>
+						</Box>
+						<TabPanel value={tapValue} index={0}>
+							Item One
+						</TabPanel>
+						<TabPanel value={tapValue} index={1}>
+							Item Two
+						</TabPanel>
+						<TabPanel value={tapValue} index={2}>
+							Item Three
+						</TabPanel>
+					</Box>
 				</div>
-				<p id="lbMyProfile">회원 정보 수정</p>
+				<Typography id="lbMyProfile">회원 정보 수정</Typography>
 				<div className="mypage_form_myProfileForm">
 					<div>
-						{' '}
-						{/*#아래 많은 div에 div className 필요? => 놉*/}
-						<label htmlFor="id">id: </label>
-						<input
-							id="id" 
-							type="text"
-							defaultValue={ currentEmail } 
+						<TextField
+							sx={{ m: 1,marginTop:'50px', width: '250px' }}
+							id="filled-disabled"
+							label="ID"
+							defaultValue={currentEmail}
+							variant="filled"
 							disabled
-						/> 
-						<br />
-					</div>
-					<div>
-						<label htmlFor="pw">pw: </label>
-						<span>
-							{isPwType && (
-								<input id="pw" type="password" defaultValue={'사용자pw'} />
-							)}{' '}
-							{/*조건부 랜더링*/}
-							{!isPwType && (
-								<input id="pw" type="text" defaultValue={'사용자pw'} />
-							)}
-						</span>
-						<span onClick={() => onClickVisible()}>
-							<Visibility visible={false} />
-						</span>
-						{/*// 버튼 누를 시 이미지 변경, useReducer는 컴포넌트 밖에서 상태 업데이트 */}
-					</div>
-					<div>
-						<label htmlFor="name">name: </label>
-						<input
-							id="name"
-							type="text"
-							defaultValue={currentUserName }
-							ref = {userNameRef}
 						/>
-						<br />
 					</div>
-					<div>
-						<label htmlFor="email">email: </label>
-						<input
-							id="email"
-							type="text"
-							defaultValue={currentEmail} 
-							ref = {userEmailRef}
+					<FormControl sx={{ m: 1, width: '250px' }} variant="filled">
+						<InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+						<FilledInput
+							id="filled-adornment-password"
+							type={values.isPwType ? 'text' : 'password'}
+							value={values.password}
+							onChange={handleChange('password')}
+							endAdornment={
+								<InputAdornment position="end">
+									<IconButton
+										sx={{ width: '40px' }}
+										aria-label="toggle password visibility"
+										onClick={onClickVisible}
+										edge="end"
+									>
+										{values.isPwType ? <VisibilityOff /> : <Visibility />}
+									</IconButton>
+								</InputAdornment>
+							}
 						/>
-						<br />
+					</FormControl>
+					<div>
+						<TextField
+							sx={{ m: 1, width: '250px' }}
+							label="UserName"
+							id="filled-start-adornment"
+							defaultValue={currentUserName}
+							onChange={handleChange('userName')}
+							variant="filled"
+						/>
 					</div>
-					<div>
-						<input
-							name="button"  /*#일단 무지성 버튼 만들기, 과연 submit,button이 맞나?*/
-							type="submit"
-							value="수정"
-							onClick={onClickSubmitButton}
-						/>
-						<input name="button" type="button" value="취소" onClick={onClickCancelButton} />
+					<div style={{marginTop:'10px',marginBottom:'50px'}}>
+						<Button sx={{width:"100px",marginRight: "10px"}} onClick={onClickSubmitButton} variant="contained">수정</Button>
+						<Button sx={{width:"100px",marginLeft: "10px"}} onClick={onClickCancelButton} variant="contained">취소</Button>
 					</div>
 				</div>
-				<p id="lbExportPortFolio">포트폴리오 내보내기</p>
+				<Typography id="lbExportPortFolio">포트폴리오 내보내기</Typography>
 				<div className="mypage_form_myPortfolioExportForm">
-					<button onClick={() => exportPDF()}>PDF로 추출하기</button>
+					<Button sx={{width:"200px",marginTop:"50px",marginBottom:"50px"}} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>PDF로 저장하기</Button>
 				</div>
-			</div>
+			</Container>
+		</div>
+	);
+}
+
+function TabPanel(props) {
+	const { children, value, index, ...other } = props;
+
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}
+		>
+			{value === index && (
+				<Box sx={{ p: 3 }}>
+					<Typography>{children}</Typography>
+				</Box>
+			)}
 		</div>
 	);
 }
