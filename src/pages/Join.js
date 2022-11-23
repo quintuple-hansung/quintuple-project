@@ -66,7 +66,8 @@ export const Join = () => {
             
             setDoc(doc(firestore, 'user', joinEmail), {
                 email: joinEmail,
-                name: userName
+                name: userName,
+                password: joinPw,
             })
         
             navigate('/login'); // 로그인 페이지로 이동
