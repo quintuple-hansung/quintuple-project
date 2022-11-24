@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import app from './components/firebase_config';
 import Join from './pages/Join';
 import MyPage from './pages/MyPage';
-import Portfolio from './pages/Portfolio';
+import PortFolio from './pages/PortFolio';
 import { AppAppBar } from './pages/AppAppBar';
 import SelectTemplate from './pages/SelectTemplate';
 import Template1 from './pages/Template1';
@@ -23,7 +23,7 @@ function App() {
 						<Route path="/join" element={<Join />} />
 						<Route path="/main" element={<Main />} />
 						<Route path='/mypage' element={<MyPage />}/>
-						<Route path='/Portfolio' element={<Portfolio />}/>
+						<Route path='/PortFolio' element={<PortFolio />}/>
 						<Route path='/selectTemplate' element={<SelectTemplate/>}/>
 						<Route path='/template1' element={<Template1/>}/>
 						<Route path='/template2' element={<Template2/>}/>

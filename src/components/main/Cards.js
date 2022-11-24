@@ -1,9 +1,9 @@
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Card from '@mui/material/Card';
 import CardText from './CardText';
-import { useState } from 'react';
+import { useState , useRef } from 'react';
 import { collection } from 'firebase/firestore/lite';
-import { getDocs } from 'firebase/firestore/lite';
+import { getDocs , updateDoc , doc } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
@@ -13,15 +13,12 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Typography from '@mui/material/Typography';
 import { CardActionArea, Container } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import InfoIcon from '@mui/icons-material/Info';
 import { ClickAwayListener } from '@mui/material';
 import Comment from './Comment';
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 const modalStyle = {
 	position: 'absolute',
 	top: '50%',
@@ -34,12 +31,45 @@ const modalStyle = {
 	boxShadow: 24,
 	p: 4,
 };
+
 function Cards() {
 	const [posts, setPosts] = useState([]);
 	const postsCollectionRef = collection(firestore, 'post');
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	
+	const [like, setHstate] = useState(false);
+	/* const [book, setBstate] = useState(false);
+	const Hon = () => setHstate(!like);
+	const Bon = () => setBstate(!book); */
+
+	useEffect(() => {
+		const getPosts = async () => {
+			const data = await getDocs(postsCollectionRef);
+			setPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+			console.log(posts);
+		};
+		getPosts();
+	}, []);
+
+	//좋아요 카운팅
+	const togglelike = async () => {
+		const userDoc = doc(getDocs, "post", like)
+		const res = await updateDoc(userDoc, {like: like + 1});
+		console.log(res);
+	};
+	
+	//모달 링크
+	const handleCopyClipBoard = async (text: string) => {
+		try {
+		  await navigator.clipboard.writeText(text);
+		  
+		  alert('복사 성공!');
+		} catch (error) {
+		  alert('복사 실패!');
+		}
+	  };
 
 	function ModalHandler(props) {
 		return (
@@ -75,7 +105,6 @@ function Cards() {
 					width: 450,
 					height: 1000,
 				}}>
-				{props.name}
 				<Box
 					sx={{
 						width: '100%',
@@ -84,13 +113,13 @@ function Cards() {
 						position: 'absolute',
 					}}>
 					<IconButton color="inherit" sx={{ width: 50, left: '30px' }}>
-						<ShareIcon />
+						<ShareIcon onClick={handleCopyClipBoard}/>
 					</IconButton>
 					<IconButton color="inherit" sx={{ width: 50, left: '70px' }}>
 						<BookmarkIcon />
 					</IconButton>
 					<IconButton color="inherit" sx={{ width: 50, left: '110px' }}>
-						<FavoriteIcon />
+						<FavoriteIcon onClick={togglelike}/>
 					</IconButton>
 				</Box>
 				<Box // 댓글 영역
@@ -101,7 +130,6 @@ function Cards() {
 						width: '100%',
 						height: '800px',
 					}}>
-					HELLO
 					<Comment post={props.post} />
 				</Box>
 			</Box>
@@ -128,15 +156,6 @@ function Cards() {
 			</Box>
 		);
 	}
-
-	useEffect(() => {
-		const getPosts = async () => {
-			const data = await getDocs(postsCollectionRef);
-			setPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-			console.log(posts);
-		};
-		getPosts();
-	}, []);
 
 	const cardPosts = posts.map((value, index) => (
 		<Card key={index} sx={{ width: '400px', height: '300px' }}>
