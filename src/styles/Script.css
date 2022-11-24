@@ -4,7 +4,7 @@
     grid-template-columns: repeat(2, 1fr); 
     gap: 2.5rem;
     padding: 8rem;
-   
+  
 }
 
 .script__item {
@@ -14,6 +14,7 @@
     border: 1px solid transparent;
     transition: var(--transition);
     height: fit-content;
+    font-family: "Happiness-Sans-Bold";
 }
 
 .script__item:hover {
@@ -24,6 +25,7 @@
 .script__item-image {
     border-radius: 1rem;
     overflow: hidden;
+    height: 30rem;
  
 }
 
@@ -50,8 +52,11 @@
     font-size: 2.3rem;
     border-radius: 50px;
     backdrop-filter: blur(15px);
+    left: 0;
+    right: 0;
     position: relative;
     left: 60%;
+    font-family: "Happiness-Sans-Bold";
 }
 
 .script__container Button:hover {

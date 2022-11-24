@@ -5,7 +5,7 @@ import AppBar from '../components/AppBar.js';
 import Toolbar from '../components/Toolbar';
 
 const rightLink = {
-  fontSize: 16,
+  fontSize: 18,
   color: 'common.white',
   ml: 3,
 };
@@ -22,7 +22,7 @@ function AppAppBar() {
             color="inherit"
             textAlign="center"
             href="/"
-            sx={{ fontSize: 24 }}
+            sx={{ fontSize: 25 }}
           >
             {'사이트 이름'}
           </Link>
