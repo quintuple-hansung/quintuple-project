@@ -1,8 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Bounce from 'react-reveal/Bounce';
-import Tada from 'react-reveal/Tada';
-import Swing from 'react-reveal/Swing';
-import Flip from 'react-reveal/Flip';
 import { useNavigate, useNavigation } from 'react-router-dom';
 import '../styles/Intro.css';
 import AppAppBar from './AppAppBar';
@@ -13,6 +9,7 @@ import '../styles/TopBar.css'
 import { AiOutlineHome } from 'react-icons/ai';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineUp } from 'react-icons/ai';
+import Script from './Script';
 
 const Topbar = () => {
 	const [activeNav, setActiveNav] = useState('#home');
@@ -23,8 +20,14 @@ const Topbar = () => {
 			behavior: 'smooth'
 		})
 	  }
-	
-	 // ½ºÅ©·ÑÀ» 500¸¸Å­ ³»·ÈÀ» ¶§ true ·Î º¯°æ, TOP ¹öÆ° ³ªÅ¸³²
+	  
+	  const scrollToBottom = () => {
+		window.scrollTo({
+			bottom: 0,
+			behavior: 'smooth'
+		})
+	  }
+	 // ìŠ¤í¬ë¡¤ì„ 500ë§Œí¼ ë‚´ë ¸ì„ ë•Œ true ë¡œ ë³€ê²½, TOP ë²„íŠ¼ ë‚˜íƒ€ë‚¨
 	 const [showButton, setShowButton] = useState(false);
 	 useEffect(() => {
 	   const handleShowButton = () => { 
@@ -43,9 +46,14 @@ const Topbar = () => {
 
 	return (
 	  <nav>
-		<a href="/main" onClick={()=> setActiveNav('/main')} className={activeNav === '/home' ? 'active' : ''}><AiOutlineHome /></a>
-		<a href="/mypage" onClick={()=> setActiveNav('/mypage')} className={activeNav === '/mypage' ? 'active' : ''}><AiOutlineUser /></a>
-		<a onClick={()=> scrollToTop()} className={activeNav === '#top' ? 'active' : ''}> <AiOutlineUp/></a> 
+		{/*<a href="/main" onClick={()=> setActiveNav('/main')} className={activeNav === '/home' ? 'active' : ''}><AiOutlineHome /></a>
+		<a href="/mypage" onClick={()=> setActiveNav('/mypage')} className={activeNav === '/mypage' ? 'active' : ''}><AiOutlineUser /></a>*/}
+		{
+			window.scrollY > 500
+			? <a onClick={()=> scrollToTop()} className={activeNav === '#top' ? 'active' : ''}> <AiOutlineUp/></a> 
+			: <a> ðŸ’› </a>
+		}
+		
 	  </nav>
 	)
   }
@@ -59,7 +67,8 @@ class Intro extends React.Component {
 			<DotRing/>
 				<AppAppBar/>
 				<IntroTitle/>
-				<IntroLearnMore/>
+			{/*<IntroLearnMore/>*/}
+				<Script />
 			<Topbar />
 			</>
 		)

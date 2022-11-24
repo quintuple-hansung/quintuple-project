@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Typography from '../components/Typography';
 
+
 const item = {
   display: 'flex',
   flexDirection: 'column',
@@ -36,16 +37,13 @@ class IntroLearnMore extends React.Component {
                         sx={{ height: 55 }}
                       />
                       <Typography variant="h6" sx={{ my: 5 }}>
-                        The best luxury hotels
+                        (사이트) 하나로 포트폴리오 준비 끝
                       </Typography>
                       <Typography variant="h5">
                         {
-                          'From the latest trendy boutique hotel to the iconic palace with XXL pool'
+                          '다양한 템플릿을 이용하여 간편하게 만들어보세요!'
                         }
         
-                        {
-                          ', go for a mini-vacation just a few subway stops away from your home.'
-                        }
                       </Typography>
                     </Box>
                   </Grid>
@@ -58,14 +56,14 @@ class IntroLearnMore extends React.Component {
                         sx={{ height: 55 }}
                       />
                       <Typography variant="h6" sx={{ my: 5 }}>
-                        New experiences
+                        다른 사람들의 포트폴리오 구경하기
                       </Typography>
                       <Typography variant="h5">
                         {
-                          'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '
+                          '다양한 분야의 포트폴리오를 자유롭게 구경하고 댓글을 남겨보세요'
                         }
         
-                        {'your Sundays will not be alike.'}
+                       
                       </Typography>
                     </Box>
                   </Grid>
@@ -78,11 +76,10 @@ class IntroLearnMore extends React.Component {
                         sx={{ height: 55 }}
                       />
                       <Typography variant="h6" sx={{ my: 5 }}>
-                        Exclusive rates
+                        언제 어디서나 자유롭게 작성
                       </Typography>
                       <Typography variant="h5">
-                        {'By registering, you will access specially negotiated rates '}
-                        {'that you will not find anywhere else.'}
+                        {'주말엔 노트북, 출퇴근길엔 스마트폰으로 자유롭게 작성하고 필요할땐 PDF로 저장하세요 '}
                       </Typography>
                     </Box>
                   </Grid>

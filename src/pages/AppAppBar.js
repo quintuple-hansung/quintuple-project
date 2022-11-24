@@ -34,15 +34,15 @@ function AppAppBar() {
               href="/login"
               sx={rightLink}
             >
-              {'Sign In'}
+              {'로그인'}
             </Link>
             <Link
               variant="h6"
               underline="none"
               href="/join"
-              sx={{ ...rightLink, color: 'secondary.main' }}
+              sx={{ ...rightLink, color: 'inherit' }}
             >
-              {'Sign Up'}
+              {'회원가입'}
             </Link>
           </Box>
         </Toolbar>
