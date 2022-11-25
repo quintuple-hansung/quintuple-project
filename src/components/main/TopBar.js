@@ -34,6 +34,13 @@ export default function TopBar() {
 							My Page
 						</Button>
 					</Link>
+					<Link
+						to="/Login"
+						style={{ textDecoration: 'none', color: 'inherit' }}>
+						<Button color="inherit" sx={{ width: 100 }}>
+							Logout
+						</Button>
+					</Link>
 				</Toolbar>
 			</AppBar>
 		</Box>

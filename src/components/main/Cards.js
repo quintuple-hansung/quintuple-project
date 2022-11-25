@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardText from './CardText';
 import { useState , useRef } from 'react';
 import { collection } from 'firebase/firestore/lite';
-import { getDocs , updateDoc , doc , query } from 'firebase/firestore/lite';
+import { getDocs , updateDoc , doc } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
@@ -54,9 +54,9 @@ function Cards() {
 	}, []);
 
 	//좋아요 카운팅
-	const togglelike = (props) => {
+	const togglelike = async (props) => {
 		const userDoc = doc(firestore, "post", props);
-		updateDoc(userDoc,{like : like+1})
+		await updateDoc(userDoc,{like : like+1})
 	};
 	
 	//모달 링크
