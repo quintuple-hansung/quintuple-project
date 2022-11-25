@@ -7,3 +7,8 @@
     font-family: "esamanru Light";
     src: url(../font/esamanru\ Light.ttf);
 }
+
+@font-face {
+    font-family: "Nanum";
+    src: url(../font/NanumSquareNeo-bRg.ttf);
+}

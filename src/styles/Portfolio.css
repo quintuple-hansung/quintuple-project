@@ -1,0 +1,38 @@
+.content p {
+    font-family: "Nanum";
+    font-size: 1.5rem;
+    text-align: center;
+
+}
+
+.content text-field {
+    font-size: 10rem;
+    text-align: center;
+}
+
+.content button {
+    font-size: 1rem;
+    font-family: "Nanum";
+    background-color: rgba(46,59,85);
+    color: white;
+    border-color: rgba(46,59,85);
+}
+
+.content Button:hover {
+    color: rgba(46,59,85);
+    background: rgba(70, 88, 126, 0.226);
+    border-color: rgba(70, 88, 126, 0.226);
+}
+
+.content div {
+    display: grid;
+    grid-template-columns:200px 200px 200px;
+    gap: 0.5rem;
+}
+
+.content1 div {
+    
+  
+}
+
+/*.item:nth-child(1) {grid-column: 1;}*/
