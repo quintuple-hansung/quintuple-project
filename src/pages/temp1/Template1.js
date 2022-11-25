@@ -1,7 +1,7 @@
-import Main from "../containers/Main";
+import Main from "../../containers/Main";
 import { ThemeProvider } from "styled-components";
-import { chosenTheme } from "./theme";
-import { GlobalStyles } from "./global";
+import { chosenTheme } from "../theme";
+import { GlobalStyles } from "../global";
 
 function Template1(){
 return (

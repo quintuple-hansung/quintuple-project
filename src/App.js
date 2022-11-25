@@ -8,7 +8,7 @@ import MyPage from './pages/MyPage';
 import PortFolio from './pages/Portfolio';
 import { AppAppBar } from './pages/AppAppBar';
 import SelectTemplate from './pages/SelectTemplate';
-import Template1 from './pages/Template1';
+import Template1 from './pages/temp1/Template1';
 import Template2 from './pages/temp2/Template2';
 
 
