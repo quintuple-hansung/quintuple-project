@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Style from './Temp1.module.scss';
 import {Box, Grid} from "@mui/material";
 import classNames from 'classnames';
@@ -30,7 +30,7 @@ function EmojiBullet(props) {
 export default function Home() {
 
     //console.log(`info = ${JSON.stringify(info)}`)
-    //const firstName = info.firstName.toLowerCase()
+    //const info.name = info.info.name.toLowerCase()
 
     let colors = ["rgb(0,255,164)", "rgb(166,104,255)"]; //이름,사진배경 등 그라데이션 색
 
@@ -44,21 +44,32 @@ export default function Home() {
     const currentUser = auth.currentUser;
     const currentEmail = currentUser.email;
     const docRef = doc(firestore, "user", currentEmail);
-    const name = ""
+
+    const [name, setName] = useState('');
+    
+    const changeName = target => {
+        setName(target);
+    }
 
     // user 컬렉션에서 db 가져오기
     getDoc(doc(firestore, "user", currentEmail)).then(docSnap => {
         if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
-            name = docSnap.data()
+            //console.log(`name = ${docSnap.data()['name']}`);
+            var currentName = docSnap.data()['name']
+            console.log(`currentName = ${currentName}`);
+            changeName(currentName);
+            console.log(`name = ${name}`);
         } else {
         console.log("No such document!");
         }
     })
 
+    console.log(`name = ${name}`);
+
     const info = {
         firstName: name,
-        lastName: "Hong",
+        lastName: name,
         initials: "js", 
         position: "a Full Stack Developer",
         selfPortrait: self, 
@@ -145,20 +156,18 @@ export default function Home() {
 
     function aboutMeText() {
        return <>
-           <p><span style={{color: info.baseColor}}>{firstName}{info.lastName.toLowerCase()} $</span> cat
-               about{firstName} </p>
-           <p><span style={{color: info.baseColor}}>about{firstName} <span
+           <p><span style={{color: info.baseColor}}>{info.firstName} $</span> cat
+               about{info.name} </p>
+           <p><span style={{color: info.baseColor}}>about{info.name} <span
                className={Style.green}>(main)</span> $ </span>
                {info.bio}
            </p>
        </>;
    }
 
-   const firstName = info.firstName;
-
    function skillsText() {
        return <>
-           <p><span style={{color: info.baseColor}}>{firstName}{info.lastName.toLowerCase()} $</span> cd skills/tools
+           <p><span style={{color: info.baseColor}}>{info.firstName}{info.lastName.toLowerCase()} $</span> cd skills/tools
            </p>
            <p><span style={{color: info.baseColor}}>skills/tools <span
                className={Style.green}>(main)</span> $</span> ls</p>
@@ -175,7 +184,7 @@ export default function Home() {
 
    function miscText() {
        return <>
-           <p><span style={{color: info.baseColor}}>{firstName}{info.lastName.toLowerCase()} $</span> cd
+           <p><span style={{color: info.baseColor}}>{info.firstName}$</span> cd
                hobbies/interests</p>
            <p><span style={{color: info.baseColor}}>hobbies/interests <span
                className={Style.green}>(main)</span> $</span> ls</p>

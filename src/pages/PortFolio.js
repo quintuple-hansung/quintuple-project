@@ -54,6 +54,7 @@ function Portfolio(){
   // 사용자가 입력한 정보들 db 에 저장하고 포트폴리오 템플릿 페이지로 넘어감
   const submitInfo = () => {
     updateDoc(doc(firestore, 'user', currentEmail), {
+      name: name,
       age: age,
       education: education,
       introduce: introduce
