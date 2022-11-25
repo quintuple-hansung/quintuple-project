@@ -81,6 +81,7 @@ export const Join = () => {
     }
     
     return (
+        <div className='join'>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
                 <Box
@@ -91,11 +92,11 @@ export const Join = () => {
                         alignItems: 'center',
                     }}
                 >
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ m: 1,  bgcolor: '#2e3b55' }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign up
+                <Typography component="h1" variant="h4" fontFamily= 'esamanru Light'>
+                    SIGN UP
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     <TextField
@@ -145,17 +146,18 @@ export const Join = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 3, mb: 2,  bgcolor: '#2e3b55'  }}
                         onClick={signup}>
-                            Sign Up
+                            S I G N U P
                     </Button>
                     <Grid item>
                         <Link href="/login" variant="body2" textAlign="center">
-                            로그인 페이지로 이동하기
+                            <br/><b>▶ QUINTUPLE에 로그인 하러가기 ◀</b>
                         </Link>
                     </Grid>
                 </Box>
         </Container>
+        </div>
 
     );
         {/*<div className='join_form'>

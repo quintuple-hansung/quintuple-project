@@ -7,7 +7,6 @@ import mock5 from "./img/mock5.png"
 
 export let colors = ["rgb(0,255,164)", "rgb(166,104,255)"]; //이름,사진배경 등 그라데이션 색
 
-
 export const info = {
     firstName: "gildong",
     lastName: "Hong",

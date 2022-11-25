@@ -56,9 +56,10 @@ function ProductHeroLayout(props) {
             right: 0,
             top: 0,
             bottom: 0,
-            backgroundColor: 'common.black',
+            backgroundColor:'common.whote',
             opacity: 0.5,
             zIndex: -1,
+            backgroundSize: 'cover',
           }}
         />
         <Background sx={sxBackground} />

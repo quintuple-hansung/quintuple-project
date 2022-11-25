@@ -39,7 +39,7 @@ export default function IntroLayout() {
 
       <Typography color="inherit" align="center" variant="h2" marked="center"  fontFamily= "esamanru Light">
         <br/><br/>
-        여러분만의 포트폴리오를<br/>(사이트)에서 만들어보세요!
+        여러분만의 포트폴리오를<br/> QUINTUPLE에서 만들어보세요!
       </Typography>
       <Typography
         color="inherit"

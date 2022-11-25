@@ -3,14 +3,15 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import MuiButton from '@mui/material/Button';
 
 const ButtonRoot = styled(MuiButton)(({ theme, size }) => ({
-  borderRadius: 0,
-  fontWeight: theme.typography.fontWeightMedium,
-  fontFamily: theme.typography.h1.fontFamily,
-  padding: theme.spacing(2, 4),
+  padding: theme.spacing(2,4),
   fontSize: theme.typography.pxToRem(14),
   boxShadow: 'none',
-  '&:active, &:focus': {
+  backgroundColor: '#2E3B55',
+  fontFamily: "esamanru Light",
+  borderRadius: '30px',
+  '&:active, &:focus, &:hover': {
     boxShadow: 'none',
+    backgroundColor: '#45577d',
   },
   ...(size === 'small' && {
     padding: theme.spacing(1, 3),

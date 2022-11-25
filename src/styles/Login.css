@@ -6,6 +6,7 @@ input {
     padding-left: 5px;
     border-radius: 10px;
     font-size: 1.2rem;
+    font-Family: 'esamanru Light';
 }
 
 .login_join_form {
@@ -20,13 +21,30 @@ input {
 }
 
 input[type="button"] {
-    border: 1px solid rgb(64, 113, 203);
+    border: 1px solid rgba(46,59,85);
     height: 50px;
     width: 160px; 
     margin-inline: 40px;
     margin-top: 20px;
     border-radius: 10px;
     font-size: 1.2rem;
-    background-color: rgb(64, 113, 203);
+    font-family: 'esamanru Light';
+    background-color: rgba(46,59,85);
     color: white;
+}
+
+.login button {
+    font-family: 'esamanru Light';
+    font-size: 1rem;
+}
+.login a {
+    font-family: 'Happiness-Sans-Bold';
+    font-size: 1.2rem;
+    color:rgb(23, 24, 26);
+}
+
+.login b {
+    font-family: 'Happiness-Sans-Bold';
+    font-size: 1.3rem;
+    color:rgba(46,59,85);
 }

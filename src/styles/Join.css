@@ -16,13 +16,24 @@ input {
 }
 
 button {
-    border: 1px solid rgb(64, 113, 203);
+    border: 1px solid rgba(46,59,85);
     height: 55px;
     width: 240px; 
     margin-top: 20px;
     margin-inline: 40px;
     border-radius: 10px;
     font-size: 1.2rem;
-    background-color: rgb(64, 113, 203);
+    background-color: rgba(46,59,85);
     color: white;
+}
+
+.join button {
+    font-family: 'esamanru Light';
+    font-size: 1rem;
+}
+
+.join b {
+    font-family: 'Happiness-Sans-Bold';
+    font-size: 1.3rem;
+    color:rgba(46,59,85);
 }

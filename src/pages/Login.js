@@ -17,6 +17,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import '../font/font.css';
 
 function Login() {
 	const [loginEmail, setLoginEmail] = useState('');
@@ -66,6 +67,7 @@ function Login() {
 	};
 
 	return (
+		<div className='login'>
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
 				<Box
@@ -76,13 +78,13 @@ function Login() {
 						alignItems: 'center',
 					}}
 				>
-				<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+				<Avatar sx={{ m: 1, bgcolor: '#2e3b55' }}>
 					<LockOutlinedIcon />
 				</Avatar>
-				<Typography component="h1" variant="h5">
-					Sign in
+				<Typography component="h1" variant="h4" fontFamily= 'esamanru Light'>
+					LOGIN
 				</Typography>
-				<Box component="form" noValidate sx={{ mt: 1 }}>
+				<Box component="form" noValidate sx={{ mt: 1}} >
 					<TextField
 						margin="normal"
 						required
@@ -112,17 +114,20 @@ function Login() {
 					type="submit" 
 					fullWidth
 					variant="contained" 
-					sx={{ mt: 3, mb: 2 }} 
+					sx={{ mt: 3, mb: 2, bgcolor: '#2e3b55'}} 
 					onClick={onClickLogin}>
-						Sign In
+						L O G I N
 				</Button>
 				<Grid item>
+					<a>아직도 QUINTUPLE 아이디가 없다면 ?</a> <br/>
 					<Link href="/join" variant="body2">
-						<b>(사이트 이름)과 함께하러 가기</b> (회원가입)
+						<br/>
+						<b> ▶ QUINTUPLE과 함께하러 가기 ◀</b>
 					</Link>
               </Grid>
 			</Box>
       	</Container>
+		</div>
 	);
 }
 

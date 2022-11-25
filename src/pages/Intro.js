@@ -8,7 +8,7 @@ import DotRing from './DotRing';
 import '../styles/TopBar.css'
 import { AiOutlineHome } from 'react-icons/ai';
 import { AiOutlineUser } from 'react-icons/ai';
-import { AiOutlineUp } from 'react-icons/ai';
+import { AiOutlineUp } from 'react-icons/ai'; 
 import Script from './Script';
 
 const Topbar = () => {
@@ -50,8 +50,8 @@ const Topbar = () => {
 		<a href="/mypage" onClick={()=> setActiveNav('/mypage')} className={activeNav === '/mypage' ? 'active' : ''}><AiOutlineUser /></a>*/}
 		{
 			window.scrollY > 500
-			? <a onClick={()=> scrollToTop()} className={activeNav === '#top' ? 'active' : ''}> <AiOutlineUp/></a> 
-			: <a> 💛 </a>
+			? <a onClick={()=> scrollToTop()} className={activeNav === '#top' ? 'active' : ''}> <AiOutlineUp size="24" color="#fff"/> </a> 
+			: <a> 🤍 </a>
 		}
 		
 	  </nav>

@@ -14,7 +14,7 @@ function AppAppBar() {
   return (
     <div>
       <AppBar position="fixed">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }} style={{background : '#2E3B55'}}>
           <Box sx={{ flex: 1 }} />
           <Link
             variant="h6"
@@ -23,8 +23,9 @@ function AppAppBar() {
             textAlign="center"
             href="/"
             sx={{ fontSize: 25 }}
+            fontFamily= "esamanru Light"
           >
-            {'사이트 이름'}
+            {'QUINTUPLE'}
           </Link>
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
             <Link
@@ -33,6 +34,7 @@ function AppAppBar() {
               underline="none"
               href="/login"
               sx={rightLink}
+              fontFamily= "esamanru Light"
             >
               {'로그인'}
             </Link>
@@ -41,6 +43,7 @@ function AppAppBar() {
               underline="none"
               href="/join"
               sx={{ ...rightLink, color: 'inherit' }}
+              fontFamily= "esamanru Light"
             >
               {'회원가입'}
             </Link>

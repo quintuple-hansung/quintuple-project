@@ -82,7 +82,7 @@ function Typography(props) {
   return (
     <MuiTypography variantMapping={variantMapping} variant={variant} {...other}>
       {children}
-      {markedClassName ? <span className={markedClassName} /> : null}
+      {markedClassName ? <span className={markedClassName} style={{background : '#2E3B55'}} /> : null}
     </MuiTypography>
   );
 }
