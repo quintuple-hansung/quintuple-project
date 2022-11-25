@@ -50,7 +50,7 @@ export default function Home() {
     getDoc(doc(firestore, "user", currentEmail)).then(docSnap => {
         if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
-            name = docSnap.data(name)
+            name = docSnap.data()
         } else {
         console.log("No such document!");
         }
