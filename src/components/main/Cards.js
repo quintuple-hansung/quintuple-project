@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardText from './CardText';
 import { useState , useRef } from 'react';
 import { collection } from 'firebase/firestore/lite';
-import { getDocs , updateDoc , doc } from 'firebase/firestore/lite';
+import { getDocs , updateDoc , doc , query } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
@@ -39,7 +39,7 @@ function Cards() {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	
-	const [like, setHstate] = useState(false);
+	const [like, setHstate] = useState(0);
 	/* const [book, setBstate] = useState(false);
 	const Hon = () => setHstate(!like);
 	const Bon = () => setBstate(!book); */
@@ -54,18 +54,17 @@ function Cards() {
 	}, []);
 
 	//좋아요 카운팅
-	const togglelike = async () => {
-		const userDoc = doc(getDocs, "post", like)
-		const res = await updateDoc(userDoc, {like: like + 1});
-		console.log(res);
+	const togglelike = (props) => {
+		const userDoc = doc(firestore, "post", props);
+		updateDoc(userDoc,{like : like+1})
 	};
 	
 	//모달 링크
 	const handleCopyClipBoard = async (text: string) => {
 		try {
 		  await navigator.clipboard.writeText(text);
-		  
-		  alert('복사 성공!');
+
+		  alert('링크 복사');
 		} catch (error) {
 		  alert('복사 실패!');
 		}
@@ -74,6 +73,7 @@ function Cards() {
 	function ModalHandler(props) {
 		return (
 			<>
+				console.log(props.post)
 				<Modal
 					aria-labelledby="transition-modal-title"
 					aria-describedby="transition-modal-description"
@@ -119,7 +119,7 @@ function Cards() {
 						<BookmarkIcon />
 					</IconButton>
 					<IconButton color="inherit" sx={{ width: 50, left: '110px' }}>
-						<FavoriteIcon onClick={togglelike}/>
+						<FavoriteIcon onClick={()=>togglelike(props.post)}/>
 					</IconButton>
 				</Box>
 				<Box // 댓글 영역
