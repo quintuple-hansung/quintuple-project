@@ -26,7 +26,7 @@ export default function IntroLayout() {
         //backgroundColor: '#FFF9c4', // Average color of the background image.
         backgroundPosition: 'top center',
         backgroundSize: 'cover',
-        attachment: 'fixed'
+        attachment: 'fixed',
         
       }}
     >
