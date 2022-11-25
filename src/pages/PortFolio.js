@@ -10,10 +10,15 @@ import { useNavigate } from 'react-router-dom';
 
 function Portfolio(){
   //const [value, setValue] = React.useState('Controlled');
-  const [name, setName] = React.useState('');
-  const [education, setEducation] = React.useState('');
-  const [age, setAge] = React.useState('');
-  const [introduce, setIntroduce] = React.useState('');
+  const [name, setName] = React.useState(''); // 이름
+  const [education, setEducation] = React.useState(''); // 학력
+  const [age, setAge] = React.useState(''); // 나이
+  const [introduce, setIntroduce] = React.useState(''); // 자기소개
+  const [title, setTitle] = React.useState('') // 포트폴리오 제목 (진행한 프로젝트 하나 기재)
+  const [description, setDescription] = React.useState('') // 프로젝트 설명
+  const [language, setLanguage] = React.useState('') // 사용했던 언어
+  const [stack, setStack] = React.useState('') // 사용했던 기술 설명
+  const [tlanguage, setTLanguage] = React.useState('') // 자신의 주요 언어
 
   const handleName = e => {
     setName(e.target.value)
@@ -29,6 +34,26 @@ function Portfolio(){
 
   const handleIntroduce = e => {
     setIntroduce(e.target.value)
+  }
+
+  const handleTitle = e => {
+    setTitle(e.target.value)
+  }
+
+  const handleDesription = e => {
+    setDescription(e.target.value)
+  }
+
+  const handleLanguage = e => {
+    setLanguage(e.target.value)
+  }
+
+  const handleStack = e => {
+    setStack(e.target.value)
+  }
+
+  const handleTLanguage = e => {
+    setTLanguage(e.target.value)
   }
 
   const navigate = useNavigate();
@@ -57,7 +82,12 @@ function Portfolio(){
       name: name,
       age: age,
       education: education,
-      introduce: introduce
+      introduce: introduce,
+      title: title,
+      description: description,
+      language: language,
+      stack: stack,
+      tlanguage: tlanguage,
     })
     navigate('/selectTemplate'); // 템플릿 선택하는 페이지로 넘어감
   }
