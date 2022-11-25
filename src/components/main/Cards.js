@@ -56,7 +56,8 @@ function Cards() {
 	//좋아요 카운팅
 	const togglelike = async (props) => {
 		const userDoc = doc(firestore, "post", props);
-		await updateDoc(userDoc,{like : like+1})
+		setHstate(like+1);
+		await updateDoc(userDoc,{like : like})
 	};
 	
 	//모달 링크
