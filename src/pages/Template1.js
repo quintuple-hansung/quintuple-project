@@ -7,7 +7,6 @@ function Template1(){
 return (
     <div className="mypage_form">
       <div>
-        <h1>this isPortFolio Pages</h1>
         <ThemeProvider theme={chosenTheme}>
           <>
             <GlobalStyles />
