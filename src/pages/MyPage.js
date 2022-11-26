@@ -95,6 +95,36 @@ function MyPage() {
 		console.log(`initPW called after setPassword : ${Password}`)
 		return Password;
 	}
+	//Promise 객체의 데이터 설정을 setPassword 함수 안에서 함
+	const setPassword = async () => {
+		const oldPassword = oldPassword; // DB에서 가져온 값
+		const newPassword = values.newPassword; // 변경된 PW값
+
+		console.log(`setPassword is called : oldPassword is ${oldPassword} newPassword is ${newPassword}`)
+
+		//사용자 재인증 (PW 업데이트)
+		const credential = EmailAuthProvider.credential(
+			currentEmail,
+			oldPassword
+		);
+
+		await reauthenticateWithCredential(auth.currentUser, credential); // StackOverFlow 사랑합니다 ㅠㅠ
+
+		// User의 PW 변경
+		if (oldPassword !== newPassword) {
+			updatePassword(currentUser, newPassword).then(() => {
+				console.log(`PassWord updated!`)
+			}).catch((error) => {
+				console.log(`PassWord error!`)
+			});
+		} else console.log('Password is Not Changed!')
+
+		//DB에 변경된 PW 수정
+		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+		updateDoc(docRef, { ['password']: newPassword })
+	}
+
+
 
 
 	initUserName(currentEmail);
@@ -127,35 +157,7 @@ function MyPage() {
 
 		getPWfromDB(currentEmail).then(pw => setPassword(pw)); //DB에서 PW(Promise 객체)를 가져와서 setPassword에 전달
 
-		//Promise 객체의 데이터 설정을 setPassword 함수 안에서 함
-		const setPassword = async (data) => {
-			const oldPassword = data; // DB에서 가져온 값
-			const newPassword = values.newPassword; // 변경된 PW값
-
-			console.log(`setPassword is called : oldPassword is ${oldPassword} newPassword is ${newPassword}`)
-
-			//사용자 재인증 (PW 업데이트)
-			const credential = EmailAuthProvider.credential(
-				currentEmail,
-				oldPassword
-			);
-
-			await reauthenticateWithCredential(auth.currentUser, credential); // StackOverFlow 사랑합니다 ㅠㅠ
-
-			// User의 PW 변경
-			if (oldPassword !== newPassword) {
-				updatePassword(currentUser, newPassword).then(() => {
-					console.log(`PassWord updated!`)
-				}).catch((error) => {
-					console.log(`PassWord error!`)
-				});
-			} else console.log('Password is Not Changed!')
-
-			//DB에 변경된 PW 수정
-			const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-			updateDoc(docRef, { ['password']: newPassword })
-		}
-
+		
 		getUserNamefromDB(currentEmail).then(username => setUserName(username)); //DB에서 UserName(Promise 객체)를 가져와서 setUserName에 전달	
 
 		const setUserName = async (data) => {
