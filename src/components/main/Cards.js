@@ -136,7 +136,7 @@ function Cards() {
 						height: '800px',
 					}}>
 					<Comment post={props.post} />
-					<AddComment />
+					<AddComment post={props.post} />
 				</Box>
 			</Box>
 		);

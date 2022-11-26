@@ -22,29 +22,7 @@ function Comment(props) {
 		getComments();
 	}, []);
 
-	// const renderRow = comment.map((value, index) => (
-	// 	// const { index, style } = props;
-	// 	// 수정 필요
-	// 	<ListItem key={index} component="div" disablePadding>
-	// 		<ListItemText
-	// 			primary={value.user}
-	// 			secondary={
-	// 				<React.Fragment>
-	// 					<Typography
-	// 						sx={{ display: 'inline' }}
-	// 						component="span"
-	// 						variant="body2"
-	// 						color="text.primary">
-	// 						{value.content}
-	// 						{/* {console.log(value.content)} */}
-	// 					</Typography>
-	// 				</React.Fragment>
-	// 			}
-	// 		/>
-	// 	</ListItem>
-	// ));
-
-	var testComment = comment.map((value, index) => (
+	var CommentList = comment.map((value, index) => (
 		<>
 			<ListItem>
 				<ListItemText
@@ -55,15 +33,6 @@ function Comment(props) {
 		</>
 	));
 
-	// return (
-	// 	<>
-	// 		<FixedSizeList sx={{ outerHeight: 400 }} itemSize={46} overscanCount={5}>
-	// 			{renderRow}
-	// 			{console.log('TYPE ' + typeof renderRow)}
-	// 		</FixedSizeList>
-	// 	</>
-	// );
-
 	return (
 		<List
 			sx={{
@@ -72,15 +41,7 @@ function Comment(props) {
 				overflow: 'auto',
 				bgcolor: 'background.paper',
 			}}>
-			{testComment}
-			{testComment}
-			{testComment}
-			{testComment}
-			{testComment}
-			{testComment}
-			{testComment}
-			{testComment}
-			{testComment}
+			{CommentList}
 		</List>
 	);
 }
