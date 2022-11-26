@@ -76,6 +76,31 @@ function MyPage() {
 		return Password;
 	}
 
+	// FireBase DB에서 UserName 가져오기
+	const initUserName = async (currentEmail) => {
+		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
+		const currentUserName = await (userDoc.data().name); //DB에서 가져온 Promise 객체에서 name data 가져오기
+		//setValues({ ...values, ['oldUserName']: currentUserName })
+		console.log(`initUserName is called : ${currentUserName}`)
+		return currentUserName;
+	}
+
+	const initPW = async (currentEmail) => {
+		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
+		const Password = await (userDoc.data().password)// DB에서 가져온 Promise객체에서 Password data 가져오기
+		setValues({ ...values, ['oldPassword']: Password })
+		console.log(`initPW called : ${Password}`)
+		return Password;
+	}
+
+
+	initUserName(currentEmail);
+	//initPW(currentEmail);
+
+
+
 
 	//onChange()
 	// Values들이 바뀌면
@@ -143,7 +168,7 @@ function MyPage() {
 			if (oldUserName !== newUserName) {
 				//DB에 UserName 수정
 				const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-				updateDoc(docRef, { ['name']: newUserName });
+				updateDoc(docRef, { ['name']: 'a' });
 				console.log(`UserName updated!`)
 			} else console.log(`UserName is Not Changed!`)
 		}
@@ -259,12 +284,11 @@ function MyPage() {
 						/>
 					</div>
 					<FormControl sx={{ m: 1, width: '250px' }} variant="filled">
-						<InputLabel htmlFor="filled-adornment-password">OldPassword</InputLabel>
+						<InputLabel htmlFor="filled-adornment-oldpassword">OldPassword</InputLabel>
 						<FilledInput
-							id="filled-adornment-password"
+							id="filled-adornment-oldpassword"
 							type={values.isPwType ? 'text' : 'password'}
-							defaultValue={''/*initPW(currentEmail).then((pw)=>{console.log(`()=> return pw ${pw}`)})*/}
-							onChange={handleChange('newPassword')}
+							value={'values.oldPassword'}
 							endAdornment={
 								<InputAdornment position="end">
 									<IconButton
@@ -285,7 +309,7 @@ function MyPage() {
 						<FilledInput
 							id="filled-adornment-password"
 							type={values.isPwType ? 'text' : 'password'}
-							onChange={handleChange('newPassword')}
+							//onChange={handleChange('newPassword')}
 							endAdornment={
 								<InputAdornment position="end">
 									<IconButton
@@ -304,8 +328,8 @@ function MyPage() {
 						<TextField
 							sx={{ m: 1, width: '250px' }}
 							label="OldUserName"
-							id="filled-start-adornment"
-							defaultValue={''}
+							id="filled-start-oldadornment"
+							value={values.oldUserName}
 							variant="filled"
 							disabled
 						/>
@@ -313,7 +337,7 @@ function MyPage() {
 							sx={{ m: 1, width: '250px' }}
 							label="NewUserName"
 							id="filled-start-adornment"
-							onChange={handleChange('newUserName')}
+							//onChange={handleChange('newUserName')}
 							variant="filled"
 						/>
 					</div>
