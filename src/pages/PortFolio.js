@@ -9,6 +9,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore/lite';
 import { useNavigate } from 'react-router-dom';
 import PageBar from './PageBar.js';
 import '../styles/Portfolio.css';
+import ThumbnailUpload from '../components/ThumbnailUpload';
 
 function Portfolio(){
   //const [value, setValue] = React.useState('Controlled');
@@ -204,8 +205,8 @@ function Portfolio(){
             <Button variant="outlined" onClick={submitInfo}>다음</Button>
           </Stack>
         </div>
-
       </section>
+	  <ThumbnailUpload />
       </>
   )
 }

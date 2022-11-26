@@ -51,7 +51,7 @@ export default function AddComment(props) {
 			sx={{
 				'& > :not(style)': {
 					m: 1,
-					width: '35ch',
+					width: '100%',
 					top: '15px',
 					float: 'left',
 				},
@@ -69,7 +69,7 @@ export default function AddComment(props) {
 				startIcon={<CommentIcon />}
 				onClick={addCommentFirebase}
 				float="right">
-				Comment
+				Add Comment
 			</Button>
 		</Box>
 	);
