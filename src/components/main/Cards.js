@@ -1,9 +1,9 @@
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Card from '@mui/material/Card';
 import CardText from './CardText';
-import { useState , useRef } from 'react';
-import { collection } from 'firebase/firestore/lite';
-import { getDocs , updateDoc , doc } from 'firebase/firestore/lite';
+import { useState, useRef } from 'react';
+import { collection, query } from 'firebase/firestore/lite';
+import { getDocs, updateDoc, doc } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
@@ -13,12 +13,16 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { CardActionArea, Container } from '@mui/material';
+import Button from '@mui/material/Button';
+import { CardActionArea } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
 import { ClickAwayListener } from '@mui/material';
 import Comment from './Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import CommentIcon from '@mui/icons-material/Comment';
+import TextField from '@mui/material/TextField';
+
 const modalStyle = {
 	position: 'absolute',
 	top: '50%',
@@ -38,7 +42,7 @@ function Cards() {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	
+
 	const [like, setHstate] = useState(0);
 	/* const [book, setBstate] = useState(false);
 	const Hon = () => setHstate(!like);
@@ -48,33 +52,33 @@ function Cards() {
 		const getPosts = async () => {
 			const data = await getDocs(postsCollectionRef);
 			setPosts(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
-			console.log(posts);
+			// console.log(posts);
 		};
 		getPosts();
 	}, []);
 
 	//좋아요 카운팅
-	const togglelike = async (props) => {
-		const userDoc = doc(firestore, "post", props);
-		setHstate(like+1);
-		await updateDoc(userDoc,{like : like})
+	const togglelike = async props => {
+		const userDoc = doc(firestore, 'post', props);
+		setHstate(like + 1);
+		await updateDoc(userDoc, { like: like });
 	};
-	
+
 	//모달 링크
 	const handleCopyClipBoard = async (text: string) => {
 		try {
-		  await navigator.clipboard.writeText(text);
+			await navigator.clipboard.writeText(text);
 
-		  alert('링크 복사');
+			alert('링크 복사');
 		} catch (error) {
-		  alert('복사 실패!');
+			alert('복사 실패!');
 		}
-	  };
+	};
 
 	function ModalHandler(props) {
 		return (
 			<>
-				console.log(props.post)
+				{/* console.log(props.post) */}
 				<Modal
 					aria-labelledby="transition-modal-title"
 					aria-describedby="transition-modal-description"
@@ -114,24 +118,40 @@ function Cards() {
 						position: 'absolute',
 					}}>
 					<IconButton color="inherit" sx={{ width: 50, left: '30px' }}>
-						<ShareIcon onClick={handleCopyClipBoard}/>
+						<ShareIcon onClick={handleCopyClipBoard} />
 					</IconButton>
 					<IconButton color="inherit" sx={{ width: 50, left: '70px' }}>
 						<BookmarkIcon />
 					</IconButton>
 					<IconButton color="inherit" sx={{ width: 50, left: '110px' }}>
-						<FavoriteIcon onClick={()=>togglelike(props.post)}/>
+						<FavoriteIcon onClick={() => togglelike(props.post)} />
 					</IconButton>
 				</Box>
 				<Box // 댓글 영역
 					sx={{
-						backgroundColor: 'gray',
 						bottom: '0px',
 						position: 'absolute',
 						width: '100%',
 						height: '800px',
 					}}>
 					<Comment post={props.post} />
+					<Box
+						component="form"
+						sx={{
+							'& > :not(style)': {
+								m: 1,
+								width: '35ch',
+								top: '15px',
+								float: 'left',
+							},
+						}}
+						noValidate
+						autoComplete="off">
+						<TextField id="commentTextField" label="Comment" variant="filled" />
+					</Box>
+					<Button variant="outlined" startIcon={<CommentIcon />} float="right">
+						Comment
+					</Button>
 				</Box>
 			</Box>
 		);
