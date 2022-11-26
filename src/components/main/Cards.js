@@ -1,8 +1,8 @@
 import Grid2 from '@mui/material/Unstable_Grid2';
 import Card from '@mui/material/Card';
 import CardText from './CardText';
-import { useState, useRef } from 'react';
-import { collection, query } from 'firebase/firestore/lite';
+import { useState } from 'react';
+import { collection } from 'firebase/firestore/lite';
 import { getDocs, updateDoc, doc } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
@@ -13,16 +13,13 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
 import { CardActionArea } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
 import { ClickAwayListener } from '@mui/material';
 import Comment from './Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-
 import AddComment from './AddComment';
-import TextField from '@mui/material/TextField';
 
 const modalStyle = {
 	position: 'absolute',
@@ -141,8 +138,6 @@ function Cards() {
 			</Box>
 		);
 	}
-
-	function addComment() {}
 
 	function ModalContent() {
 		return (
