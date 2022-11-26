@@ -29,12 +29,6 @@ import SendIcon from '@mui/icons-material/Send'; // Mui 전송 아이콘 ( > ) �
 import SaveIcon from '@mui/icons-material/Save'; // Mui 저장 아이콘 사용
 
 function MyPage() {
-	/* #databse 연동부분
-  const handleLoginEmail = e => {
-	setLoginEmail(e.target.value);
-  };
-  */
-
 	// 화면전환
 	const navigate = useNavigate();
 
@@ -60,40 +54,22 @@ function MyPage() {
 
 
 	// FireBase DB에서 UserName 가져오기
-	const getUserNamefromDB = async (currentEmail) => {
-		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
-		const currentUserName = await (userDoc.data().name); //DB에서 가져온 Promise 객체에서 name data 가져오기
-		console.log(`getUserfromDB is called : ${currentUserName}`)
-		return currentUserName;
-	}
-
-	// FireBase DB에서 Password 가져오기
-	const getPWfromDB = async (currentEmail) => {
-		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
-		const Password = await (userDoc.data().password)// DB에서 가져온 Promise객체에서 Password data 가져오기
-		console.log(`getPWfromDBis called : ${Password}`)
-		return Password;
-	}
-
-	// FireBase DB에서 UserName 가져오기
 	const initUserName = async (currentEmail) => {
 		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
 		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
 		const currentUserName = await (userDoc.data().name); //DB에서 가져온 Promise 객체에서 name data 가져오기
 		setoldUserName(currentUserName);
-		console.log(`initUserName is called : ${currentUserName}`)
+		console.log(`initUserName is called , ${currentUserName}`)
 		return currentUserName;
 	}
-
+	
+	//Firebase DB에서 Password 가져오기
 	const initPW = async (currentEmail) => {
 		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
 		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
 		const Password = await (userDoc.data().password)// DB에서 가져온 Promise객체에서 Password data 가져오기
-		console.log(`initPW called before setPassword : ${Password}`)
 		setoldPassword(Password);
-		console.log(`initPW called after setPassword : ${Password}`)
+		console.log(`initPW called, setPassword : ${Password}`)
 		return Password;
 	}
 
@@ -104,7 +80,6 @@ function MyPage() {
 
 	//Promise 객체의 데이터 설정을 setPassword 함수 안에서 함
 	const setPassword = async () => {
-		const oldPassword = oldPassword; // DB에서 가져온 값
 		const newPassword = values.newPassword; // 변경된 PW값
 
 		console.log(`setPassword is called : oldPassword is ${oldPassword} newPassword is ${newPassword}`)
@@ -133,7 +108,6 @@ function MyPage() {
 
 	
 	const setUserName = async () => {
-		const oldUserName = oldUserName;
 		const newUserName = values.newUserName;
 
 		console.log(`setUserName is called : oldUserName is ${oldUserName} newUserName is ${newUserName}`)
@@ -153,11 +127,11 @@ function MyPage() {
 
 	//onChange()
 
-	// // Values들이 바뀌면
-	// const handleChange = (prop) => (event) => {
-	// 	setValues({ ...values, [prop]: event.target.value });
-	// 	console.log(`onhandleChange is called`)
-	// };
+	// Values들이 바뀌면
+	const handleChange = (prop) => (event) => {
+		setValues({ ...values, [prop]: event.target.value });
+		console.log(`onhandleChange is called`)
+	};
 
 
 	// Tab 목록이 바뀌면
@@ -176,11 +150,8 @@ function MyPage() {
 	//수정 버튼 이벤트
 	const onClickSubmitButton = async () => {
 
-		getPWfromDB(currentEmail).then(pw => setPassword(pw)); //DB에서 PW(Promise 객체)를 가져와서 setPassword에 전달
-
-		
-		getUserNamefromDB(currentEmail).then(username => setUserName(username)); //DB에서 UserName(Promise 객체)를 가져와서 setUserName에 전달	
-
+		setPassword(); //DB에서 PW(Promise 객체)를 가져와서 setPassword에 전달
+		setUserName(); //DB에서 UserName(Promise 객체)를 가져와서 setUserName에 전달
 	};
 
 	//취소 버튼 이벤트
@@ -315,7 +286,7 @@ function MyPage() {
 						<FilledInput
 							id="filled-adornment-password"
 							type={values.isPwType ? 'text' : 'password'}
-							//onChange={handleChange('newPassword')}
+							onChange={handleChange('newPassword')}
 							endAdornment={
 								<InputAdornment position="end">
 									<IconButton
@@ -343,7 +314,7 @@ function MyPage() {
 							sx={{ m: 1, width: '250px' }}
 							label="NewUserName"
 							id="filled-start-adornment"
-							//onChange={handleChange('newUserName')}
+							onChange={handleChange('newUserName')}
 							variant="filled"
 						/>
 					</div>
