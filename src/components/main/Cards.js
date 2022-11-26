@@ -20,7 +20,8 @@ import { ClickAwayListener } from '@mui/material';
 import Comment from './Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import CommentIcon from '@mui/icons-material/Comment';
+
+import AddComment from './AddComment';
 import TextField from '@mui/material/TextField';
 
 const modalStyle = {
@@ -42,12 +43,6 @@ function Cards() {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	const [comment, setComment] = useState('');
-
-	const commentChange = e => {
-		console.log(comment);
-		setComment(e.target.value);
-	};
 
 	const [like, setHstate] = useState(0);
 	/* const [book, setBstate] = useState(false);
@@ -141,32 +136,7 @@ function Cards() {
 						height: '800px',
 					}}>
 					<Comment post={props.post} />
-					<Box
-						component="form"
-						sx={{
-							'& > :not(style)': {
-								m: 1,
-								width: '35ch',
-								top: '15px',
-								float: 'left',
-							},
-						}}
-						noValidate
-						autoComplete="off">
-						<TextField
-							id="commentTextField"
-							label="Comment"
-							variant="filled"
-							onChange={commentChange}
-						/>
-					</Box>
-					<Button
-						variant="outlined"
-						startIcon={<CommentIcon />}
-						float="right"
-						onClick={addComment}>
-						Comment
-					</Button>
+					<AddComment />
 				</Box>
 			</Box>
 		);
