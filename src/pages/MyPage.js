@@ -45,13 +45,13 @@ function MyPage() {
 	const auth = getAuth();
 	const currentUser = auth.currentUser; // Auth로 얻은 현재 User 객체
 	const currentEmail = currentUser.email; // User객체의 이메일 값
+	const [oldPassword , setoldPassword] = useState('');
+	const [oldUserName, setoldUserName] = useState('');
 
 	// onChange 에서 다룰 변수들
 	const [values, setValues] = useState({
 		newPassword: '',
 		newUserName: '',
-		oldPassword: '',
-		oldUserName: '',
 		isPwType: false,
 		isPwVisible: false
 	});
@@ -81,7 +81,7 @@ function MyPage() {
 		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
 		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
 		const currentUserName = await (userDoc.data().name); //DB에서 가져온 Promise 객체에서 name data 가져오기
-		//setValues({ ...values, ['oldUserName']: currentUserName })
+		setoldUserName(currentUserName);
 		console.log(`initUserName is called : ${currentUserName}`)
 		return currentUserName;
 	}
@@ -90,24 +90,23 @@ function MyPage() {
 		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
 		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
 		const Password = await (userDoc.data().password)// DB에서 가져온 Promise객체에서 Password data 가져오기
-		setValues({ ...values, ['oldPassword']: Password })
-		console.log(`initPW called : ${Password}`)
+		console.log(`initPW called before setPassword : ${Password}`)
+		setoldPassword(Password);
+		console.log(`initPW called after setPassword : ${Password}`)
 		return Password;
 	}
 
 
 	initUserName(currentEmail);
-	//initPW(currentEmail);
-
-
-
+	initPW(currentEmail);
 
 	//onChange()
-	// Values들이 바뀌면
-	const handleChange = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value });
-		console.log(`onhandleChange is called`)
-	};
+
+	// // Values들이 바뀌면
+	// const handleChange = (prop) => (event) => {
+	// 	setValues({ ...values, [prop]: event.target.value });
+	// 	console.log(`onhandleChange is called`)
+	// };
 
 
 	// Tab 목록이 바뀌면
@@ -161,14 +160,14 @@ function MyPage() {
 
 		const setUserName = async (data) => {
 			const oldUserName = data;
-			const newUserName = values.data;
+			const newUserName = values.newUserName;
 
 			console.log(`setUserName is called : oldUserName is ${oldUserName} newUserName is ${newUserName}`)
 
 			if (oldUserName !== newUserName) {
 				//DB에 UserName 수정
 				const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-				updateDoc(docRef, { ['name']: 'a' });
+				updateDoc(docRef, { ['name']: newUserName });
 				console.log(`UserName updated!`)
 			} else console.log(`UserName is Not Changed!`)
 		}
@@ -288,7 +287,7 @@ function MyPage() {
 						<FilledInput
 							id="filled-adornment-oldpassword"
 							type={values.isPwType ? 'text' : 'password'}
-							value={'values.oldPassword'}
+							value={oldPassword}
 							endAdornment={
 								<InputAdornment position="end">
 									<IconButton
@@ -329,7 +328,7 @@ function MyPage() {
 							sx={{ m: 1, width: '250px' }}
 							label="OldUserName"
 							id="filled-start-oldadornment"
-							value={values.oldUserName}
+							value={oldUserName}
 							variant="filled"
 							disabled
 						/>
