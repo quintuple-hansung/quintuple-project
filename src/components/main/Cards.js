@@ -42,6 +42,12 @@ function Cards() {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	const [comment, setComment] = useState('');
+
+	const commentChange = e => {
+		console.log(comment);
+		setComment(e.target.value);
+	};
 
 	const [like, setHstate] = useState(0);
 	/* const [book, setBstate] = useState(false);
@@ -147,15 +153,26 @@ function Cards() {
 						}}
 						noValidate
 						autoComplete="off">
-						<TextField id="commentTextField" label="Comment" variant="filled" />
+						<TextField
+							id="commentTextField"
+							label="Comment"
+							variant="filled"
+							onChange={commentChange}
+						/>
 					</Box>
-					<Button variant="outlined" startIcon={<CommentIcon />} float="right">
+					<Button
+						variant="outlined"
+						startIcon={<CommentIcon />}
+						float="right"
+						onClick={addComment}>
 						Comment
 					</Button>
 				</Box>
 			</Box>
 		);
 	}
+
+	function addComment() {}
 
 	function ModalContent() {
 		return (
