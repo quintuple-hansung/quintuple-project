@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom'; //navigate 사용
 import React, { useState, useEffect, useRef } from 'react'; // useState,userEffect 사용자
 import html2canvas from 'html2canvas'; // javascript 페이지 스크린샷 라이브러리
 import jsPDF from 'jspdf'; // JavaScript에서 PDF를 생성하는 라이브러리.
-import TopBar from '../components/main/TopBar';
-import { getAuth, updateEmail, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider, } from 'firebase/auth'; // firebase에서 사용자 정보를 가져오고, 재인증 메소드, 업데이트 처리
-import { doc, getDoc, updateDoc } from 'firebase/firestore/lite'; // firebase DB에서 정보 가져오기
+import TopBar from '../components/main/TopBar'; // TopBar 사용
+import { firestore } from "../components/firebase_config"; // FireBase DB 불러오기 용 firestore 사용
+import { getDoc, updateDoc, doc } from '@firebase/firestore/lite';
+import { getAuth, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider, } from 'firebase/auth'; // firebase에서 사용자 정보를 가져오고, 재인증 메소드, 업데이트 처리
 import Container from '@mui/material/Container'; // Mui Container 사용
 import Box from '@mui/material/Box'; // Mui Box 사용
 import Button from '@mui/material/Button'; // Mui Button 사용
@@ -38,33 +39,51 @@ function MyPage() {
 	const navigate = useNavigate();
 
 	// 사용할 변수들
-	const [tapValue, setTapValue] = React.useState(0); // Mui table 현재 보고 있는 탭 값
+	const [tapValue, setTapValue] = useState(0); // Mui table 현재 보고 있는 탭 값
 
 	// 현재 로그인한 사용자 가져오기
 	const auth = getAuth();
-
-	const currentUser = auth.currentUser;
-	const currentUserName = currentUser.displayName;
-	const currentEmail = currentUser.email;
+	const currentUser = auth.currentUser; // Auth로 얻은 현재 User 객체
+	const currentEmail = currentUser.email; // User객체의 이메일 값
 
 	// onChange 에서 다룰 변수들
-	const [values, setValues] = React.useState({
-		password: '',
-		userName: currentUserName,
+	const [values, setValues] = useState({
+		newPassword: '',
+		newUserName: '',
+		oldPassword: '',
+		oldUserName: '',
 		isPwType: false,
 		isPwVisible: false
 	});
 
 
 
-	// const docRef = doc(firestore, "user", currentEmail);
-	// const docSnap = getDoc(docRef);
+	// FireBase DB에서 UserName 가져오기
+	const getUserNamefromDB = async (currentEmail) => {
+		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
+		const currentUserName = await (userDoc.data().name); //DB에서 가져온 Promise 객체에서 name data 가져오기
+		console.log(`getUserfromDB is called : ${currentUserName}`)
+		return currentUserName;
+	}
+
+	// FireBase DB에서 Password 가져오기
+	const getPWfromDB = async (currentEmail) => {
+		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
+		const Password = await (userDoc.data().password)// DB에서 가져온 Promise객체에서 Password data 가져오기
+		console.log(`getPWfromDBis called : ${Password}`)
+		return Password;
+	}
+
 
 	//onChange()
 	// Values들이 바뀌면
 	const handleChange = (prop) => (event) => {
 		setValues({ ...values, [prop]: event.target.value });
+		console.log(`onhandleChange is called`)
 	};
+
 
 	// Tab 목록이 바뀌면
 	const handleTabChange = (event, newValue) => {
@@ -81,49 +100,55 @@ function MyPage() {
 
 	//수정 버튼 이벤트
 	const onClickSubmitButton = async () => {
-		console.log('Submit button pressed');
-		console.log(`currentUser: ${currentUser}`)
-		console.log(`currentUserName: ${currentUserName}`)
-		console.log(`changeUserName : ${values.userName}`);
-		console.log(`UserName 비교 ${currentUserName === values.userName}`);
+
+		getPWfromDB(currentEmail).then(pw => setPassword(pw)); //DB에서 PW(Promise 객체)를 가져와서 setPassword에 전달
+
+		//Promise 객체의 데이터 설정을 setPassword 함수 안에서 함
+		const setPassword = async (data) => {
+			const oldPassword = data; // DB에서 가져온 값
+			const newPassword = values.newPassword; // 변경된 PW값
+
+			console.log(`setPassword is called : oldPassword is ${oldPassword} newPassword is ${newPassword}`)
+
+			//사용자 재인증 (PW 업데이트)
+			const credential = EmailAuthProvider.credential(
+				currentEmail,
+				oldPassword
+			);
+
+			await reauthenticateWithCredential(auth.currentUser, credential); // StackOverFlow 사랑합니다 ㅠㅠ
+
+			// User의 PW 변경
+			if (oldPassword !== newPassword) {
+				updatePassword(currentUser, newPassword).then(() => {
+					console.log(`PassWord updated!`)
+				}).catch((error) => {
+					console.log(`PassWord error!`)
+				});
+			} else console.log('Password is Not Changed!')
+
+			//DB에 변경된 PW 수정
+			const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+			updateDoc(docRef, { ['password']: newPassword })
+		}
+
+		getUserNamefromDB(currentEmail).then(username => setUserName(username)); //DB에서 UserName(Promise 객체)를 가져와서 setUserName에 전달	
+
+		const setUserName = async (data) => {
+			const oldUserName = data;
+			const newUserName = values.data;
+
+			console.log(`setUserName is called : oldUserName is ${oldUserName} newUserName is ${newUserName}`)
+
+			if (oldUserName !== newUserName) {
+				//DB에 UserName 수정
+				const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+				updateDoc(docRef, {['name']: newUserName});
+				console.log(`UserName updated!`)
+			} else console.log(`UserName is Not Changed!`)
+		}
 
 
-		const newPassword = values.password;
-		console.log(`newPW is ${values.password}`)
-
-		const oldPassword = 'dldbswo1..1' // DB에서 인증을 위한 기존 비밀번호 가져오기
-		const credential = EmailAuthProvider.credential(
-			currentEmail,
-			oldPassword
-		);
-
-		await reauthenticateWithCredential(auth.currentUser, credential); // StackOverFlow 사랑합니다 ㅠㅠ
-
-		// DB의 pw 속성도 업데이트 해주기
-		updatePassword(currentUser, newPassword).then(() => {
-			console.log(`PassWord updated!`)
-		}).catch((error) => {
-			console.log(`PassWord error!`)
-		});
-
-		if (currentUser.displayName !== values.userName) {
-			updateProfile(currentUser, {
-				displayName: values.userName
-			}).then(() => {
-				console.log(`Profile updated!`)
-			}).catch((error) => {
-				console.log(`Profile updated error!`)
-			})
-		} else console.log(`UserName is Not Changed!`)
-
-		// 우선 이메일 변경은 보류
-		// if (currentUser.email !== userEmailRef.current.value) {
-		// 	updateEmail(currentUser, userEmailRef.current.value).then(() => {
-		// 		console.log(`Email updated!`)
-		// 	}).catch((error) => {
-		// 		console.log(`Email updated error!`)
-		// 	});
-		// } else console.log(`UserEmail is Not Changed!`)
 
 	};
 
@@ -197,8 +222,8 @@ function MyPage() {
 			<TopBar />
 			<Container className='mypage_form_captureTarget' fixed>
 				<Box className="mypage_form_createPortfolioform">
-						<Button sx={{margin:"3% auto"}} onClick={onClickPortFolio} variant="contained" endIcon={<SendIcon />}>
-							포트폴리오 작성하러 가기</Button>
+					<Button sx={{ margin: "3% auto" }} onClick={onClickPortFolio} variant="contained" endIcon={<SendIcon />}>
+						포트폴리오 작성하러 가기</Button>
 				</Box>
 				<Typography id="lbMyPost">내 글</Typography>
 				<div className="mypage_form_myPostForm">
@@ -225,7 +250,7 @@ function MyPage() {
 				<div className="mypage_form_myProfileForm">
 					<div>
 						<TextField
-							sx={{ m: 1,marginTop:'50px', width: '250px' }}
+							sx={{ m: 1, marginTop: '50px', width: '250px' }}
 							id="filled-disabled"
 							label="ID"
 							defaultValue={currentEmail}
@@ -238,8 +263,8 @@ function MyPage() {
 						<FilledInput
 							id="filled-adornment-password"
 							type={values.isPwType ? 'text' : 'password'}
-							value={values.password}
-							onChange={handleChange('password')}
+							defaultValue={''/*initPW(currentEmail).then((pw)=>{console.log(`()=> return pw ${pw}`)})*/}
+							onChange={handleChange('newPassword')}
 							endAdornment={
 								<InputAdornment position="end">
 									<IconButton
@@ -259,19 +284,19 @@ function MyPage() {
 							sx={{ m: 1, width: '250px' }}
 							label="UserName"
 							id="filled-start-adornment"
-							defaultValue={currentUserName}
-							onChange={handleChange('userName')}
+							defaultValue={''/*init(currentEmail).then(()=>{return values.oldUserName})*/}
+							onChange={handleChange('newUserName')}
 							variant="filled"
 						/>
 					</div>
-					<div style={{marginTop:'10px',marginBottom:'50px'}}>
-						<Button sx={{width:"100px",marginRight: "10px"}} onClick={onClickSubmitButton} variant="contained">수정</Button>
-						<Button sx={{width:"100px",marginLeft: "10px"}} onClick={onClickCancelButton} variant="contained">취소</Button>
+					<div style={{ marginTop: '10px', marginBottom: '50px' }}>
+						<Button sx={{ width: "100px", marginRight: "10px" }} onClick={onClickSubmitButton} variant="contained">수정</Button>
+						<Button sx={{ width: "100px", marginLeft: "10px" }} onClick={onClickCancelButton} variant="contained">취소</Button>
 					</div>
 				</div>
 				<Typography id="lbExportPortFolio">포트폴리오 내보내기</Typography>
 				<div className="mypage_form_myPortfolioExportForm">
-					<Button sx={{width:"200px",marginTop:"50px",marginBottom:"50px"}} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>PDF로 저장하기</Button>
+					<Button sx={{ width: "200px", marginTop: "50px", marginBottom: "50px" }} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>PDF로 저장하기</Button>
 				</div>
 			</Container>
 		</div>
