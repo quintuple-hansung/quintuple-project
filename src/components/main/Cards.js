@@ -20,7 +20,8 @@ import { ClickAwayListener } from '@mui/material';
 import Comment from './Comment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import CommentIcon from '@mui/icons-material/Comment';
+
+import AddComment from './AddComment';
 import TextField from '@mui/material/TextField';
 
 const modalStyle = {
@@ -135,27 +136,13 @@ function Cards() {
 						height: '800px',
 					}}>
 					<Comment post={props.post} />
-					<Box
-						component="form"
-						sx={{
-							'& > :not(style)': {
-								m: 1,
-								width: '35ch',
-								top: '15px',
-								float: 'left',
-							},
-						}}
-						noValidate
-						autoComplete="off">
-						<TextField id="commentTextField" label="Comment" variant="filled" />
-					</Box>
-					<Button variant="outlined" startIcon={<CommentIcon />} float="right">
-						Comment
-					</Button>
+					<AddComment />
 				</Box>
 			</Box>
 		);
 	}
+
+	function addComment() {}
 
 	function ModalContent() {
 		return (
