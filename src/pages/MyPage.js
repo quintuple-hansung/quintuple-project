@@ -48,6 +48,7 @@ function MyPage() {
 	const [oldPassword , setoldPassword] = useState('');
 	const [oldUserName, setoldUserName] = useState('');
 
+
 	// onChange 에서 다룰 변수들
 	const [values, setValues] = useState({
 		newPassword: '',
@@ -95,6 +96,12 @@ function MyPage() {
 		console.log(`initPW called after setPassword : ${Password}`)
 		return Password;
 	}
+
+
+	initUserName(currentEmail);
+	initPW(currentEmail);
+
+
 	//Promise 객체의 데이터 설정을 setPassword 함수 안에서 함
 	const setPassword = async () => {
 		const oldPassword = oldPassword; // DB에서 가져온 값
@@ -124,11 +131,25 @@ function MyPage() {
 		updateDoc(docRef, { ['password']: newPassword })
 	}
 
+	
+	const setUserName = async () => {
+		const oldUserName = oldUserName;
+		const newUserName = values.newUserName;
+
+		console.log(`setUserName is called : oldUserName is ${oldUserName} newUserName is ${newUserName}`)
+
+		if (oldUserName !== newUserName) {
+			//DB에 UserName 수정
+			const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
+			updateDoc(docRef, { ['name']: newUserName });
+			console.log(`UserName updated!`)
+		} else console.log(`UserName is Not Changed!`)
+	}
 
 
 
-	initUserName(currentEmail);
-	initPW(currentEmail);
+	
+
 
 	//onChange()
 
@@ -159,22 +180,6 @@ function MyPage() {
 
 		
 		getUserNamefromDB(currentEmail).then(username => setUserName(username)); //DB에서 UserName(Promise 객체)를 가져와서 setUserName에 전달	
-
-		const setUserName = async (data) => {
-			const oldUserName = data;
-			const newUserName = values.newUserName;
-
-			console.log(`setUserName is called : oldUserName is ${oldUserName} newUserName is ${newUserName}`)
-
-			if (oldUserName !== newUserName) {
-				//DB에 UserName 수정
-				const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-				updateDoc(docRef, { ['name']: newUserName });
-				console.log(`UserName updated!`)
-			} else console.log(`UserName is Not Changed!`)
-		}
-
-
 
 	};
 
