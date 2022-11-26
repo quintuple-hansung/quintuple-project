@@ -143,7 +143,7 @@ function MyPage() {
 			if (oldUserName !== newUserName) {
 				//DB에 UserName 수정
 				const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
-				updateDoc(docRef, {['name']: newUserName});
+				updateDoc(docRef, { ['name']: newUserName });
 				console.log(`UserName updated!`)
 			} else console.log(`UserName is Not Changed!`)
 		}
@@ -259,11 +259,32 @@ function MyPage() {
 						/>
 					</div>
 					<FormControl sx={{ m: 1, width: '250px' }} variant="filled">
-						<InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+						<InputLabel htmlFor="filled-adornment-password">OldPassword</InputLabel>
 						<FilledInput
 							id="filled-adornment-password"
 							type={values.isPwType ? 'text' : 'password'}
 							defaultValue={''/*initPW(currentEmail).then((pw)=>{console.log(`()=> return pw ${pw}`)})*/}
+							onChange={handleChange('newPassword')}
+							endAdornment={
+								<InputAdornment position="end">
+									<IconButton
+										sx={{ width: '40px' }}
+										aria-label="toggle password visibility"
+										onClick={onClickVisible}
+										edge="end"
+									>
+										{values.isPwType ? <VisibilityOff /> : <Visibility />}
+									</IconButton>
+								</InputAdornment>
+							}
+							disabled
+						/>
+					</FormControl>
+					<FormControl sx={{ m: 1, width: '250px' }} variant="filled">
+						<InputLabel htmlFor="filled-adornment-password">NewPassword</InputLabel>
+						<FilledInput
+							id="filled-adornment-password"
+							type={values.isPwType ? 'text' : 'password'}
 							onChange={handleChange('newPassword')}
 							endAdornment={
 								<InputAdornment position="end">
@@ -282,9 +303,16 @@ function MyPage() {
 					<div>
 						<TextField
 							sx={{ m: 1, width: '250px' }}
-							label="UserName"
+							label="OldUserName"
 							id="filled-start-adornment"
-							defaultValue={''/*init(currentEmail).then(()=>{return values.oldUserName})*/}
+							defaultValue={''}
+							variant="filled"
+							disabled
+						/>
+						<TextField
+							sx={{ m: 1, width: '250px' }}
+							label="NewUserName"
+							id="filled-start-adornment"
 							onChange={handleChange('newUserName')}
 							variant="filled"
 						/>
