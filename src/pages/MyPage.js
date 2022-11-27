@@ -28,7 +28,7 @@ import TextField from '@mui/material/TextField'; // Mui textfield 사용
 import SendIcon from '@mui/icons-material/Send'; // Mui 전송 아이콘 ( > ) 사용
 import SaveIcon from '@mui/icons-material/Save'; // Mui 저장 아이콘 사용
 import WriteIcon from '@mui/icons-material/DriveFileRenameOutline'; //포트폴리오 작성 아이콘
-import { fontFamily } from '../font/font.css';
+
 
 
 function MyPage() {

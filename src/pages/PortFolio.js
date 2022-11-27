@@ -187,12 +187,16 @@ function Portfolio(){
           <input class='text-input' id='education' name='education' type='text' onChange={handleEducation}/>
         </p>
         <p class='field'>
+          <label class='label' for='field'>자신의 분야</label>
+          <textarea class='textarea' cols='50' id='field' name='field' rows='1' onChange={handleField}></textarea>
+        </p>
+        <p class='field'>
           <label class='label' for='introduce'>자기소개</label>
           <textarea class='textarea' cols='50' id='introduce' name='introduce' rows='3' onChange={handleIntroduce}></textarea>
         </p>
         <p class='field'>
-          <label class='label' for='tlanguage'>주요 언어</label>
-          <textarea class='textarea' cols='50' id='tlanguage' name='tlanguage' rows='3' onChange={handleTLanguage}></textarea>
+          <label class='label' for='tlanguage'>주요 언어 (3개 필수)</label>
+          <textarea class='textarea' cols='50' id='tlanguage' name='tlanguage' rows='2' onChange={handleTLanguage}></textarea>
         </p>
         <p class='field'>
           <label class='label' for='title'>프로젝트 제목</label>
@@ -203,11 +207,11 @@ function Portfolio(){
           <textarea class='textarea' cols='50' id='description' name='description' rows='4' onChange={handleDesription}></textarea>
         </p>
         <p class='field half'>
-          <label class='label' for='stack'>사용한 기술</label>
+          <label class='label' for='stack'>사용한 기술 (3개 필수)</label>
           <input class='text-input' id='stack' name='stack' type='text' onChange={handleStack}/>
         </p>
         <p class='field half'>
-          <label class='label' for='language'>사용한 언어</label>
+          <label class='label' for='language'>사용한 언어 (3개 필수)</label>
           <input class='text-input' id='language' name='language' type='text' onChange={handleLanguage}/>
         </p>
        
@@ -228,114 +232,6 @@ function Portfolio(){
           <input class='button' type='submit' value='다음' onClick={submitInfo}/>
         </p>
       </form>
-
-        
-        {/*
-        <Container>
-            <Grid container spacing={1}>
-              <Grid item xs={4}>
-              <TextField
-                id="outlined-multiline-static"
-                label="이름"
-                size='medium'
-                defaultValue=''
-                onChange={handleName}
-              
-              />
-          </Grid>
-          <Grid item xs={4}>
-              <TextField 
-                id="outlined-multiline-static"
-                label="나이"
-                rows={1}
-                defaultValue=""
-                onChange={handleAge}
-               
-              />
-          </Grid>
-          <Grid item xs={4}>
-              <TextField
-                id="outlined-multiline-static"
-                label="학력"
-                multiline
-                rows={1}
-                defaultValue=""
-                onChange={handleEducation}></TextField>
-             
-          </Grid>
-          <Grid item xs={6}>
-              <TextField
-                id="outlined-multiline-static"
-                label="자기소개"
-                multiline
-                rows={4}
-                defaultValue=""
-                onChange={handleIntroduce}></TextField>
-              
-          </Grid>
-          <Grid item xs={6}>
-          <TextField
-                id="outlined-multiline-static"
-                label="자신의 주요 언어"
-                multiline
-                rows={5}
-                defaultValue=""
-                onChange={handleTLanguage}></TextField>
-         
-             </Grid> 
-          <Grid item xs={12}>
-              <TextField
-                id="outlined-multiline-static"
-                label="프로젝트 제목"
-                multiline
-                rows={2}
-                defaultValue=""
-                onChange={handleTitle}
-              />
-           </Grid>
-           <Grid item xs={12}>
-              <TextField
-                id="outlined-multiline-static"
-                label="프로젝트 설명"
-                multiline
-                rows={10}
-                defaultValue=""
-                onChange={handleDesription}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                id="outlined-multiline-static"
-                label="사용했던 언어"
-                multiline
-                rows={5}
-                defaultValue=""
-                onChange={handleLanguage}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                id="outlined-multiline-static"
-                label="사용한 기술"
-                multiline
-                rows={5}
-                defaultValue=""
-                onChange={handleStack}
-              />
-            </Grid>
-           
-          
-          </Grid>
-        
-        <div>
-          <Stack direction="row" spacing={2} width={100} margin-inline={'auto'}>
-            <Button variant="outlined" onClick={submitInfo}>다음</Button>
-          </Stack>
-        </div>
-
-
-      </Container>
-  */}
       </>
   )
 }
