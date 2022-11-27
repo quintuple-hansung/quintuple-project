@@ -73,10 +73,10 @@ function Login() {
 		}
 	};
 
-	useEffect(() => {
+	/*useEffect(() => {
 		localStorage.clear();
 		localStorage.setItem('user', getAuth().currentUser.uid.toString());
-	})
+	})*/
 
 	return (
 		<div className='login'>
