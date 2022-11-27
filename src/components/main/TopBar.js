@@ -44,7 +44,7 @@ export default function TopBar() {
 	return (
 		<Box sx={{ flexGrow: 2 }}>
 			<AppBar position="static">
-				<Toolbar>
+				<Toolbar style={{background : '#2E3B55'}}>
 					<Link to="/main" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<IconButton
 							edge="start"
@@ -53,14 +53,14 @@ export default function TopBar() {
 							<HomeIcon />
 						</IconButton>
 					</Link>
-					<Typography variant="h5" component="div" sx={{ flexGrow: 3 }}>
+					<Typography variant="h5" component="div" sx={{ flexGrow: 3 }} fontFamily= "esamanru Light">
 						quintuple
 					</Typography>
 					<SearchAppBar />
 					<Link
 						to="/mypage"
-						style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button color="inherit" sx={{ width: 100 }}>
+						style={{ textDecoration: 'none', color: 'inherit' }} >
+						<Button color="inherit" sx={{ width: 100 }}  >
 							My Page
 						</Button>
 					</Link>

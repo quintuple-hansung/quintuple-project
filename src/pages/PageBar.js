@@ -25,7 +25,7 @@ export default function PageBar() {
 						</IconButton>
 					</Link>
 					<Typography variant="h5" component="div" textAlign="center" sx={{ flexGrow: 3 }}  fontFamily= "esamanru Light">
-						QUINTUPLE
+						quintuple
 					</Typography>
 		
 					<Link

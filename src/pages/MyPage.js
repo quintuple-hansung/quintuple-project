@@ -27,6 +27,9 @@ import FormControl from '@mui/material/FormControl'; // Mui Form container 사�
 import TextField from '@mui/material/TextField'; // Mui textfield 사용
 import SendIcon from '@mui/icons-material/Send'; // Mui 전송 아이콘 ( > ) 사용
 import SaveIcon from '@mui/icons-material/Save'; // Mui 저장 아이콘 사용
+import WriteIcon from '@mui/icons-material/DriveFileRenameOutline'; //포트폴리오 작성 아이콘
+import { fontFamily } from '../font/font.css';
+
 
 function MyPage() {
 	// 화면전환
@@ -222,19 +225,19 @@ function MyPage() {
 	return (
 		<div className="mypage_form">
 			<TopBar />
-			<Container className='mypage_form_captureTarget' fixed>
-				<Box className="mypage_form_createPortfolioform">
-					<Button sx={{ margin: "3% auto" }} onClick={onClickPortFolio} variant="contained" endIcon={<SendIcon />}>
+			<Container className='mypage_form_captureTarget' fixed >
+				<Box className="mypage_form_createPortfolioform" style={{border:'4px solid rgba(46,59,85)'}}>
+					<Button sx={{ margin: "3% auto", bgcolor: '#2e3b55', fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} onClick={onClickPortFolio} variant="contained" endIcon={<WriteIcon />}>
 						포트폴리오 작성하러 가기</Button>
 				</Box>
-				<Typography id="lbMyPost">내 글</Typography>
-				<div className="mypage_form_myPostForm">
-					<Box sx={{ width: '100%' }}>
-						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+				<Typography id="lbMyPost" fontFamily= 'nanum'  sx={{ fontSize: 'h6.fontSize'}}>내 글</Typography>
+				<div className="mypage_form_myPostForm" style={{border:'4px solid rgba(46,59,85)'}}>
+					<Box sx={{ width: '100%'}}>
+						<Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
 							<Tabs value={tapValue} onChange={handleTabChange} aria-label="basic tabs example">
-								<Tab icon={<FavoriteIcon />} label="좋아요한 글" />
-								<Tab icon={<BookmarkIcon />} label="북마크한 글" />
-								<Tab icon={<ModeCommentIcon />} label="댓글단 글" />
+								<Tab sx={{"&:hover": {color:'#E8474C', cursor: "pointer"}}} icon={<FavoriteIcon />} label="좋아요한 글"  />
+								<Tab sx={{"&:hover": {color:'#E8474C', cursor: "pointer"}}} icon={<BookmarkIcon />} label="북마크한 글" />
+								<Tab sx={{"&:hover": {color:'#E8474C', cursor: "pointer"}}} icon={<ModeCommentIcon />} label="댓글단 글" />
 							</Tabs>
 						</Box>
 						<TabPanel value={tapValue} index={0}>
@@ -248,8 +251,8 @@ function MyPage() {
 						</TabPanel>
 					</Box>
 				</div>
-				<Typography id="lbMyProfile">회원 정보 수정</Typography>
-				<div className="mypage_form_myProfileForm">
+				<Typography id="lbMyProfile" fontFamily= 'nanum' >회원 정보 수정</Typography>
+				<div className="mypage_form_myProfileForm" style={{border:'4px solid rgba(46,59,85)'}}>
 					<div>
 						<TextField
 							sx={{ m: 1, marginTop: '50px', width: '250px' }}
@@ -319,13 +322,13 @@ function MyPage() {
 						/>
 					</div>
 					<div style={{ marginTop: '10px', marginBottom: '50px' }}>
-						<Button sx={{ width: "100px", marginRight: "10px" }} onClick={onClickSubmitButton} variant="contained">수정</Button>
-						<Button sx={{ width: "100px", marginLeft: "10px" }} onClick={onClickCancelButton} variant="contained">취소</Button>
+						<Button sx={{ width: "100px", marginRight: "10px", bgcolor: '#2e3b55' }} onClick={onClickSubmitButton} variant="contained">수정</Button>
+						<Button sx={{ width: "100px", marginLeft: "10px", bgcolor: '#2e3b55' }} onClick={onClickCancelButton} variant="contained">취소</Button>
 					</div>
 				</div>
-				<Typography id="lbExportPortFolio">포트폴리오 내보내기</Typography>
-				<div className="mypage_form_myPortfolioExportForm">
-					<Button sx={{ width: "200px", marginTop: "50px", marginBottom: "50px" }} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>PDF로 저장하기</Button>
+				<Typography id="lbExportPortFolio" fontFamily= 'nanum'>포트폴리오 내보내기</Typography>
+				<div className="mypage_form_myPortfolioExportForm" style={{border:'5px solid rgba(46,59,85)'}}>
+					<Button sx={{ width: "200px", marginTop: "50px", marginBottom: "50px",bgcolor: '#2e3b55' }} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>PDF로 저장하기</Button>
 				</div>
 			</Container>
 		</div>

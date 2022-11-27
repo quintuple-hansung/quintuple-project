@@ -85,7 +85,7 @@ function Login() {
 					LOGIN
 				</Typography>
 				<Box component="form" noValidate sx={{ mt: 1}} >
-					<TextField
+					<TextField					
 						margin="normal"
 						required
 						fullWidth
@@ -114,7 +114,11 @@ function Login() {
 					type="submit" 
 					fullWidth
 					variant="contained" 
-					sx={{ mt: 3, mb: 2, bgcolor: '#2e3b55'}} 
+					sx={{ mt: 3, mb: 2, bgcolor: '#2e3b55', 
+						"&:hover": {
+						backgroundColor:'#E8474C',
+						cursor: "pointer",
+						}}}
 					onClick={onClickLogin}>
 						L O G I N
 				</Button>
