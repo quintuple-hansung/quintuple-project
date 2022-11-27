@@ -12,3 +12,8 @@
     font-family: "Nanum";
     src: url(../font/NanumSquareNeo-bRg.ttf);
 }
+
+@font-face {
+    font-family: 'jikji';
+    src: url(../font/jikji.ttf);
+}

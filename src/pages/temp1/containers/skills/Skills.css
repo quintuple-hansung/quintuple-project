@@ -6,17 +6,17 @@
 .skills-header {
   font-size: 60px;
   line-height: normal;
-  font-family: "Google Sans Regular";
+  font-family: 'jikji';
   text-align: center;
 }
 
 .skills-text {
   font-size: 20px;
+  font-family: 'jikji';
 }
 
 .skills-text-div {
   margin-left: 80px;
-  font-family: "Google Sans Regular";
 }
 
 .skills-main-div > * {
@@ -33,7 +33,7 @@
 .skills-heading {
   font-size: 56px;
   font-weight: 400;
-  font-family: "Google Sans Regular";
+  font-family: 'jikji';
   line-height: normal;
 }
 
@@ -44,6 +44,7 @@
   }
   .skills-header {
     font-size: 50px;
+    font-family: 'jikji';
   }
   /* .skills-image-div > img {
     margin-top: 0px;
@@ -53,6 +54,7 @@
   .skills-heading {
     font-size: 30px;
     text-align: center;
+    font-family: 'jikji';
   }
   .skills-header {
     font-size: 30px;

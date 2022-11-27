@@ -32,13 +32,11 @@ h2 {
 a {
   color: $dark;
   transition: color 200ms ease;
-  font-family: 'nanum';
 }
 
 a:hover {
   color: $lightgray;
   transition: color 200ms ease;
-  font-family: 'nanum';
 }
 
 @keyframes wave {
@@ -63,8 +61,8 @@ nav {
 }
 
 li {
-  transition: $transition;
   font-family: 'nanum';
+  transition: $transition;
 
   &:hover {
     transform: translateY(-3px);
@@ -84,17 +82,14 @@ footer {
   a, i, li {
     color: $white;
     transition: color 400ms;
-    font-family: 'nanum';
   }
 
   a:visited {
     color: $white;
-    font-family: 'nanum';
   }
 
   footer {
     color: $white;
-    font-family: 'nanum';
   }
 }
 
@@ -102,7 +97,6 @@ footer {
   background-color: $white;
   color: $dark;
   transition: all 400ms;
-  font-family: 'kangwon';
 }
 
 img {
