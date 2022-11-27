@@ -11,7 +11,8 @@ import Temp2IMG from '../image/ex2.png';
 import { textAlign } from '@mui/system';
 import {firestore} from "../components/firebase_config";
 import { getAuth} from 'firebase/auth';
-import { doc, getDoc, updateDoc } from 'firebase/firestore/lite';
+import { doc, addDoc, updateDoc,collection } from 'firebase/firestore/lite';
+import { async } from '@firebase/util';
 
 
 export default function SelectTemplate() {
@@ -25,17 +26,25 @@ export default function SelectTemplate() {
     const currentEmail = currentUser.email;
 
 
-    const selectTemp1 = () => {
+    const selectTemp1 = async() => {
         updateDoc(doc(firestore, 'user', currentEmail), {
             selectTemplateNum: 1
         })
+        await addDoc(collection(firestore, "post"), {
+            user: `${currentEmail}`,
+            like: 0
+          });
         navigate('/template1');
     }
 
-    const selectTemp2 = () => {
+    const selectTemp2 = async() => {
         updateDoc(doc(firestore, 'user', currentEmail), {
             selectTemplateNum: 2
         })
+        await addDoc(collection(firestore, "post"), {
+            user: `${currentEmail}`,
+            like: 0
+          });
         navigate('/template2');
     }
 
