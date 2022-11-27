@@ -207,7 +207,7 @@ function Portfolio(){
           <textarea class='textarea' cols='50' id='description' name='description' rows='4' onChange={handleDesription}></textarea>
         </p>
         <p class='field half'>
-          <label class='label' for='stack'>사용한 기술 (3개 필수)</label>
+          <label class='label' for='stack'>사용한 기술 </label>
           <input class='text-input' id='stack' name='stack' type='text' onChange={handleStack}/>
         </p>
         <p class='field half'>

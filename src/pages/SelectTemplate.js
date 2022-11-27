@@ -25,39 +25,41 @@ export default function SelectTemplate(){
 
     return (
         <div>
+            
             <PageBar/>
-            <p style={{color:'rgba(46,59,85)', fontFamily:'nanum', fontSize:'2rem', textAlign:'center'}}>샘플을 보고 마음에 드는 포트폴리오의 템플릿을 선택해보세요</p>
-            <CardActions>
-            <Card>
+            <center>
+            <p style={{color:'rgba(46,59,85)', fontFamily:'nanum', fontSize:'1.5rem', fontWeight:'bold', textAlign:'center'}}>샘플을 보고 마음에 드는 템플릿을 골라서 포트폴리오에 적용해보세요!!</p>
+            
+              
+            <CardActions sx={{display : 'flex', justifyContent : 'center'}} >
+                <Card >
                 <CardMedia
                 component="img"
-                height='80%'
-                width='80%'
+                height='600px'
+                width='400px'
                 image= {Temp1IMG}
-                sx={{ padding: "1em 2em 0em 1em", objectFit: "contain" }}
+                sx={{ padding: "1em 1em 0em 1em", objectFit: "contain" }}
                 />
-            </Card>
                 <Button sx={{ margin: "3% auto" ,color:'white', bgcolor: '#2e3b55', fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} size="big" onClick={selectTemp1}>
                 TEMPLATE 1
                 </Button>
-            </CardActions>
+                </Card>
 
-            <CardActions>
-            <Card>
+                <Card >
                 <CardMedia
                 component="img"
-                height='80%'
-                width='80%'
+                height='600px'
+                width='400px'
                 image= {Temp2IMG}
-                alt="green iguana"
                 sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 />
-            </Card>
-                <Button sx={{ margin: "3% auto", color:'white', bgcolor: '#2e3b55', fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} size="big" onClick={selectTemp2}>
+                 <Button sx={{ margin: "3% auto", color:'white', bgcolor: '#2e3b55', fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} size="big" onClick={selectTemp2}>
                 TEMPLATE 2
                 </Button>
-            </CardActions>
+                </Card>
+            </CardActions>            
             <p style={{color:'rgba(46,59,85)', fontFamily:'nanum', fontSize:'1.2rem', textAlign:'center'}}>앞으로 업데이트 되는 다양한 템플릿들을 만나보세요~~</p>
+            </center>
         </div>
     );
 }
