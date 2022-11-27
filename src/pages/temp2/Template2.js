@@ -202,9 +202,9 @@ export default function Home() {
               height={{xs: '35vh', md: '40vh'}}
               borderRadius={'50%'} p={'0.75rem'} mb={{xs: '1rem', sm: 0}} mr={{xs: 0, md: '2rem'}}/>
          <Box>
-            <h1>Hi, I'm <span style={{background: info.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>{info.firstName}</span><span className={Style.hand}>🤚</span>
+            <h1>안녕하세요, 반갑습니다.<span className={Style.hand}>🤚</span>
             </h1>
-            <h2>I'm {info.position} Developer.</h2>
+            <h1>" 저는 <span style={{background: info.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>{info.position}</span> 개발자입니다 "</h1>
             <Box component={'ul'} p={'0.8rem'}>
                {info.miniBio.map((bio, index) => (
                   <EmojiBullet key={index} emoji={bio.emoji} text={bio.text}/>
