@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "./Skills.css";
 import SoftwareSkill from "../../../../components/softwareSkills/SoftwareSkill";
-import { skills } from "../../../../pages/temp1/portfolio";
+import { skills } from "../skills/Skills";
 import { Fade } from "react-reveal";
 import DataScienceImg from "./DataScienceImg";
 import FullStackImg from "./FullStackImg";
 import CloudInfraImg from "./CloudInfraImg";
 import DesignImg from "./DesignImg";
+import { textAlign } from "@mui/system";
 
 function GetSkillSvg(props) {
   if (props.fileName === "DataScienceImg")
@@ -21,6 +22,8 @@ function GetSkillSvg(props) {
 class SkillSection extends Component {
   render() {
     const theme = this.props.theme;
+    const skills = this.props.skills;
+
     return (
       <div>
         {skills.data.map((skill) => {
@@ -38,20 +41,20 @@ class SkillSection extends Component {
 
               <div className="skills-text-div">
                 <Fade right duration={1000}>
-                  <h1 className="skills-heading" style={{ color: theme.text }}>
+                  <h1 className="skills-heading" style={{ color: theme.text, textAlign: 'left' }}>
                     {skill.title}
                   </h1>
                 </Fade>
                 <Fade right duration={1500}>
                   <SoftwareSkill logos={skill.softwareSkills} />
                 </Fade>
-                <Fade right duration={2000}>
+                <Fade rigth duration={2000}>
                   <div>
                     {skill.skills.map((skillSentence) => {
                       return (
                         <p
                           className="subTitle skills-text"
-                          style={{ color: theme.secondaryText }}
+                          style={{ color: theme.secondaryText, textAlign: 'left' }}
                         >
                           {skillSentence}
                         </p>
@@ -67,5 +70,7 @@ class SkillSection extends Component {
     );
   }
 }
+
+
 
 export default SkillSection;

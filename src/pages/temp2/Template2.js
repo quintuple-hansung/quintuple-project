@@ -53,8 +53,8 @@ export default function Home() {
     const [language, setLanguage] = useState('');
     const [tlanguage, setTLanguage] = useState('');
     const [field, setField] = useState('');
+    const [stack, setStack] = useState('');
 
-    
     const changeName = target => { setName(target); }
     const changeEdu = target => { setEdu(target); }
     const changeTitle = target => { setTitle(target); }
@@ -63,6 +63,7 @@ export default function Home() {
     const changeLanguage = target => { setLanguage(target); }
     const changeTLanguage = target => { setTLanguage(target); }
     const changeField = target => { setField(target); }
+    const changeStack = target => { setStack(target); }
 
     // user 컬렉션에서 db 가져오기
     // name, description, 
@@ -79,6 +80,7 @@ export default function Home() {
             var currentDesc = docSnap.data()['description'];
             var currentLang = docSnap.data()['language'];
             var currentTLang = docSnap.data()['tlanguage'];
+            var currentStack = docSnap.data()['stack'];
             //console.log(`currentName = ${currentName}`);
             changeName(currentName); // 이름 설정
             changeField(currentField);// 자신의 분야 설정
@@ -88,7 +90,8 @@ export default function Home() {
             changeDescription(currentDesc);// 설명
             changeLanguage(currentLang);// 사용했던 언어
             changeTLanguage(currentTLang);// 자기 주요 언어
-            //console.log(`name = ${name}`);
+            changeStack(currentStack); // 사용한 기술
+            console.log(`stack = ${stack}`);
         } else {
         console.log("No such document!");
         }
@@ -122,8 +125,6 @@ export default function Home() {
                 text: "johnsmith@gmail.com"
             }*/
         ],
-        
-        
         bio: introduce,
         skills:
             {
@@ -132,56 +133,7 @@ export default function Home() {
                 exposedTo: [language]
             }
         ,
-        hobbies: [
-            {
-                label: 'reading',
-                emoji: '📖'
-            },
-            {
-                label: 'theater',
-                emoji: '🎭'
-            },
-            {
-                label: 'movies',
-                emoji: '🎥'
-            },
-            {
-                label: 'cooking',
-                emoji: '🌶'
-            }
-        ],
-        portfolio: [ 
-            {
-                title: "Project 1",
-                live: "https://paytonpierce.dev", 
-                source: "https://github.com/paytonjewell", 
-                image: mock1
-            },
-            {
-                title: "Project 2",
-                live: "https://paytonpierce.dev",
-                source: "https://github.com/paytonjewell",
-                image: mock2
-            },
-            {
-                title: "Project 3",
-                live: "https://paytonpierce.dev",
-                source: "https://github.com/paytonjewell",
-                image: mock3
-            },
-            {
-                title: "Project 4",
-                live: "https://paytonpierce.dev",
-                source: "https://github.com/paytonjewell",
-                image: mock4
-            },
-            {
-                title: "Project 5",
-                live: "https://paytonpierce.dev",
-                source: "https://github.com/paytonjewell",
-                image: mock5
-            }
-        ]
+        stack: stack,
     }
 
     function aboutMeText() {
@@ -201,16 +153,27 @@ export default function Home() {
            </p>
            <p><span style={{color: info.baseColor}}>skills/tools <span
                className={Style.green}>(main)</span> $</span> ls</p>
-           <p style={{color: info.baseColor}}> Proficient With</p>
+           <p style={{color: info.baseColor}}> 프로젝트에서 사용한 언어</p>
            <ul className={Style.skills}>
                {info.skills.proficientWith.map((proficiency, index) => <li key={index}>{proficiency}</li>)}
            </ul>
-           <p style={{color: info.baseColor}}> Exposed To</p>
+           <p style={{color: info.baseColor}}> 주 언어</p>
            <ul className={Style.skills}>
                {info.skills.exposedTo.map((skill, index) => <li key={index}>{skill}</li>)}
            </ul>
        </>;
    }
+
+   function stacksText() {
+    return <>
+        <p><span style={{color: info.baseColor}}>{info.firstName}{info.lastName.toLowerCase()} $</span> cd stacks/
+        </p>
+        <p><span style={{color: info.baseColor}}>skacks/tools <span
+            className={Style.green}>(main)</span> $</span> ls</p>
+        <p style={{color: info.baseColor}}> 프로젝트에서 사용한 기술</p>
+        <p>{info.stack}</p>
+    </>;
+}
 
    function miscText() {
        return <>
@@ -254,6 +217,7 @@ export default function Home() {
          <Box display={'flex'} flexDirection={'column'} alignItems={'center'} mt={'3rem'}>
             <Terminal text={aboutMeText()}/>
             <Terminal text={miscText()}/>
+            <Terminal text={stacksText()}/>
             <Terminal text={skillsText()}/>
         </Box>    
 

@@ -18,27 +18,51 @@ export default function Greeting(props) {
   const docRef = doc(firestore, "user", currentEmail);
 
   const [name, setName] = useState('');
+  const [edu, setEdu] = useState('');
+  const [title, setTitle] = useState('');
+  const [introduce, setIntroduce] = useState('');
+  const [description, setDescription] = useState('');
+  const [language, setLanguage] = useState('');
+  const [tlanguage, setTLanguage] = useState('');
+  const [field, setField] = useState('');
   
-  const changeName = target => {
-      setName(target);
-  }
+  const changeName = target => { setName(target); }
+  const changeEdu = target => { setEdu(target); }
+  const changeTitle = target => { setTitle(target); }
+  const changeIntroduce = target => { setIntroduce(target); }
+  const changeDescription = target => { setDescription(target); }
+  const changeLanguage = target => { setLanguage(target); }
+  const changeTLanguage = target => { setTLanguage(target); }
+  const changeField = target => { setField(target); }
+
 
   // user 컬렉션에서 db 가져오기
   getDoc(doc(firestore, "user", currentEmail)).then(docSnap => {
       if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
-          //console.log(`name = ${docSnap.data()['name']}`);
-          var currentName = docSnap.data()['name']
-          console.log(`currentName = ${currentName}`);
-          changeName(currentName);
-          console.log(`name = ${name}`);
+        var currentName = docSnap.data()['name'];
+        var currentField = docSnap.data()['field'];
+        var currentEdu = docSnap.data()['education'];
+        var currentField = docSnap.data()['field'];
+        var currentIntroduce = docSnap.data()['introduce'];
+        var currentTitle = docSnap.data()['title'];
+        var currentDesc = docSnap.data()['description'];
+        var currentLang = docSnap.data()['language'];
+        var currentTLang = docSnap.data()['tlanguage'];
+        //console.log(`currentName = ${currentName}`);
+        changeName(currentName); // 이름 설정
+        changeField(currentField);// 자신의 분야 설정
+        changeEdu(currentEdu);// 학교 설정
+        changeIntroduce(currentIntroduce);// 자기소개
+        changeTitle(currentTitle);// 포트폴리오 제목
+        changeDescription(currentDesc);// 설명
+        changeLanguage(currentLang);// 사용했던 언어
+        changeTLanguage(currentTLang);// 자기 주요 언어
       } else {
       console.log("No such document!");
       }
   })
 
-  console.log(`name = ${name}`);
-
+  //console.log(`name = ${name}`);
 
   const handleTheme = () => {
     setTheme(props.theme);
@@ -47,11 +71,10 @@ export default function Greeting(props) {
 
   //Home Page
   const greeting = {
-    title: "나만의 포트폴리오",
+    title: title,
     logo_name: "AshutoshHathidara",
     nickname: name,
-    subTitle:
-      "A passionate individual who always thrives to work on end to end products which develop sustainable and scalable social and technical systems to create impact.",
+    subTitle: introduce,
     resumeLink:
       "https://drive.google.com/open?id=1XYpYhLeqCdyx_q6l0bQoC7RgwQjAjXPf",
     //portfolio_repository: "https://github.com/ashutosh1919/masterPortfolio",
