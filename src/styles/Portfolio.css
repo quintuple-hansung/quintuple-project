@@ -15,7 +15,7 @@
     margin: auto;
     padding-top: 1.5rem;
   }
-
+  
   .form .label {
     font-weight: bold;
     color: rgb(12, 12, 12);
@@ -27,8 +27,8 @@
     position: relative;
     z-index: 100;
   }
-
- .form .textarea, .form .text-input{
+  
+  .form .textarea, .form .text-input{
     font: inherit;
     line-height: normal;
     width: 100%;
@@ -37,10 +37,10 @@
     color: white;
     position: relative;
   }
- .form .textarea:placeholder, .form .text-input:placeholder{
+  .form .textarea:placeholder, .form .text-input:placeholder{
     color: white;
   }
- 
+  
   .form .button {
     font: inherit;
     line-height: normal;
@@ -54,7 +54,7 @@
     padding-left: 2em;
     padding-right: 2em;
   }
-
+  
   .form .field.img .button {
     background: rgba(46,59,85);
     font: inherit;

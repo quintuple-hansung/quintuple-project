@@ -1,8 +1,8 @@
 import React , {useState} from 'react';
 import IMG1 from '../image/img1.jpg';
-//import IMG2 from '../image/img2.jpg';
+import IMG2 from '../image/img2.jpg';
 import IMG3 from '../image/img3.jpg';
-//import IMG4 from '../image/img4.jpg';
+import IMG4 from '../image/img4.jpg';
 import '../styles/Script.css';
 import Tada from 'react-reveal/Tada';
 import Flip from 'react-reveal/Flip';
@@ -33,7 +33,7 @@ const navigateToLogin = () => {
     {
       id: 2,
       title: '다른 사람들의 포트폴리오 구경하기',
-      img: IMG1,
+      img: IMG2,
       description:
         '다양한 분야의 포트폴리오를 자유롭게 구경해보세요' 
     },
@@ -47,7 +47,7 @@ const navigateToLogin = () => {
     {
       id: 4,
       title: '언제 어디서나 자유롭게 작성',
-      img: IMG1,
+      img: IMG4,
       description: '노트북으로, 스마트폰으로 자유롭게 작성하고 필요할땐 PDF로 저장하세요',
 
     }
