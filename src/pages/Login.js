@@ -60,7 +60,7 @@ function Login() {
 
 				// 로그인 유지를 위한 localStorage (일단 확인해야 할 듯..)
 				console.log(`result = ${JSON.stringify(result)}`);
-				console.log(`token = ${getAuth().currentUser.uid}`);
+				//console.log(`token = ${getAuth().currentUser.uid}`);
 
 				console.log(result);
 				navigate('/main');
