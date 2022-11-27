@@ -18,6 +18,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import '../font/font.css';
+import { Firestore } from 'firebase/firestore/lite';
+import { firestore } from '../components/firebase_config';
 
 function Login() {
 	const [loginEmail, setLoginEmail] = useState('');
@@ -40,7 +42,7 @@ function Login() {
 	const navigate = useNavigate();
 
 	// 로그인 버튼 이벤트
-	const onClickLogin = async () => {
+	const onClickLogin = async ({history}) => {
 		try {
 			if (loginEmail === "" || loginPw === "") { // 정보를 입력하지 않고 버튼을 누르면
 				alert("이메일, 비밀번호를 입력해주세요.");
@@ -55,6 +57,11 @@ function Login() {
 					loginEmail,
 					loginPw
 				);
+
+				// 로그인 유지를 위한 localStorage (일단 확인해야 할 듯..)
+				console.log(`result = ${JSON.stringify(result)}`);
+				console.log(`token = ${getAuth().currentUser.uid}`);
+
 				console.log(result);
 				navigate('/main');
 			}
@@ -65,6 +72,11 @@ function Login() {
 			navigate('/join'); // 회원가입 페이지로 바로 이동
 		}
 	};
+
+	useEffect(() => {
+		localStorage.clear();
+		localStorage.setItem('user', getAuth().currentUser.uid.toString());
+	})
 
 	return (
 		<div className='login'>
