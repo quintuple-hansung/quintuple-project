@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Skills.css";
-import SoftwareSkill from "../../components/softwareSkills/SoftwareSkill";
-import { skills } from "../../pages/temp1/portfolio";
+import SoftwareSkill from "../../../../components/softwareSkills/SoftwareSkill";
+import { skills } from "../../../../pages/temp1/portfolio";
 import { Fade } from "react-reveal";
 import DataScienceImg from "./DataScienceImg";
 import FullStackImg from "./FullStackImg";

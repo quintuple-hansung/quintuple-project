@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Home from "../pages/temp1/home/HomeComponent";
-import { settings } from "../pages/temp1/portfolio";
+import Home from "../home/HomeComponent";
+import { settings } from "../portfolio";
 
 export default class Main extends Component {
 

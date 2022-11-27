@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./Greeting.css";
-import { greeting } from "../../pages/temp1/portfolio";
+import { greeting } from "../../portfolio";
 import { Fade } from "react-reveal";
 import FeelingProud from "./FeelingProud";
 import { collection, doc, getDoc } from "firebase/firestore/lite";
 import { getAuth } from "firebase/auth";
-import { firestore } from "../../components/firebase_config";
+import { firestore } from "../../../../components/firebase_config";
 
 export default function Greeting(props) {
   //const theme = props.theme;

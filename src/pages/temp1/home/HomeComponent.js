@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Greeting from "../../../containers/greeting/Greeting";
-import Skills from "../../../containers/skills/Skills";
+import Greeting from "../containers/greeting/Greeting";
+import Skills from "../containers/skills/Skills";
 
 class Home extends Component {
   render() {
