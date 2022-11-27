@@ -91,7 +91,7 @@ function Cards() {
 						<Fade in={open}>
 							<Box sx={modalStyle}>
 								<ModalInteract post={props.post} name={props.name} />
-								<ModalContent post={props.post} />
+								<ModalContent post={props.post} name={props.name} />
 							</Box>
 						</Fade>
 					</ClickAwayListener>
@@ -139,7 +139,7 @@ function Cards() {
 		);
 	}
 
-	function ModalContent() {
+	function ModalContent(props) {
 		return (
 			<Box
 				sx={{
@@ -149,7 +149,7 @@ function Cards() {
 					height: 1000,
 				}}>
 				<iframe
-					src="https://wikidocs.net/"
+					src={'/portfolioView/' + props.name}
 					title="내용"
 					width="100%"
 					height="100%"
@@ -165,7 +165,7 @@ function Cards() {
 			<CardActionArea onClick={handleOpen}>
 				<ModalHandler post={value.id} name={value.user} />
 				<CardText name={value.user} id={value.id} />
-				<CardThumbnail img_url={value.img_url} />
+				<CardThumbnail img_url={value.user} />
 			</CardActionArea>
 		</Card>
 	));
