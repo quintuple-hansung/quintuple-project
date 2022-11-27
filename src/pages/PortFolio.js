@@ -1,4 +1,4 @@
-import * as React from 'react';
+//import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -9,7 +9,17 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore/lite';
 import { useNavigate } from 'react-router-dom';
 import PageBar from './PageBar.js';
 import '../styles/Portfolio.css';
-import ThumbnailUpload from '../components/ThumbnailUpload';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Container, width } from '@mui/system';
+import { storage, auth } from '../components/firebase_config';
+import {
+	ref,
+	getDownloadURL,
+	uploadBytes,
+	uploadBytesResumable,
+} from 'firebase/storage';
+import React, { useState, useEffect } from 'react';
+import { LinearProgress, Typography } from '@mui/material';
 
 function Portfolio(){
   //const [value, setValue] = React.useState('Controlled');
@@ -22,6 +32,13 @@ function Portfolio(){
   const [language, setLanguage] = React.useState('') // 사용했던 언어
   const [stack, setStack] = React.useState('') // 사용했던 기술 설명
   const [tlanguage, setTLanguage] = React.useState('') // 자신의 주요 언어
+
+  //썸네일 업로드 관련
+  const [image, setImage] = useState('');
+	const [imageUrl, setImageUrl] = useState('');
+	const [error, setError] = useState('');
+	const [progress, setProgress] = useState(100);
+	//const currentEmail = auth.currentUser.email;
 
   const handleName = e => {
     setName(e.target.value)
@@ -58,6 +75,56 @@ function Portfolio(){
   const handleTLanguage = e => {
     setTLanguage(e.target.value)
   }
+
+  //썸네일 업로드 관련
+  const handleImage = event => {
+		const image = event.target.files[0];
+		setImage(image);
+		console.log(image);
+		setError('');
+	};
+
+	const onSubmit = event => {
+		event.preventDefault();
+		setError('');
+		if (image === '') {
+			console.log('파일이 선택되지 않았습니다');
+			setError('파일이 선택되지 않았습니다');
+			return;
+		}
+		// 업로드 처리
+		console.log('업로드 처리');
+		const storageRef = ref(storage, `portfolio_thumbnails/${currentEmail}.jpg`); //어떤 폴더 아래에 넣을지 설정
+		// const imagesRef = storageRef.child(currentEmail + '.jpg'); //파일명
+
+		console.log('파일을 업로드하는 행위');
+		// const upLoadTask = storageRef.put(image);
+		const upLoadTask = uploadBytesResumable(storageRef, image);
+		console.log('태스크 실행 전');
+
+		upLoadTask.on(
+			'state_changed',
+			snapshot => {
+				console.log('snapshot', snapshot);
+				const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log(percent + '% done');
+				setProgress(percent);
+			},
+			error => {
+				console.log('err', error);
+				setError('파일 업로드에 실패했습니다.' + error);
+				setProgress(100); //진행중인 바를 삭제
+			},
+			() => {
+				event.target.value = '';
+				getDownloadURL(storageRef).then(downloadURL => {
+					console.log('File available at', downloadURL);
+					setImageUrl(downloadURL);
+					setImage(downloadURL);
+				});
+			}
+		);
+	};
 
   const navigate = useNavigate();
 
@@ -98,117 +165,187 @@ function Portfolio(){
   return (
     <>
     <PageBar />
-    <section className="content">
-        <p>포트폴리오에 들어갈 내용을 작성하세요. </p>
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '35ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <div className="content1">
-              <div class='item'>
+    <form action='' class='form' onSubmit={onSubmit}>
+        <p class='field1'>포트폴리오에 들어갈 내용을 작성하세요. </p>
+            
+        <p class='field required'>
+          <label class='label required' for='name'>이름 </label>
+          <input class='text-input' id='name' name='name' required type='text' onChange={handleName}/>
+        </p>
+        <p class='field half'>
+          <label class='label' for='age'>나이</label>
+          <input class='text-input' id='age' name='age' type='text' onChange={handleAge}/>
+        </p>
+        <p class='field half'>
+          <label class='label' for='education'>학력</label>
+          <input class='text-input' id='education' name='education' type='text' onChange={handleEducation}/>
+        </p>
+        <p class='field'>
+          <label class='label' for='introduce'>자기소개</label>
+          <textarea class='textarea' cols='50' id='introduce' name='introduce' rows='3' onChange={handleIntroduce}></textarea>
+        </p>
+        <p class='field'>
+          <label class='label' for='tlanguage'>주요 언어</label>
+          <textarea class='textarea' cols='50' id='tlanguage' name='tlanguage' rows='3' onChange={handleTLanguage}></textarea>
+        </p>
+        <p class='field'>
+          <label class='label' for='title'>프로젝트 제목</label>
+          <textarea class='textarea' cols='50' id='title' name='title' rows='3' onChange={handleTitle}></textarea>
+        </p>
+        <p class='field'>
+          <label class='label' for='description'>프로젝트 설명</label>
+          <textarea class='textarea' cols='50' id='description' name='description' rows='4' onChange={handleDesription}></textarea>
+        </p>
+        <p class='field half'>
+          <label class='label' for='stack'>사용한 기술</label>
+          <input class='text-input' id='stack' name='stack' type='text' onChange={handleStack}/>
+        </p>
+        <p class='field half'>
+          <label class='label' for='language'>사용한 언어</label>
+          <input class='text-input' id='language' name='language' type='text' onChange={handleLanguage}/>
+        </p>
+       
+        <p class="field img">
+          <label class='label' for='language'>썸네일 업로드</label>
+          <input type="file" onChange={handleImage} />
+          <input class='button' onClick={onSubmit} value='썸네일 업로드'/>
+        </p>
+        <p>
+          {progress !== 100 && <LinearProgressWithLabel value={progress} />}
+        {imageUrl && (
+          <div>
+            <img width="400px" src={imageUrl} alt="uploaded" />
+          </div>
+        )}
+        </p>
+        <p class="field">
+          <input class='button' type='submit' value='다음' onClick={submitInfo}/>
+        </p>
+      </form>
+
+        
+        {/*
+        <Container>
+            <Grid container spacing={1}>
+              <Grid item xs={4}>
               <TextField
                 id="outlined-multiline-static"
                 label="이름"
-                rows={1}
+                size='medium'
                 defaultValue=''
                 onChange={handleName}
+              
               />
-              </div>
-              <div>
+          </Grid>
+          <Grid item xs={4}>
               <TextField 
                 id="outlined-multiline-static"
                 label="나이"
                 rows={1}
                 defaultValue=""
                 onChange={handleAge}
+               
               />
-              </div>
-              <div>
+          </Grid>
+          <Grid item xs={4}>
               <TextField
                 id="outlined-multiline-static"
                 label="학력"
                 multiline
                 rows={1}
                 defaultValue=""
-                onChange={handleEducation}
-            
+                onChange={handleEducation}></TextField>
+             
+          </Grid>
+          <Grid item xs={6}>
+              <TextField
+                id="outlined-multiline-static"
+                label="자기소개"
+                multiline
+                rows={4}
+                defaultValue=""
+                onChange={handleIntroduce}></TextField>
+              
+          </Grid>
+          <Grid item xs={6}>
+          <TextField
+                id="outlined-multiline-static"
+                label="자신의 주요 언어"
+                multiline
+                rows={5}
+                defaultValue=""
+                onChange={handleTLanguage}></TextField>
+         
+             </Grid> 
+          <Grid item xs={12}>
+              <TextField
+                id="outlined-multiline-static"
+                label="프로젝트 제목"
+                multiline
+                rows={2}
+                defaultValue=""
+                onChange={handleTitle}
               />
-           </div>
-           <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="자기소개"
-              multiline
-              rows={3}
-              defaultValue=""
-              onChange={handleIntroduce}
-            />
-            </div>
-            <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="프로젝트 제목"
-              multiline
-              rows={10}
-              defaultValue=""
-              onChange={handleTitle}
-            />
-          </div>
-          <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="프로젝트 설명"
-              multiline
-              rows={10}
-              defaultValue=""
-              onChange={handleDesription}
-            />
-           </div>
-           <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="사용했던 언어"
-              multiline
-              rows={10}
-              defaultValue=""
-              onChange={handleLanguage}
-            />
-            </div>
-            <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="사용한 기술"
-              multiline
-              rows={5}
-              defaultValue=""
-              onChange={handleStack}
-            />
-            </div>
-            <div>
-            <TextField
-              id="outlined-multiline-static"
-              label="자신의 주요 언어"
-              multiline
-              rows={5}
-              defaultValue=""
-              onChange={handleTLanguage}
-            />
-            </div>
-          </div>
-        </Box>
+           </Grid>
+           <Grid item xs={12}>
+              <TextField
+                id="outlined-multiline-static"
+                label="프로젝트 설명"
+                multiline
+                rows={10}
+                defaultValue=""
+                onChange={handleDesription}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="outlined-multiline-static"
+                label="사용했던 언어"
+                multiline
+                rows={5}
+                defaultValue=""
+                onChange={handleLanguage}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id="outlined-multiline-static"
+                label="사용한 기술"
+                multiline
+                rows={5}
+                defaultValue=""
+                onChange={handleStack}
+              />
+            </Grid>
+           
+          
+          </Grid>
+        
         <div>
           <Stack direction="row" spacing={2} width={100} margin-inline={'auto'}>
             <Button variant="outlined" onClick={submitInfo}>다음</Button>
           </Stack>
         </div>
-      </section>
-	  <ThumbnailUpload />
+
+
+      </Container>
+  */}
       </>
   )
 }
 
+function LinearProgressWithLabel(props) {
+	return (
+		<Box display="flex" alignItems="center">
+			<Box width="100%" mr={1}>
+				<LinearProgress variant="determinate" {...props} />
+			</Box>
+			<Box minWidth={35}>
+				<Typography variant="body2" color="textSecondary">{`${Math.round(
+					props.value
+				)}%`}</Typography>
+			</Box>
+		</Box>
+	);
+} 
 export default Portfolio;

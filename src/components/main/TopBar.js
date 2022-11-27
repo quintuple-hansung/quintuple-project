@@ -9,8 +9,38 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SearchAppBar from './SearchBar';
 import { Link } from 'react-router-dom';
+//import { auth } from "../firebase_config";
+import { getAuth, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 export default function TopBar() {
+
+	const navigate = useNavigate();
+	const auth = getAuth();
+
+	const onLogOutClick = async() => {
+		swal('정말 로그아웃하시겠습니까?', {
+			buttons: {
+				cancel: '아니요', 
+				'네':true,
+				
+			},
+		}).then((value) => {
+			switch (value) {
+				case '네' :
+					signOut(auth);
+					swal('로그아웃 완료', '', "success");
+					navigate('/');
+
+				default: 
+					break;
+			}
+		});
+		//await signOut(auth);
+		//alert('로그아웃되었습니다');
+		//navigate('/');
+	}
 	return (
 		<Box sx={{ flexGrow: 2 }}>
 			<AppBar position="static">
@@ -34,13 +64,11 @@ export default function TopBar() {
 							My Page
 						</Button>
 					</Link>
-					<Link
-						to="/Login"
-						style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button color="inherit" sx={{ width: 100 }}>
+					
+						<Button color="inherit" sx={{ width: 100 }} onClick={onLogOutClick}>
 							Logout
 						</Button>
-					</Link>
+				
 				</Toolbar>
 			</AppBar>
 		</Box>
