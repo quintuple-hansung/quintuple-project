@@ -5,6 +5,7 @@ import { Fade } from "react-reveal";
 import { collection, doc, getDoc } from "firebase/firestore/lite";
 import { getAuth } from "firebase/auth";
 import { firestore } from "../../../../components/firebase_config";
+import { stepClasses } from "@mui/material";
 
 let lang_arr = [];
 let tlang_arr = [];
@@ -75,9 +76,6 @@ export default function Skills(props) {
         console.log(`tlang_arr = ${tlang_arr}`)
 
         changeStack(currentStack); // 사용한 기술
-        // 사용한 기술 -> 쉼표 기준으로 잘라서 배열 (3개로 입력 제한)
-        stack_arr = currentStack.split(', ');
-        console.log(`stack_arr = ${stack_arr}`);
       } else {
       console.log("No such document!");
       }
@@ -212,9 +210,7 @@ export default function Skills(props) {
         title: "사용한 기술",
         fileName: "CloudInfraImg",
         skills: [
-          "⚡ " + stack_arr[0],
-          "⚡ " + stack_arr[1],
-          "⚡ " + stack_arr[2],
+          "⚡ " + stack
           //"⚡ Setting up streaming jobs from DB to Server or vice-versa on GCP and AWS",
         ],
         softwareSkills: [
@@ -327,7 +323,7 @@ export default function Skills(props) {
           </h1>
         </Fade>
       </div>
-      <SkillSection theme={theme} skills={skills} />
+      <SkillSection theme={theme} skills={skills} style={{ textAlign: 'left', fontSize: '30px', marginTop: '60px', marginLeft: '30px' }} />
     </div>
   );
 }

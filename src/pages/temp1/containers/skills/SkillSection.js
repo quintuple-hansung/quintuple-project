@@ -41,12 +41,12 @@ class SkillSection extends Component {
 
               <div className="skills-text-div">
                 <Fade right duration={1000}>
-                  <h1 className="skills-heading" style={{ color: theme.text, textAlign: 'left' }}>
+                  <h1 className="skills-heading" style={{ color: theme.text, textAlign: 'left', fontSize: '45px' }}>
                     {skill.title}
                   </h1>
                 </Fade>
                 <Fade right duration={1500}>
-                  <SoftwareSkill logos={skill.softwareSkills} />
+                  {/*<SoftwareSkill logos={skill.softwareSkills} />*/}
                 </Fade>
                 <Fade rigth duration={2000}>
                   <div>
@@ -54,7 +54,7 @@ class SkillSection extends Component {
                       return (
                         <p
                           className="subTitle skills-text"
-                          style={{ color: theme.secondaryText, textAlign: 'left' }}
+                          style={{ color: theme.secondaryText, textAlign: 'left', fontSize: '25px', lineHeight: '40px', marginTop: '50px', marginLeft: '20px' }}
                         >
                           {skillSentence}
                         </p>

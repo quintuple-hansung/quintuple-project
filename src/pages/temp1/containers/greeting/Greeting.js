@@ -6,6 +6,7 @@ import FeelingProud from "./FeelingProud";
 import { collection, doc, getDoc } from "firebase/firestore/lite";
 import { getAuth } from "firebase/auth";
 import { firestore } from "../../../../components/firebase_config";
+import { textAlign } from "@mui/system";
 
 export default function Greeting(props) {
   //const theme = props.theme;
@@ -87,15 +88,15 @@ export default function Greeting(props) {
         <div className="greeting-main">
           <div className="greeting-text-div">
             <div>
-              <h1 className="greeting-text" style={{ color: theme.text }}>
+              <p className="greeting-text" style={{ color: theme.text, fontSize:'60px', fontWeight: 'bold', textAlign: 'left' }}>
                 {greeting.title}
-              </h1>
+              </p>
               <h2 className="greeting-nickname" style={{ color: theme.text }}>
-                --- by ( {greeting.nickname} )
+                --- by {greeting.nickname}
               </h2>
               <p
                 className="greeting-text-p subTitle"
-                style={{ color: theme.secondaryText }}
+                style={{ color: theme.secondaryText, textAlign: 'left', fontSize: '30px', marginTop: '60px', marginLeft: '20px'}}
               >
                 {greeting.subTitle}
               </p>
