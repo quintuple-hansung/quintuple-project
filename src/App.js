@@ -10,7 +10,7 @@ import { AppAppBar } from './pages/AppAppBar';
 import SelectTemplate from './pages/SelectTemplate';
 import Template1 from './pages/temp1/Template1';
 import Template2 from './pages/temp2/Template2';
-
+import PortfolidView from './components/main/PortfolioView';
 
 function App() {
 	return (
@@ -22,11 +22,12 @@ function App() {
 						<Route path="/login" element={<Login />} />
 						<Route path="/join" element={<Join />} />
 						<Route path="/main" element={<Main />} />
-						<Route path='/mypage' element={<MyPage />}/>
-						<Route path='/PortFolio' element={<PortFolio />}/>
-						<Route path='/selectTemplate' element={<SelectTemplate/>}/>
-						<Route path='/template1' element={<Template1/>}/>
-						<Route path='/template2' element={<Template2/>}/>
+						<Route path="/mypage" element={<MyPage />} />
+						<Route path="/PortFolio" element={<PortFolio />} />
+						<Route path="/selectTemplate" element={<SelectTemplate />} />
+						<Route path="/template1" element={<Template1 />} />
+						<Route path="/template2" element={<Template2 />} />
+						<Route path="portfolioView/:email" element={<PortfolidView />} />
 					</Routes>
 				</Router>
 			</div>
