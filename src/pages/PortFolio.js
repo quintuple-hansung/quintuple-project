@@ -32,6 +32,7 @@ function Portfolio(){
   const [language, setLanguage] = React.useState('') // 사용했던 언어
   const [stack, setStack] = React.useState('') // 사용했던 기술 설명
   const [tlanguage, setTLanguage] = React.useState('') // 자신의 주요 언어
+  const [field, setField] = React.useState('') // 자신의 분야
 
   //썸네일 업로드 관련
   const [image, setImage] = useState('');
@@ -74,6 +75,10 @@ function Portfolio(){
 
   const handleTLanguage = e => {
     setTLanguage(e.target.value)
+  }
+
+  const handleField = e => {
+    setField(e.target.value);
   }
 
   //썸네일 업로드 관련
@@ -158,6 +163,7 @@ function Portfolio(){
       language: language,
       stack: stack,
       tlanguage: tlanguage,
+      field: field,
     })
     navigate('/selectTemplate'); // 템플릿 선택하는 페이지로 넘어감
   }

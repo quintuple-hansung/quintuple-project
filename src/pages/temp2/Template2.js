@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Style from './Temp1.module.scss';
 import {Box, Grid} from "@mui/material";
 import classNames from 'classnames';
-import me from './img/self.png';
+import me from './img/boogie.png';
 import Terminal  from './Terminal';
 import PortfolioBlock from './PortfolioBlock';
 import { collection, doc, getDoc } from "firebase/firestore/lite";
@@ -19,10 +19,10 @@ function EmojiBullet(props) {
    const {emoji, text} = props;
 
    return (
-       <Box component={'li'} fontSize={'1rem'} lineHeight={1.5} style={{cursor: 'default'}}>
+       <Box component={'li'} fontSize={'2rem'} lineHeight={1.5} style={{cursor: 'default'}}>
            <Box component={'span'} aria-label="cheese"
                 role="img"
-                mr={{xs: '0.5rem', md: '1rem'}} fontSize={'1.5rem'}>{emoji}</Box> {text}
+                mr={{xs: '0.5rem', md: '1rem'}} fontSize={'3rem'}>{emoji}</Box> {text}
        </Box>
    );
 }
@@ -46,20 +46,49 @@ export default function Home() {
     const docRef = doc(firestore, "user", currentEmail);
 
     const [name, setName] = useState('');
+    const [edu, setEdu] = useState('');
+    const [title, setTitle] = useState('');
+    const [introduce, setIntroduce] = useState('');
+    const [description, setDescription] = useState('');
+    const [language, setLanguage] = useState('');
+    const [tlanguage, setTLanguage] = useState('');
+    const [field, setField] = useState('');
+
     
-    const changeName = target => {
-        setName(target);
-    }
+    const changeName = target => { setName(target); }
+    const changeEdu = target => { setEdu(target); }
+    const changeTitle = target => { setTitle(target); }
+    const changeIntroduce = target => { setIntroduce(target); }
+    const changeDescription = target => { setDescription(target); }
+    const changeLanguage = target => { setLanguage(target); }
+    const changeTLanguage = target => { setTLanguage(target); }
+    const changeField = target => { setField(target); }
 
     // user 컬렉션에서 db 가져오기
+    // name, description, 
     getDoc(doc(firestore, "user", currentEmail)).then(docSnap => {
         if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
             //console.log(`name = ${docSnap.data()['name']}`);
-            var currentName = docSnap.data()['name']
-            console.log(`currentName = ${currentName}`);
-            changeName(currentName);
-            console.log(`name = ${name}`);
+            var currentName = docSnap.data()['name'];
+            var currentField = docSnap.data()['field'];
+            var currentEdu = docSnap.data()['education'];
+            var currentField = docSnap.data()['field'];
+            var currentIntroduce = docSnap.data()['introduce'];
+            var currentTitle = docSnap.data()['title'];
+            var currentDesc = docSnap.data()['description'];
+            var currentLang = docSnap.data()['language'];
+            var currentTLang = docSnap.data()['tlanguage'];
+            //console.log(`currentName = ${currentName}`);
+            changeName(currentName); // 이름 설정
+            changeField(currentField);// 자신의 분야 설정
+            changeEdu(currentEdu);// 학교 설정
+            changeIntroduce(currentIntroduce);// 자기소개
+            changeTitle(currentTitle);// 포트폴리오 제목
+            changeDescription(currentDesc);// 설명
+            changeLanguage(currentLang);// 사용했던 언어
+            changeTLanguage(currentTLang);// 자기 주요 언어
+            //console.log(`name = ${name}`);
         } else {
         console.log("No such document!");
         }
@@ -70,36 +99,37 @@ export default function Home() {
     const info = {
         firstName: name,
         lastName: '',
-        initials: "js", 
-        position: "a Full Stack Developer",
+        initials: "", 
+        position: field,
         selfPortrait: self, 
         gradient: `-webkit-linear-gradient(135deg, ${colors})`, 
         baseColor: colors[0],
         miniBio: [ 
-            {
+            /*{
                 emoji: '☕',
                 text: 'fueled by coffee'
-            },
+            },*/
             {
                 emoji: '🏢',
-                text: '한성대학교'
+                text: edu,
             },
-            {
+            /*{
                 emoji: "💼",
                 text: "웹공학트랙"
             },
             {
                 emoji: "📧",
                 text: "johnsmith@gmail.com"
-            }
+            }*/
         ],
         
         
-        bio: "Hello! I'm John. I'm a systems engineer for Google. I studied CompSci at Harvard, I enjoy long walks on the beach, and I believe artificial intelligence will inevitably rule us all one day. You should hire me!",
+        bio: introduce,
         skills:
             {
-                proficientWith: ['javascript', 'react', 'git', 'github', 'bootstrap', 'html5', 'css3', 'figma'],
-                exposedTo: ['nodejs', 'python', 'adobe illustrator']
+                //proficientWith: ['javascript', 'react', 'git', 'github', 'bootstrap', 'html5', 'css3', 'figma'],
+                proficientWith: [tlanguage],
+                exposedTo: [language]
             }
         ,
         hobbies: [
@@ -185,14 +215,18 @@ export default function Home() {
    function miscText() {
        return <>
            <p><span style={{color: info.baseColor}}>{info.firstName}$</span> cd
-               hobbies/interests</p>
-           <p><span style={{color: info.baseColor}}>hobbies/interests <span
+               Project</p>
+           <p><span style={{color: info.baseColor}}>Project/title <span
                className={Style.green}>(main)</span> $</span> ls</p>
-           <ul>
+                <p>{title}</p>
+           <p><span style={{color: info.baseColor}}>Project/description <span
+            className={Style.green}>(main)</span> $</span> ls</p>
+           {/*<ul>
                {info.hobbies.map((hobby, index) => (
                    <li key={index}><Box component={'span'} mr={'1rem'}>{hobby.emoji}</Box>{hobby.label}</li>
                ))}
-           </ul>
+               </ul>*/}
+            <p>{description}</p>
        </>;
    }
 
@@ -207,7 +241,7 @@ export default function Home() {
          <Box>
             <h1>Hi, I'm <span style={{background: info.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>{info.firstName}</span><span className={Style.hand}>🤚</span>
             </h1>
-            <h2>I'm {info.position}.</h2>
+            <h2>I'm {info.position} Developer.</h2>
             <Box component={'ul'} p={'0.8rem'}>
                {info.miniBio.map((bio, index) => (
                   <EmojiBullet key={index} emoji={bio.emoji} text={bio.text}/>
@@ -219,12 +253,12 @@ export default function Home() {
 
          <Box display={'flex'} flexDirection={'column'} alignItems={'center'} mt={'3rem'}>
             <Terminal text={aboutMeText()}/>
-            <Terminal text={skillsText()}/>
             <Terminal text={miscText()}/>
+            <Terminal text={skillsText()}/>
         </Box>    
 
 
-        <Box>
+        {/*<Box>
             <Grid container display={'flex'} justifyContent={'center'}>
                 {info.portfolio.map((project, index) => (
                    <Grid item xs={12} md={6} key={index}>
@@ -232,7 +266,7 @@ export default function Home() {
                    </Grid>
                 ))}
             </Grid>
-        </Box>
+                </Box>*/}
 
       </>
 
