@@ -45,7 +45,7 @@ export default function AddComment(props) {
 			content: comment,
 			user: name,
 		});
-		setComment('');
+		document.getElementById('commentTextField').value = '';
 	};
 
 	getUserName();
