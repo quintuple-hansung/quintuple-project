@@ -42,9 +42,12 @@ function Comment(props) {
 		<>
 			<List
 				sx={{
-					width: '100vw',
+					position: 'absolute',
+					width: '15vw',
 					// maxHeight: '80%',
-					height: '73vh',
+					right: '0.5vw',
+					bottom: '2vh',
+					height: '72vh',
 					overflow: 'auto',
 					bgcolor: 'background.paper',
 				}}>

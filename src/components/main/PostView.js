@@ -55,18 +55,12 @@ export default function PostView(props) {
 
 	function Interact(props) {
 		return (
-			<Box
-				width="13vw"
-				height="100vh"
-				sx={{
-					position: 'absolute',
-					right: '5vh',
-				}}>
+			<>
 				<Box
 					sx={{
-						width: '100%',
+						width: '18vw',
 						height: '2vh',
-						top: '100px',
+						top: '5vh',
 						position: 'absolute',
 					}}>
 					<IconButton
@@ -87,16 +81,15 @@ export default function PostView(props) {
 				</Box>
 				<Box // 댓글 영역
 					sx={{
-						bottom: '0px',
 						top: '20vh',
-						right: '5vh',
+						right: '2vw',
 						position: 'absolute',
-						width: '17vw',
+						width: '15vw',
 						height: '70vh',
 					}}>
 					<Comment post={props.post} />
 				</Box>
-			</Box>
+			</>
 		);
 	}
 
