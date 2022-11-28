@@ -52,27 +52,29 @@ export default function AddComment(props) {
 	return (
 		<Box
 			component="form"
-			sx={{
-				'& > :not(style)': {
-					m: 1,
-					width: '100%',
-					top: '15px',
-					float: 'left',
-				},
-			}}
 			noValidate
 			autoComplete="off">
 			<TextField
+				sx={{
+					marginTop : '33vw',
+					width: '15vw',
+					height: '6.7vh',
+					right: '0vw',
+				}}
 				id="commentTextField"
 				label="Comment"
 				variant="filled"
 				onChange={commentChange}
 			/>
 			<Button
+				sx={{
+					width: '31vh',
+					height: '4.5vh',
+					right: '0vw',
+				}}
 				variant="outlined"
 				startIcon={<CommentIcon />}
-				onClick={addCommentFirebase}
-				float="right">
+				onClick={addCommentFirebase}>
 				Add Comment
 			</Button>
 		</Box>

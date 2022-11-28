@@ -55,53 +55,52 @@ export default function PostView(props) {
 
 	function Interact(props) {
 		return (
-			<Box
-				width="17%"
-				sx={{
-					position: 'absolute',
-					right: '32px',
-
-					height: 1000,
-				}}>
+			<>
 				<Box
 					sx={{
-						width: '100%',
-						height: '70px',
-						top: '100px',
+						width: '18vw',
+						height: '2vh',
+						top: '5vh',
 						position: 'absolute',
 					}}>
-					<IconButton color="inherit" sx={{ width: 50, left: '30px' }}>
+					<IconButton
+						color="inherit"
+						sx={{ width: '2vh', height: '10vh', left: '172vh' }}>
 						<ShareIcon onClick={handleCopyClipBoard} />
 					</IconButton>
-					<IconButton color="inherit" sx={{ width: 50, left: '70px' }}>
+					<IconButton
+						color="inherit"
+						sx={{ width: '2vh', height: '10vh', left: '174vh' }}>
 						<BookmarkIcon />
 					</IconButton>
-					<IconButton color="inherit" sx={{ width: 50, left: '110px' }}>
+					<IconButton
+						color="inherit"
+						sx={{ width: '2vh', height: '10vh', left: '176vh' }}>
 						<FavoriteIcon onClick={() => togglelike(props.post)} />
 					</IconButton>
 				</Box>
 				<Box // 댓글 영역
 					sx={{
-						bottom: '0px',
-						top: '600px',
+						top: '18vh',
+						right: '2vw',
 						position: 'absolute',
-						width: '100%',
-						height: '80%',
+						width: '15vw',
+						height: '70vh',
 					}}>
 					<Comment post={props.post} />
 				</Box>
-			</Box>
+			</>
 		);
 	}
 
 	function Content(props) {
 		return (
 			<Box
-				width="80%"
-				height="95%"
+				width="80vw"
+				height="92.5vh"
 				sx={{
 					position: 'absolute',
-					left: '32px',
+					left: '2vh',
 				}}>
 				<iframe
 					src={'/portfolioView/' + props.name}
