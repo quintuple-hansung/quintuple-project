@@ -11,3 +11,6 @@
 
 - 실행
   - yarn start
+
+github repo
+https://github.com/quintuple-hansung/quintuple-project
