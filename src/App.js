@@ -11,6 +11,7 @@ import SelectTemplate from './pages/SelectTemplate';
 import Template1 from './pages/temp1/Template1';
 import Template2 from './pages/temp2/Template2';
 import PortfolidView from './components/main/PortfolioView';
+import PostView from './components/main/PostView';
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 						<Route path="/template1" element={<Template1 />} />
 						<Route path="/template2" element={<Template2 />} />
 						<Route path="portfolioView/:email" element={<PortfolidView />} />
+						<Route path="/postview/:postid" element={<PostView />} />
 					</Routes>
 				</Router>
 			</div>
