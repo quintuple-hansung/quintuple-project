@@ -45,9 +45,9 @@ function Comment(props) {
 					position: 'absolute',
 					width: '15vw',
 					// maxHeight: '80%',
-					right: '0.5vw',
-					bottom: '2vh',
-					height: '72vh',
+					right: '0vw',
+					bottom: '4vh',
+					height: '70vh',
 					overflow: 'auto',
 					bgcolor: 'background.paper',
 				}}>

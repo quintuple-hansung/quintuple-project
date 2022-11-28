@@ -65,17 +65,17 @@ export default function PostView(props) {
 					}}>
 					<IconButton
 						color="inherit"
-						sx={{ width: '2vh', height: '2vh', left: '3vh' }}>
+						sx={{ width: '2vh', height: '10vh', left: '170vh' }}>
 						<ShareIcon onClick={handleCopyClipBoard} />
 					</IconButton>
 					<IconButton
 						color="inherit"
-						sx={{ width: '2vh', height: '2vh', left: '5vh' }}>
+						sx={{ width: '2vh', height: '10vh', left: '172vh' }}>
 						<BookmarkIcon />
 					</IconButton>
 					<IconButton
 						color="inherit"
-						sx={{ width: '2vh', height: '2vh', left: '7vh' }}>
+						sx={{ width: '2vh', height: '10vh', left: '174vh' }}>
 						<FavoriteIcon onClick={() => togglelike(props.post)} />
 					</IconButton>
 				</Box>
@@ -97,7 +97,7 @@ export default function PostView(props) {
 		return (
 			<Box
 				width="80vw"
-				height="95vh"
+				height="92vh"
 				sx={{
 					position: 'absolute',
 					left: '2vh',

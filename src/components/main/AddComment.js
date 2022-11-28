@@ -65,7 +65,8 @@ export default function AddComment(props) {
 			<TextField
 				sx={{
 					width: '16vw',
-					height: '2vh',
+					height: '5vh',
+					right: '0vw',
 				}}
 				id="commentTextField"
 				label="Comment"
@@ -74,9 +75,9 @@ export default function AddComment(props) {
 			/>
 			<Button
 				sx={{
-					width: '16vw',
+					width: '5vh',
 					height: '2vh',
-					marginTop: '0.5vh',
+					marginTop: '0vh',
 				}}
 				variant="outlined"
 				startIcon={<CommentIcon />}
