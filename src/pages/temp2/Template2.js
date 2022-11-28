@@ -13,6 +13,8 @@ import html2canvas from 'html2canvas'; // javascript 페이지 스크린샷 라�
 import jsPDF from 'jspdf'; // JavaScript에서 PDF를 생성하는 라이브러리.
 import Button from '@mui/material/Button'; // Mui Button 사용
 import SaveIcon from '@mui/icons-material/Save'; // Mui 저장 아이콘 사용
+import {RiHome2Line} from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 
 function EmojiBullet(props) {
    const {emoji, text} = props;
@@ -63,6 +65,9 @@ export default function Home() {
     const changeTLanguage = target => { setTLanguage(target); }
     const changeField = target => { setField(target); }
     const changeStack = target => { setStack(target); }
+
+    // 화면전환
+	const navigate = useNavigate();
 
     // user 컬렉션에서 db 가져오기
     // name, description, 
@@ -271,7 +276,11 @@ export default function Home() {
         </div>
 
         <div className="mypage_form_myPortfolioExportForm" style={{border:'5px solid rgba(46,59,85)'}}>
-					<Button sx={{ width: "500px", marginTop: "50px", marginBottom: "50px",bgcolor: '#2e3b55',fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"} }} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>내 포트폴리오 PDF로 저장하기</Button>
+					<Button sx={{ width: "300px", marginTop: "50px", marginBottom: "50px", marginRight: "100px", bgcolor: '#2e3b55',fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"} }} 
+                    onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>내 포트폴리오 PDF로 저장하기</Button>
+                    <Button sx={{ width: "200px", marginTop: "50px", marginBottom: "50px", color:'white', bgcolor: '#2e3b55',fontFamily:'nanum', 
+                    "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} endIcon={<RiHome2Line />} onClick={() => navigate('/main')}> 홈으로 돌아가기</Button> 
+
         </div>
 
 
