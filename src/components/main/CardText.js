@@ -19,8 +19,8 @@ export function CardText(props) {
 		}
 	});
 	if (name !== '') {
-		return <CardHeader title={`${name} 님의 포트폴리오`} />;
-	} else return <CardHeader title={`주인 없는 포트폴리오`} />;
+		return <CardHeader title={`${name} 님의 포트폴리오`} titleTypographyProps={{ fontFamily:'nanum', fontWeight:'bold',}} />;
+	} else return <CardHeader title={`주인 없는 포트폴리오`} titleTypographyProps={{ fontFamily:'nanum', fontWeight:'bold' }}/>;
 }
 
 export default CardText;
