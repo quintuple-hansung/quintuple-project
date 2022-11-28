@@ -317,11 +317,11 @@ export default function Skills(props) {
   return (
     <div className="main" id="skills" onLoad={handleTheme}>
       <div className="skills-header-div">
-        <Fade bottom duration={2000} distance="20px">
+        {/* <Fade bottom duration={2000} distance="20px"> */}
           <h1 className="skills-header" style={{ color: theme.text }}>
             What I Do?
           </h1>
-        </Fade>
+        {/* </Fade> */}
       </div>
       <SkillSection theme={theme} skills={skills} style={{ textAlign: 'left', fontSize: '30px', marginTop: '60px', marginLeft: '30px' }} />
     </div>

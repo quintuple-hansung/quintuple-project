@@ -2,46 +2,52 @@ import Main from "./containers/Main";
 import { ThemeProvider } from "styled-components";
 import { chosenTheme } from "../theme";
 import { GlobalStyles } from "../global";
-import html2canvas from 'html2canvas'; // javascript ÆäÀÌÁö ½ºÅ©¸°¼¦ ¶óÀÌºê·¯¸®
-import jsPDF from 'jspdf'; // JavaScript¿¡¼­ PDF¸¦ »ı¼ºÇÏ´Â ¶óÀÌºê·¯¸®.
-import Button from '@mui/material/Button'; // Mui Button »ç¿ë
-import SaveIcon from '@mui/icons-material/Save'; // Mui ÀúÀå ¾ÆÀÌÄÜ »ç¿ë
+import html2canvas from 'html2canvas'; // javascript í˜ì´ì§€ ìŠ¤í¬ë¦°ìƒ· ë¼ì´ë¸ŒëŸ¬ë¦¬
+import jsPDF from 'jspdf'; // JavaScriptì—ì„œ PDFë¥¼ ìƒì„±í•˜ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬.
+import Button from '@mui/material/Button'; // Mui Button ì‚¬ìš©
+import SaveIcon from '@mui/icons-material/Save'; // Mui ì €ì¥ ì•„ì´ì½˜ ì‚¬ìš©
+import {RiHome2Line} from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 
 function Template1(){
-  //PDF·Î ÃßÃâ
+
+	 // í™”ë©´ì „í™˜
+	 const navigate = useNavigate();
+  	
+	 //PDFë¡œ ì¶”ì¶œ
 	const exportPDF = () => {
-		// PDF°¡ Ä¸ÃÄÇØ¼­ º¯È¯ÇÑ ÀÌ¹ÌÁö°¡ Å¬ °æ¿ì Àß·Á¼­ Ãâ·ÂµÇ´Â °Í ÇØ°áÇØ¾ß ÇÔ!
-		// => ÂüÁ¶ »çÀÌÆ® https://jeffrey-oh.tistory.com/363 
-		// ÇöÀç ÆäÀÌÁö¿¡¼­ HTML element¸¦ °¡Á®¿À´Â °ÍÀÌ ¾Æ´Ñ ´Ù¸¥ ÆäÀÌÁöÀÇ componenet °¡Á®¿À´Â °Í ÇØ°á ÇØ¾ß ÇÔ!
-		const element = document.querySelector("div.mypage_form_captureTarget") // Ä¸ÃÄÇÒ HTML element
+		// PDFê°€ ìº¡ì³í•´ì„œ ë³€í™˜í•œ ì´ë¯¸ì§€ê°€ í´ ê²½ìš° ì˜ë ¤ì„œ ì¶œë ¥ë˜ëŠ” ê²ƒ í•´ê²°í•´ì•¼ í•¨!
+		// => ì°¸ì¡° ì‚¬ì´íŠ¸ https://jeffrey-oh.tistory.com/363 
+		// í˜„ì¬ í˜ì´ì§€ì—ì„œ HTML elementë¥¼ ê°€ì ¸ì˜¤ëŠ” ê²ƒì´ ì•„ë‹Œ ë‹¤ë¥¸ í˜ì´ì§€ì˜ componenet ê°€ì ¸ì˜¤ëŠ” ê²ƒ í•´ê²° í•´ì•¼ í•¨!
+		const element = document.querySelector("div.mypage_form_captureTarget") // ìº¡ì³í•  HTML element
 
 		html2canvas(element)
 			.then(function (canvas) {
 
-				var capturedImgData = canvas.toDataURL(); // canvas·Î Ä¸ÃÄÇÑ data¸¦ base64 Data·Î º¯È¯(jsPDF¿¡¼­ »ç¿ë)
+				var capturedImgData = canvas.toDataURL(); // canvasë¡œ ìº¡ì³í•œ dataë¥¼ base64 Dataë¡œ ë³€í™˜(jsPDFì—ì„œ ì‚¬ìš©)
 
-				// »õ PDF »ı¼º
+				// ìƒˆ PDF ìƒì„±
 				var doc = new jsPDF('p', "pt", "a4");
 				var position = 0;
 
 
-				var imgWidth = 595; // ÀÌ¹ÌÁö °¡·Î ±æÀÌ() A4 ±âÁØ
-				var pageHeight = 842; // ÀÌ¹ÌÁö ¼¼·Î ±æÀÌ() A4 ±âÁØ / A4 ±âÁØ (595,842)pt
-				var imgHeight = canvas.height * imgWidth / canvas.width; // ÀÌ¹ÌÁö ¼¼·Î ±æÀÌ¸¦ A4±âÁØ¿¡ ¸Â°Ô º¯È¯
+				var imgWidth = 595; // ì´ë¯¸ì§€ ê°€ë¡œ ê¸¸ì´() A4 ê¸°ì¤€
+				var pageHeight = 842; // ì´ë¯¸ì§€ ì„¸ë¡œ ê¸¸ì´() A4 ê¸°ì¤€ / A4 ê¸°ì¤€ (595,842)pt
+				var imgHeight = canvas.height * imgWidth / canvas.width; // ì´ë¯¸ì§€ ì„¸ë¡œ ê¸¸ì´ë¥¼ A4ê¸°ì¤€ì— ë§ê²Œ ë³€í™˜
 				var heightLeft = imgHeight;
 				var margin = 0;
 
-				console.log(`canvas.width is ${canvas.width} canvas.height is ${canvas.height}`) // canvas Å©±â(captured img) Ãâ·Â
-				console.log(`imgWidth is ${imgWidth} imgHeight.width is ${imgHeight}`) // pdf ¿¡ Ãâ·ÂµÉ º¯È¯µÈ capture img Å©±â Ãâ·Â
-				console.log(`margin is ${margin} postion is ${position}`) // Ãâ·ÂµÇ´Â ½ÃÀÛÁöÁ¡(x,y) Ãâ·Â
-				console.log(`HTML element width is ${element.offsetWidth} HTML element height is ${element.offsetHeight}`) // targetHTMLelemntÀÇ ¿ø·¡ Å©±â Ãâ·Â
+				console.log(`canvas.width is ${canvas.width} canvas.height is ${canvas.height}`) // canvas í¬ê¸°(captured img) ì¶œë ¥
+				console.log(`imgWidth is ${imgWidth} imgHeight.width is ${imgHeight}`) // pdf ì— ì¶œë ¥ë  ë³€í™˜ëœ capture img í¬ê¸° ì¶œë ¥
+				console.log(`margin is ${margin} postion is ${position}`) // ì¶œë ¥ë˜ëŠ” ì‹œì‘ì§€ì (x,y) ì¶œë ¥
+				console.log(`HTML element width is ${element.offsetWidth} HTML element height is ${element.offsetHeight}`) // targetHTMLelemntì˜ ì›ë˜ í¬ê¸° ì¶œë ¥
 
-				// PDF¿¡ Ä¸ÃÄÇÑ img ºÙÀÌ±â
-				// Ã¹ ÆäÀÌÁö Ãâ·Â
+				// PDFì— ìº¡ì³í•œ img ë¶™ì´ê¸°
+				// ì²« í˜ì´ì§€ ì¶œë ¥
 				doc.addImage(capturedImgData, 'PNG', margin, position, imgWidth, imgHeight);
 				heightLeft -= pageHeight;
 
-				// ÇÑ ÆäÀÌÁö ÀÌ»óÀÏ °æ¿ì ·çÇÁ µ¹¸é¼­ Ãâ·Â
+				// í•œ í˜ì´ì§€ ì´ìƒì¼ ê²½ìš° ë£¨í”„ ëŒë©´ì„œ ì¶œë ¥
 				while (heightLeft >= 842) {
 					position = heightLeft - imgHeight;
 					doc.addPage();
@@ -49,7 +55,7 @@ function Template1(){
 					heightLeft -= pageHeight;
 				}
 
-				// ÆÄÀÏ ÀúÀå
+				// íŒŒì¼ ì €ì¥
 				doc.save('MyPortfolio.pdf');
 
 			})
@@ -72,8 +78,11 @@ return (
      
 
       <div className="mypage_form_myPortfolioExportForm" style={{border:'5px solid rgba(46,59,85)'}}>
-					<Button sx={{ width: "500px", marginTop: "50px", marginBottom: "50px",bgcolor: '#2e3b55',fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"} }} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>³» Æ÷Æ®Æú¸®¿À PDF·Î ÀúÀåÇÏ±â</Button>
-      </div>
+					<Button sx={{ width: "500px", marginTop: "50px", marginRight:"50px", marginBottom: "50px",bgcolor: '#2e3b55',fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"} }} onClick={() => exportPDF()} variant="contained" endIcon={<SaveIcon />}>ë‚´ í¬íŠ¸í´ë¦¬ì˜¤ PDFë¡œ ì €ì¥í•˜ê¸°</Button>
+					<Button sx={{ width: "200px", marginTop: "50px", marginBottom: "50px", color:'white', bgcolor: '#2e3b55',fontFamily:'nanum', 
+                    "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} endIcon={<RiHome2Line />} onClick={() => navigate('/main')}> í™ˆìœ¼ë¡œ ëŒì•„ê°€ê¸°</Button> 
+
+	  </div>
 
     </div>
     </>
