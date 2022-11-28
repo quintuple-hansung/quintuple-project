@@ -83,9 +83,10 @@ export default function PostView(props) {
 				<Box // 댓글 영역
 					sx={{
 						bottom: '0px',
+						top: '600px',
 						position: 'absolute',
 						width: '100%',
-						height: '800px',
+						height: '80%',
 					}}>
 					<Comment post={props.post} />
 				</Box>
@@ -97,7 +98,7 @@ export default function PostView(props) {
 		return (
 			<Box
 				width="80%"
-				height="100%"
+				height="95%"
 				sx={{
 					position: 'absolute',
 					left: '32px',
