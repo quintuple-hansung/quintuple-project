@@ -36,12 +36,16 @@ export default function AddComment(props) {
 			}
 		});
 	};
-
 	const addCommentFirebase = () => {
+		props.commentHandler({
+			content: comment,
+			user: name,
+		});
 		addDoc(collection(firestore, `post/${props.post}/comment`), {
 			content: comment,
 			user: name,
 		});
+		setComment('');
 	};
 
 	getUserName();

@@ -9,7 +9,7 @@ import List from '@mui/material/List';
 import { CommentsDisabled } from '@mui/icons-material';
 import { maxHeight } from '@mui/system';
 import Divider from '@mui/material/Divider';
-
+import AddComment from './AddComment';
 function Comment(props) {
 	const q = query(collection(firestore, `post/${props.post}/comment`));
 	const [comment, setComment] = useState([]);
@@ -22,6 +22,11 @@ function Comment(props) {
 		getComments();
 	}, []);
 
+	const commentChanged = target => {
+		const t = [...comment];
+		t.push(target);
+		setComment(t);
+	};
 	var CommentList = comment.map((value, index) => (
 		<>
 			<ListItem>
@@ -34,15 +39,18 @@ function Comment(props) {
 	));
 
 	return (
-		<List
-			sx={{
-				width: '100%',
-				maxHeight: '80%',
-				overflow: 'auto',
-				bgcolor: 'background.paper',
-			}}>
-			{CommentList}
-		</List>
+		<>
+			<List
+				sx={{
+					width: '100%',
+					maxHeight: '80%',
+					overflow: 'auto',
+					bgcolor: 'background.paper',
+				}}>
+				{CommentList}
+			</List>
+			<AddComment post={props.post} commentHandler={commentChanged} />
+		</>
 	);
 }
 

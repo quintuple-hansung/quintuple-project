@@ -88,7 +88,6 @@ export default function PostView(props) {
 						height: '800px',
 					}}>
 					<Comment post={props.post} />
-					<AddComment post={props.post} />
 				</Box>
 			</Box>
 		);
