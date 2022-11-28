@@ -52,20 +52,13 @@ export default function AddComment(props) {
 	return (
 		<Box
 			component="form"
-			sx={{
-				'& > :not(style)': {
-					width: '15vw',
-					height: '4vh',
-					right: '0.5vw',
-					top: '70vh',
-				},
-			}}
 			noValidate
 			autoComplete="off">
 			<TextField
 				sx={{
-					width: '16vw',
-					height: '5vh',
+					marginTop : '33vw',
+					width: '15vw',
+					height: '6.7vh',
 					right: '0vw',
 				}}
 				id="commentTextField"
@@ -75,9 +68,9 @@ export default function AddComment(props) {
 			/>
 			<Button
 				sx={{
-					width: '5vh',
-					height: '2vh',
-					marginTop: '0vh',
+					width: '31vh',
+					height: '4.5vh',
+					right: '0vw',
 				}}
 				variant="outlined"
 				startIcon={<CommentIcon />}

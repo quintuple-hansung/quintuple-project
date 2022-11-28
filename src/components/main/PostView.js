@@ -81,7 +81,7 @@ export default function PostView(props) {
 				</Box>
 				<Box // 댓글 영역
 					sx={{
-						top: '20vh',
+						top: '18vh',
 						right: '2vw',
 						position: 'absolute',
 						width: '15vw',
@@ -97,7 +97,7 @@ export default function PostView(props) {
 		return (
 			<Box
 				width="80vw"
-				height="92vh"
+				height="92.5vh"
 				sx={{
 					position: 'absolute',
 					left: '2vh',
