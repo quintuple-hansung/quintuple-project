@@ -2,12 +2,10 @@
 import '../styles/MyPage.css'; // css 파일 사용
 import { useNavigate } from 'react-router-dom'; //navigate 사용
 import React, { useState, useEffect, useRef } from 'react'; // useState,userEffect 사용자
-import html2canvas from 'html2canvas'; // javascript 페이지 스크린샷 라이브러리
-import jsPDF from 'jspdf'; // JavaScript에서 PDF를 생성하는 라이브러리.
 import TopBar from '../components/main/TopBar'; // TopBar 사용
 import { firestore } from "../components/firebase_config"; // FireBase DB 불러오기 용 firestore 사용
 import { getDoc, updateDoc, doc } from '@firebase/firestore/lite';
-import { getAuth, updateProfile, updatePassword, reauthenticateWithCredential, EmailAuthProvider, } from 'firebase/auth'; // firebase에서 사용자 정보를 가져오고, 재인증 메소드, 업데이트 처리
+import { getAuth, updatePassword, reauthenticateWithCredential, EmailAuthProvider, } from 'firebase/auth'; // firebase에서 사용자 정보를 가져오고, 재인증 메소드, 업데이트 처리
 import Container from '@mui/material/Container'; // Mui Container 사용
 import Box from '@mui/material/Box'; // Mui Box 사용
 import Button from '@mui/material/Button'; // Mui Button 사용
@@ -25,8 +23,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'; // Mui 비밀번�
 import InputLabel from '@mui/material/InputLabel'; // Mui Input field의 라벨 사용
 import FormControl from '@mui/material/FormControl'; // Mui Form container 사용
 import TextField from '@mui/material/TextField'; // Mui textfield 사용
-import SendIcon from '@mui/icons-material/Send'; // Mui 전송 아이콘 ( > ) 사용
-import SaveIcon from '@mui/icons-material/Save'; // Mui 저장 아이콘 사용
 import WriteIcon from '@mui/icons-material/DriveFileRenameOutline'; //포트폴리오 작성 아이콘
 
 
@@ -42,7 +38,7 @@ function MyPage() {
 	const auth = getAuth();
 	const currentUser = auth.currentUser; // Auth로 얻은 현재 User 객체
 	const currentEmail = currentUser.email; // User객체의 이메일 값
-	const [oldPassword , setoldPassword] = useState('');
+	const [oldPassword, setoldPassword] = useState('');
 	const [oldUserName, setoldUserName] = useState('');
 
 
@@ -62,17 +58,15 @@ function MyPage() {
 		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
 		const currentUserName = await (userDoc.data().name); //DB에서 가져온 Promise 객체에서 name data 가져오기
 		setoldUserName(currentUserName);
-		console.log(`initUserName is called , ${currentUserName}`)
 		return currentUserName;
 	}
-	
+
 	//Firebase DB에서 Password 가져오기
 	const initPW = async (currentEmail) => {
 		const docRef = doc(firestore, 'user', currentEmail); //docRef 생성
 		const userDoc = await getDoc(docRef); // userDoc의 Data 가져오기 (Promise 객체 리턴)
 		const Password = await (userDoc.data().password)// DB에서 가져온 Promise객체에서 Password data 가져오기
 		setoldPassword(Password);
-		console.log(`initPW called, setPassword : ${Password}`)
 		return Password;
 	}
 
@@ -84,8 +78,6 @@ function MyPage() {
 	//Promise 객체의 데이터 설정을 setPassword 함수 안에서 함
 	const setPassword = async () => {
 		const newPassword = values.newPassword; // 변경된 PW값
-
-		console.log(`setPassword is called : oldPassword is ${oldPassword} newPassword is ${newPassword}`)
 
 		//사용자 재인증 (PW 업데이트)
 		const credential = EmailAuthProvider.credential(
@@ -109,11 +101,9 @@ function MyPage() {
 		updateDoc(docRef, { ['password']: newPassword })
 	}
 
-	
+
 	const setUserName = async () => {
 		const newUserName = values.newUserName;
-
-		console.log(`setUserName is called : oldUserName is ${oldUserName} newUserName is ${newUserName}`)
 
 		if (oldUserName !== newUserName) {
 			//DB에 UserName 수정
@@ -122,7 +112,7 @@ function MyPage() {
 			console.log(`UserName updated!`)
 		} else console.log(`UserName is Not Changed!`)
 	}
-	
+
 	//onChange()
 
 	// Values들이 바뀌면
@@ -159,13 +149,12 @@ function MyPage() {
 
 	//비밀번호 표시 전환 버튼 이벤트
 	const onClickVisible = () => {
-		console.log(`values.isPwType is ${values.isPwType}`);
+		console.log('onClickVisible button pressed');
 		console.log(`values.isPwVisible is ${values.isPwVisible}`);
-
 		setValues({ ...values, isPwType: !values.isPwType, isPwVisible: !values.isPwVisible });
 	};
 
-	
+
 	{
 		/*JSX code*/
 	}
@@ -173,33 +162,54 @@ function MyPage() {
 		<div className="mypage_form">
 			<TopBar />
 			<Container className='mypage_form_captureTarget' fixed >
-				<Box className="mypage_form_createPortfolioform" style={{border:'4px solid rgba(46,59,85)'}}>
-					<Button sx={{ margin: "3% auto", bgcolor: '#2e3b55', fontFamily:'nanum', "&:hover": {backgroundColor:'#E8474C', cursor: "pointer"}}} onClick={onClickPortFolio} variant="contained" endIcon={<WriteIcon />}>
+				<Box className="mypage_form_createPortfolioform" style={{ border: '4px solid rgba(46,59,85)' }}>
+					<Button sx={{ margin: "3% auto", bgcolor: '#2e3b55', fontFamily: 'nanum', "&:hover": { backgroundColor: '#E8474C', cursor: "pointer" } }} onClick={onClickPortFolio} variant="contained" endIcon={<WriteIcon />}>
 						포트폴리오 작성하러 가기</Button>
 				</Box>
-				<Typography id="lbMyPost" fontFamily= 'nanum'  sx={{ fontSize: 'h6.fontSize'}}>내 글</Typography>
-				<div className="mypage_form_myPostForm" style={{border:'4px solid rgba(46,59,85)'}}>
-					<Box sx={{ width: '100%'}}>
-						<Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
+				<Typography id="lbMyPost" fontFamily='nanum' sx={{ fontSize: 'h6.fontSize' }}>내 글</Typography>
+				<div className="mypage_form_myPostForm" style={{ border: '4px solid rgba(46,59,85)' }}>
+					<Box sx={{ width: '100%' }}>
+						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 							<Tabs value={tapValue} onChange={handleTabChange} aria-label="basic tabs example">
-								<Tab sx={{"&:hover": {color:'#E8474C', cursor: "pointer"}}} icon={<FavoriteIcon />} label="좋아요한 글"  />
-								<Tab sx={{"&:hover": {color:'#E8474C', cursor: "pointer"}}} icon={<BookmarkIcon />} label="북마크한 글" />
-								<Tab sx={{"&:hover": {color:'#E8474C', cursor: "pointer"}}} icon={<ModeCommentIcon />} label="댓글단 글" />
+								<Tab sx={{ "&:hover": { color: '#E8474C', cursor: "pointer" } }} icon={<FavoriteIcon />} label="좋아요한 글" />
+								<Tab sx={{ "&:hover": { color: '#E8474C', cursor: "pointer" } }} icon={<BookmarkIcon />} label="북마크한 글" />
+								<Tab sx={{ "&:hover": { color: '#E8474C', cursor: "pointer" } }} icon={<ModeCommentIcon />} label="댓글단 글" />
 							</Tabs>
 						</Box>
 						<TabPanel value={tapValue} index={0}>
-							Item One
+							<Typography>글 1</Typography>
+							<hr></hr>
+							<Typography>글 2</Typography>
+							<hr></hr>
+							<Typography>글 3</Typography>
+							<hr></hr>
+							<Typography>글 4</Typography>
+							<hr></hr>
+							<Typography>글 5</Typography>
+							<hr></hr>
 						</TabPanel>
 						<TabPanel value={tapValue} index={1}>
-							Item Two
+							<Typography>글 1</Typography>
+							<hr></hr>
+							<Typography>글 2</Typography>
+							<hr></hr>
+							<Typography>글 3</Typography>
+							<hr></hr>
 						</TabPanel>
 						<TabPanel value={tapValue} index={2}>
-							Item Three
+							<Typography>글 1</Typography>
+							<hr></hr>
+							<Typography>글 2</Typography>
+							<hr></hr>
+							<Typography>글 3</Typography>
+							<hr></hr>
+							<Typography>글 4</Typography>
+							<hr></hr>
 						</TabPanel>
 					</Box>
 				</div>
-				<Typography id="lbMyProfile" fontFamily= 'nanum' >회원 정보 수정</Typography>
-				<div className="mypage_form_myProfileForm" style={{border:'4px solid rgba(46,59,85)'}}>
+				<Typography id="lbMyProfile" fontFamily='nanum' >회원 정보 수정</Typography>
+				<div className="mypage_form_myProfileForm" style={{ border: '4px solid rgba(46,59,85)' }}>
 					<div>
 						<TextField
 							sx={{ m: 1, marginTop: '50px', width: '250px' }}
