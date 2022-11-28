@@ -13,12 +13,10 @@ export default function CardThumbnail(props) {
 				storage,
 				`gs://quintuple-e9f49.appspot.com/portfolio_thumbnails/${props.img_url}.jpg`
 			);
-			if (url) {
-				await getDownloadURL(gsReference).then(x => {
-					setUrl(x);
-					setReady(false);
-				});
-			}
+			await getDownloadURL(gsReference).then(x => {
+				setUrl(x);
+				setReady(false);
+			});
 		};
 
 		if (url == undefined) {
