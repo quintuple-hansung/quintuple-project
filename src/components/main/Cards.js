@@ -43,14 +43,13 @@ function Cards() {
 		getPosts();
 	}, []);
 
-
-
-
 	const cardPosts = posts.map((value, index) => (
 		<Link
 			to={`/postview/${value.id}`}
 			style={{ textDecoration: 'none', color: 'inherit' }}>
-			<Card key={index} sx={{ width: '400px', height: '300px' }}>
+			<Card
+				key={index}
+				sx={{ width: '400px', height: '300px', marginTop: '5vh' }}>
 				{/* <ModalHandler post={value.id} name={value.user} /> */}
 				<CardText name={value.user} id={value.id} />
 				<CardThumbnail img_url={value.user} />
