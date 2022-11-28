@@ -7,6 +7,7 @@ import { getDocs, updateDoc, doc } from 'firebase/firestore/lite';
 import { firestore } from '../firebase_config';
 import { useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
+import Pagination from './Pagination';
 
 import React from 'react';
 
@@ -28,11 +29,17 @@ const modalStyle = {
 function Cards() {
 	const [posts, setPosts] = useState([]);
 	const postsCollectionRef = collection(firestore, 'post');
-
+	const [limit, setLimit] = useState(9); // 페이지 당 게시물 수 9개
+	const [page, setPage] = useState(1); // 현재 페이지 번호
+	const offset = (page - 1) * limit; // 첫 게시물의 위치
 	const [like, setHstate] = useState(0);
 	/* const [book, setBstate] = useState(false);
 	const Hon = () => setHstate(!like);
 	const Bon = () => setBstate(!book); */
+
+	console.log(`posts.length = ${posts.length}`);
+	console.log(`limit = ${limit}`);
+	console.log(`page = ${page}`);
 
 	useEffect(() => {
 		const getPosts = async () => {
@@ -43,7 +50,7 @@ function Cards() {
 		getPosts();
 	}, []);
 
-	const cardPosts = posts.map((value, index) => (
+	const cardPosts = posts.slice(offset, offset + limit).map((value, index) => (
 		<Link
 			to={`/postview/${value.id}`}
 			style={{ textDecoration: 'none', color: 'inherit', }} >
@@ -58,11 +65,20 @@ function Cards() {
 	));
 
 	return (
-		<div className="Cards" key={1}>
-			<Grid2 container justifyContent={'space-around'} flexDirection={'row'}>
-				{cardPosts}
-			</Grid2>
-		</div>
+		<>
+			<div className="Cards" key={1} style={{ marginInline: '100px'}}>
+				<Grid2 container justifyContent={'space-around'} flexDirection={'row'} marginBottom={'180px'}>
+					{cardPosts}
+				</Grid2>
+			</div>
+				<Pagination
+					total = {posts.length}
+					limit = {limit}
+					page = {page}
+					setPage = {setPage}
+				/>
+		</>
+		
 	);
 }
 
