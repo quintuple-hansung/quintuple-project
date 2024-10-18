@@ -52,10 +52,10 @@
 
 ## 사용한 라이브러리 및 도구
 
-- ![image](https://github.com/user-attachments/assets/a31d2ff2-600f-4fbb-9bd5-37c979ac3521) **Firebase**: 사용자 인증 및 데이터 관리에 사용했습니다.
-- ![image](https://github.com/user-attachments/assets/d9a9e9f0-6e6c-438b-aeb1-8d08b719cb49) **Material-UI (MUI)**: 반응형이고 현대적인 사용자 인터페이스 컴포넌트를 디자인하는 데 사용했습니다.
-- ![image](https://github.com/user-attachments/assets/0b99a14f-bd3d-40cd-a1d0-2ada59fc0c83) **html2canvas&jsPDF**: PDF 저장 시에 사용했습니다.
-- ![image](https://github.com/user-attachments/assets/5b2bd419-0f06-4c4e-a9dd-1dbb9e66bf65) **React**: 사용자 인터페이스를 구축하는 데 사용한 주요 JavaScript 라이브러리입니다.
+- **Firebase**: 사용자 인증 및 데이터 관리에 사용했습니다.
+- **Material-UI (MUI)**: 반응형이고 현대적인 사용자 인터페이스 컴포넌트를 디자인하는 데 사용했습니다.
+- **html2canvas&jsPDF**: PDF 저장 시에 사용했습니다.
+- **React**: 사용자 인터페이스를 구축하는 데 사용한 주요 JavaScript 라이브러리입니다.
 
 ## 진행 상황 및 성과
 
