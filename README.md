@@ -15,7 +15,7 @@
 
 ## 개요
 
-이 프로젝트는 Quintuple 클래스의 5조가 만든 포트폴리오 관리 애플리케이션입니다. 사용자가 자신의 전문 포트폴리오를 효율적으로 관리할 수 있는 플랫폼을 만드는 것을 목표로 하였으며, 커뮤니티 상호작용, 포트폴리오 템플릿, 현대적인 사용자 인터페이스 등의 기능을 포함하고 있습니다. 주요 기술로는 React, Firebase, Material-UI (MUI)를 사용했습니다.
+이 프로젝트는 Quintuple 5조가 만든 포트폴리오 관리 애플리케이션입니다. 사용자가 자신의 전문 포트폴리오를 효율적으로 관리할 수 있는 플랫폼을 만드는 것을 목표로 하였으며, 커뮤니티 상호작용, 포트폴리오 템플릿, 현대적인 사용자 인터페이스 등의 기능을 포함하고 있습니다. 주요 기술로는 React, Firebase, Material-UI (MUI)를 사용했습니다.
 
 ## 주요 기능
 
@@ -34,17 +34,28 @@
 ## 주요 화면
 
 - **인트로 페이지**: 플랫폼 소개와 탐색 애니메이션을 포함합니다.
+![image](https://github.com/user-attachments/assets/9c37da87-160f-4b53-b8d1-00af2c5c8794)
+
 - **로그인 및 회원가입 페이지**: 사용자가 계정에 로그인하거나 회원가입할 수 있으며, 관련 화면으로의 원활한 이동을 제공합니다.
+  ![image](https://github.com/user-attachments/assets/291db452-5d7d-4569-801e-8c3bafc6b88e)
+
 - **메인 페이지**: 포트폴리오와 커뮤니티 기능(좋아요, 댓글)을 표시합니다.
+![image](https://github.com/user-attachments/assets/26ca160a-0396-418f-a670-15930f80161a)
+![image](https://github.com/user-attachments/assets/cc5294b3-8769-4c49-9a71-648feb757ea7)
+
 - **마이 페이지**: 사용자가 개인정보를 수정하고 커뮤니티 활동을 확인하며 자신의 포트폴리오를 관리할 수 있습니다.
+  ![image](https://github.com/user-attachments/assets/8e8b2ba7-6ec9-4614-bca6-6cef1fc01253)
+
 - **포트폴리오 템플릿 페이지**: 사용자가 다양한 템플릿을 사용해 포트폴리오를 만들고 PDF로 내보낼 수 있습니다.
+  ![image](https://github.com/user-attachments/assets/6e74d431-f0e8-4456-aee3-30da939dc898)
+  ![image](https://github.com/user-attachments/assets/b00e60f5-5366-478e-8734-15b86e3e4d6e)
 
 ## 사용한 라이브러리 및 도구
 
-- **Firebase**: 사용자 인증 및 데이터 관리에 사용했습니다.
-- **Material-UI (MUI)**: 반응형이고 현대적인 사용자 인터페이스 컴포넌트를 디자인하는 데 사용했습니다.
-- **React**: 사용자 인터페이스를 구축하는 데 사용한 주요 JavaScript 라이브러리입니다.
-- **React Router**: 애플리케이션 내 다양한 페이지 간의 탐색을 관리하는 데 사용했습니다.
+- ![image](https://github.com/user-attachments/assets/a31d2ff2-600f-4fbb-9bd5-37c979ac3521) **Firebase**: 사용자 인증 및 데이터 관리에 사용했습니다.
+- ![image](https://github.com/user-attachments/assets/d9a9e9f0-6e6c-438b-aeb1-8d08b719cb49) **Material-UI (MUI)**: 반응형이고 현대적인 사용자 인터페이스 컴포넌트를 디자인하는 데 사용했습니다.
+- ![image](https://github.com/user-attachments/assets/0b99a14f-bd3d-40cd-a1d0-2ada59fc0c83) **html2canvas&jsPDF**: PDF 저장 시에 사용했습니다.
+- ![image](https://github.com/user-attachments/assets/5b2bd419-0f06-4c4e-a9dd-1dbb9e66bf65) **React**: 사용자 인터페이스를 구축하는 데 사용한 주요 JavaScript 라이브러리입니다.
 
 ## 진행 상황 및 성과
 
@@ -62,7 +73,7 @@
 
 ## 감사 인사
 
-이 프로젝트의 개발 동안 지도해 주신 교수님과 클래스메이트들에게 감사의 말씀을 드립니다.
+이 프로젝트의 개발 동안 지도해 주신 교수님과 학우들에게 감사의 말씀을 드립니다.
 
 ## 프로젝트 실행 방법
 
